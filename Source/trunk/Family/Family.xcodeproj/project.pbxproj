@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8425BD2E196B929A0018187E /* SplashScreentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8425BD2C196B929A0018187E /* SplashScreentViewController.m */; };
+		8425BD2F196B929A0018187E /* SplashScreentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8425BD2D196B929A0018187E /* SplashScreentViewController.xib */; };
+		8425BD32196B94A00018187E /* logo_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 8425BD31196B94A00018187E /* logo_03.png */; };
+		8425BD34196B9C6A0018187E /* btn_aboutus.png in Resources */ = {isa = PBXBuildFile; fileRef = 8425BD33196B9C6A0018187E /* btn_aboutus.png */; };
+		8425BD36196B9E490018187E /* btn_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 8425BD35196B9E490018187E /* btn_facebook.png */; };
+		8425BD3A196B9FA50018187E /* google_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 8425BD39196B9FA50018187E /* google_login.png */; };
+		8425BD3C196BA1200018187E /* btn_SignUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 8425BD3B196BA1200018187E /* btn_SignUp.png */; };
+		8425BD3E196BA1DD0018187E /* btn_Login.png in Resources */ = {isa = PBXBuildFile; fileRef = 8425BD3D196BA1DD0018187E /* btn_Login.png */; };
+		8425BD40196BCAD10018187E /* btn_border2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8425BD3F196BCAD10018187E /* btn_border2.png */; };
 		8429DADC19637BFE00A8A381 /* btn_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 8429DADB19637BFE00A8A381 /* btn_delete.png */; };
 		8429DADE196388D300A8A381 /* btn_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 8429DADD196388D300A8A381 /* btn_edit.png */; };
 		8429DAE01963DDA300A8A381 /* icon_activity.png in Resources */ = {isa = PBXBuildFile; fileRef = 8429DADF1963DDA300A8A381 /* icon_activity.png */; };
@@ -112,6 +121,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8425BD2B196B929A0018187E /* SplashScreentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashScreentViewController.h; sourceTree = "<group>"; };
+		8425BD2C196B929A0018187E /* SplashScreentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashScreentViewController.m; sourceTree = "<group>"; };
+		8425BD2D196B929A0018187E /* SplashScreentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashScreentViewController.xib; sourceTree = "<group>"; };
+		8425BD31196B94A00018187E /* logo_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_03.png; sourceTree = "<group>"; };
+		8425BD33196B9C6A0018187E /* btn_aboutus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_aboutus.png; sourceTree = "<group>"; };
+		8425BD35196B9E490018187E /* btn_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_facebook.png; sourceTree = "<group>"; };
+		8425BD39196B9FA50018187E /* google_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = google_login.png; sourceTree = "<group>"; };
+		8425BD3B196BA1200018187E /* btn_SignUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_SignUp.png; sourceTree = "<group>"; };
+		8425BD3D196BA1DD0018187E /* btn_Login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_Login.png; sourceTree = "<group>"; };
+		8425BD3F196BCAD10018187E /* btn_border2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_border2.png; sourceTree = "<group>"; };
 		8429DADB19637BFE00A8A381 /* btn_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_delete.png; sourceTree = "<group>"; };
 		8429DADD196388D300A8A381 /* btn_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_edit.png; sourceTree = "<group>"; };
 		8429DADF1963DDA300A8A381 /* icon_activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_activity.png; sourceTree = "<group>"; };
@@ -260,6 +279,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8425BD2A196B927C0018187E /* SplashScreent */ = {
+			isa = PBXGroup;
+			children = (
+				8425BD2B196B929A0018187E /* SplashScreentViewController.h */,
+				8425BD2C196B929A0018187E /* SplashScreentViewController.m */,
+				8425BD2D196B929A0018187E /* SplashScreentViewController.xib */,
+			);
+			path = SplashScreent;
+			sourceTree = "<group>";
+		};
+		8425BD30196B94970018187E /* Logo */ = {
+			isa = PBXGroup;
+			children = (
+				8425BD31196B94A00018187E /* logo_03.png */,
+			);
+			path = Logo;
+			sourceTree = "<group>";
+		};
 		8429DAE71963E4FF00A8A381 /* History */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +468,7 @@
 		84534A5F196253000031D6DA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8425BD2A196B927C0018187E /* SplashScreent */,
 				84A45842196565D400DF96FA /* EditPromise */,
 				84A458221964DCC600DF96FA /* EditActivity */,
 				8429DAED1963E67D00A8A381 /* Activity */,
@@ -449,6 +487,7 @@
 		84534A60196253000031D6DA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8425BD30196B94970018187E /* Logo */,
 				8429DB101963EF7100A8A381 /* Activity */,
 				84534AB31963038B0031D6DA /* Avatar */,
 				84534A8319625DAD0031D6DA /* Background */,
@@ -540,6 +579,12 @@
 		84534A8419625DAD0031D6DA /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				8425BD3F196BCAD10018187E /* btn_border2.png */,
+				8425BD3D196BA1DD0018187E /* btn_Login.png */,
+				8425BD3B196BA1200018187E /* btn_SignUp.png */,
+				8425BD39196B9FA50018187E /* google_login.png */,
+				8425BD35196B9E490018187E /* btn_facebook.png */,
+				8425BD33196B9C6A0018187E /* btn_aboutus.png */,
 				8484F13B1968F78E00EBA065 /* inside.png */,
 				8484F1371968F78500EBA065 /* left_button.png */,
 				8484F1381968F78500EBA065 /* right_button.png */,
@@ -824,6 +869,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8425BD3A196B9FA50018187E /* google_login.png in Resources */,
 				8429DAFE1963E6AA00A8A381 /* PromiseViewController.xib in Resources */,
 				84534A8219625BF90031D6DA /* SettingViewController.xib in Resources */,
 				84534AC01963039D0031D6DA /* hinh6.jpg in Resources */,
@@ -839,19 +885,23 @@
 				846347551966615E008B9A6F /* btn_save.png in Resources */,
 				84A458271964DCDB00DF96FA /* EditActivityViewController.xib in Resources */,
 				84534ABB1963039D0031D6DA /* hinh1.jpg in Resources */,
+				8425BD32196B94A00018187E /* logo_03.png in Resources */,
 				84534ABD1963039D0031D6DA /* hinh3.jpg in Resources */,
 				84A4582B1964E53C00DF96FA /* btn_saveedit.png in Resources */,
 				84534A8B19625F1E0031D6DA /* setting_icon.png in Resources */,
 				8484F13A1968F78500EBA065 /* right_button.png in Resources */,
+				8425BD40196BCAD10018187E /* btn_border2.png in Resources */,
 				84A4583719651E2D00DF96FA /* btn_pick.png in Resources */,
 				84534AA9196272190031D6DA /* ItemMemberView.xib in Resources */,
 				8429DAF41963E68800A8A381 /* ActivityViewController.xib in Resources */,
+				8425BD3E196BA1DD0018187E /* btn_Login.png in Resources */,
 				8429DAF91963E69E00A8A381 /* FriendViewController.xib in Resources */,
 				84A458291964E31200DF96FA /* btn_done.png in Resources */,
 				8429DB1C1963EF7100A8A381 /* activity5.jpg in Resources */,
 				8429DB181963EF7100A8A381 /* activity1.jpg in Resources */,
 				84534A8819625DAD0031D6DA /* btn_skip.png in Resources */,
 				8429DB1B1963EF7100A8A381 /* activity4.jpg in Resources */,
+				8425BD2F196B929A0018187E /* SplashScreentViewController.xib in Resources */,
 				84534A7D19625BE70031D6DA /* MemberViewController.xib in Resources */,
 				84534A70196257630031D6DA /* LoginViewController.xib in Resources */,
 				84534A8919625DAD0031D6DA /* customer_service.png in Resources */,
@@ -861,7 +911,9 @@
 				84534A8D1962644A0031D6DA /* back.png in Resources */,
 				8429DB1E1963EF7100A8A381 /* activity7.jpg in Resources */,
 				84534AC11963039D0031D6DA /* hinh7.jpg in Resources */,
+				8425BD3C196BA1200018187E /* btn_SignUp.png in Resources */,
 				84534A3B196252D80031D6DA /* InfoPlist.strings in Resources */,
+				8425BD36196B9E490018187E /* btn_facebook.png in Resources */,
 				8484F169196919E900EBA065 /* SlicesActivityTableViewCell.xib in Resources */,
 				8429DADE196388D300A8A381 /* btn_edit.png in Resources */,
 				84A45847196565EC00DF96FA /* EditPromiseViewController.xib in Resources */,
@@ -875,6 +927,7 @@
 				84534A43196252D80031D6DA /* Images.xcassets in Resources */,
 				84534ABF1963039D0031D6DA /* hinh5.jpg in Resources */,
 				8484F16F19691E1800EBA065 /* MemberInfoView.xib in Resources */,
+				8425BD34196B9C6A0018187E /* btn_aboutus.png in Resources */,
 				8429DB061963E8E900A8A381 /* ItemActivityView.xib in Resources */,
 				8429DADC19637BFE00A8A381 /* btn_delete.png in Resources */,
 				8429DAE41963E0AC00A8A381 /* icon_friend.png in Resources */,
@@ -912,6 +965,7 @@
 				84A7DB91196A466B004516F0 /* DataHandler.m in Sources */,
 				84534A6F196257630031D6DA /* LoginViewController.m in Sources */,
 				84534A75196257840031D6DA /* MainViewController.m in Sources */,
+				8425BD2E196B929A0018187E /* SplashScreentViewController.m in Sources */,
 				84534AB21962C5260031D6DA /* Member.m in Sources */,
 				8484F168196919E900EBA065 /* SlicesActivityTableViewCell.m in Sources */,
 				84A4583C19651E7F00DF96FA /* PromiseTableViewCell.m in Sources */,

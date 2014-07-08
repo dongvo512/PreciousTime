@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "SplashScreentViewController.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -16,8 +17,11 @@
     // Override point for customization after application launch.
     // Customize BackButton
    
-    LoginViewController *vcLogin = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-      self.window.rootViewController = vcLogin;
+  /*  LoginViewController *vcLogin = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+      self.window.rootViewController = vcLogin;*/
+    
+    SplashScreentViewController *vcSplashScreen = [[SplashScreentViewController alloc] initWithNibName:@"SplashScreentViewController" bundle:nil];
+    self.window.rootViewController = vcSplashScreen;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
