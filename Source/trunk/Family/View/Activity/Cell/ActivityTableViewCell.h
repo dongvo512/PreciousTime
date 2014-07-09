@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ItemActivityView.h"
+#import "Activity.h"
 @protocol ActivityTableViewDelegate <NSObject>
--(void)itemMemberSelectedCell:(id)sender;
+-(void)editActivitySelectedCell:(Activity*)aActivity;
+-(void)singleTagItemActivity;
+-(void)longTagItemActivity;
 @end
 @interface ActivityTableViewCell : UITableViewCell<ItemActivityViewDelegate>
 {

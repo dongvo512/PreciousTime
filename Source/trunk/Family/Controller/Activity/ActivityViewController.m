@@ -10,10 +10,14 @@
 #import "Activity.h"
 #import "ActivityTableViewCell.h"
 #import "EditActivityViewController.h"
+#import "BlockActionSheet.h"
 @interface ActivityViewController ()
 {
     NSMutableArray *arrActivities;
+    IBOutlet UITableView *tblContent;
 }
+- (IBAction)takePhoto:(id)sender;
+
 - (IBAction)changeAddNewActivityViewController:(id)sender;
 @end
 
@@ -67,10 +71,10 @@
         NSString *strImg = [NSString stringWithFormat:@"activity%d.jpg",i+1];
         UIImage *imgCurr = [UIImage imageNamed:strImg];
         aActivity.avatar = imgCurr;
-        
+        aActivity.isSelected = NO;
         NSString *strName = [NSString stringWithFormat:@"Activity%d",i+1];
         aActivity.name = strName;
-    
+        aActivity.time = 5;
         [arrActivities addObject:aActivity];
     }
     
@@ -117,16 +121,92 @@
     return 170;
 }
 #pragma mark - ActivityTableViewCell Delegate
--(void)itemMemberSelectedCell:(id)sender
+-(void)editActivitySelectedCell:(Activity *)aActivity
 {
     EditActivityViewController *vcEditActivity = [[EditActivityViewController alloc] initWithNibName:@"EditActivityViewController" bundle:nil];
     vcEditActivity.isEditActivityViewController = YES;
     [self.navigationController pushViewController:vcEditActivity animated:YES];
 }
+-(void)singleTagItemActivity
+{
+    [tblContent reloadData];
+}
+-(void)longTagItemActivity
+{
+    [tblContent reloadData];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)takePhoto:(id)sender
+{
+    BlockActionSheet *blockActionSheet = [[BlockActionSheet alloc] initWithTitle:@"Image Option"];
+    [blockActionSheet setCancelButtonWithTitle:@"Cancel" block:^{
+        NSLog(@"Cancel");
+    }];
+    [blockActionSheet setDestructiveButtonWithTitle:@"Take a Picture" block:^{
+      //  NSLog(@"Take a Picture");
+        [self takeAPickture];
+    }];
+    [blockActionSheet addButtonWithTitle:@"Camera Roll" block:^{
+        NSLog(@"Camera Roll");
+        if([self isCheckCamrera])
+            [self cameraRoll];
+    }];
+    [blockActionSheet showInView:self.view];
+
+}
+-(Boolean) isCheckCamrera
+{
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            
+            UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                  message:@"Device has no camera"
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"OK"
+                                                        otherButtonTitles: nil];
+            
+            [myAlertView show];
+            return NO;
+    }
+    else
+            return YES;
+}
+- (void)takeAPickture
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+-(void)cameraRoll
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+#pragma mark - Image Picker Controller delegate methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+   // [btnAvatar setImage:chosenImage forState:UIControlStateNormal];
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
 }
 
 - (IBAction)changeAddNewActivityViewController:(id)sender

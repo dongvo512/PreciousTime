@@ -14,4 +14,5 @@
 @property (nonatomic, retain) UIImage *avatar;
 @property (nonatomic, retain) NSNumber* point;
 @property (nonatomic, retain) UIColor *color;
+@property (nonatomic) Boolean isSelected;
 @end

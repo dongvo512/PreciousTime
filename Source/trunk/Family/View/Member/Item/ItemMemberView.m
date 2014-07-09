@@ -15,6 +15,7 @@
     IBOutlet UIView *viewBackGround;
     Member *memberCurr;
 }
+
 - (IBAction)editMember:(id)sender;
 @end
 @implementation ItemMemberView

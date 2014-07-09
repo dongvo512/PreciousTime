@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		841A2AE1196CEBC500442CAE /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A2AE0196CEBC500442CAE /* BlockActionSheet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		841A2AE6196CED4B00442CAE /* BlockBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A2AE4196CED4B00442CAE /* BlockBackground.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		841A2AF6196CF18700442CAE /* action-black-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AE8196CF18700442CAE /* action-black-button-selected.png */; };
+		841A2AF7196CF18700442CAE /* action-black-button-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AE9196CF18700442CAE /* action-black-button-selected@2x.png */; };
+		841A2AF8196CF18700442CAE /* action-black-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AEA196CF18700442CAE /* action-black-button.png */; };
+		841A2AF9196CF18700442CAE /* action-black-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AEB196CF18700442CAE /* action-black-button@2x.png */; };
+		841A2AFA196CF18700442CAE /* action-gray-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AEC196CF18700442CAE /* action-gray-button-selected.png */; };
+		841A2AFB196CF18700442CAE /* action-gray-button-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AED196CF18700442CAE /* action-gray-button-selected@2x.png */; };
+		841A2AFC196CF18700442CAE /* action-gray-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AEE196CF18700442CAE /* action-gray-button.png */; };
+		841A2AFD196CF18700442CAE /* action-gray-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AEF196CF18700442CAE /* action-gray-button@2x.png */; };
+		841A2AFE196CF18700442CAE /* action-red-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AF0196CF18700442CAE /* action-red-button-selected.png */; };
+		841A2AFF196CF18700442CAE /* action-red-button-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AF1196CF18700442CAE /* action-red-button-selected@2x.png */; };
+		841A2B00196CF18700442CAE /* action-red-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AF2196CF18700442CAE /* action-red-button.png */; };
+		841A2B01196CF18700442CAE /* action-red-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AF3196CF18700442CAE /* action-red-button@2x.png */; };
+		841A2B02196CF18700442CAE /* action-sheet-panel.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AF4196CF18700442CAE /* action-sheet-panel.png */; };
+		841A2B03196CF18700442CAE /* action-sheet-panel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AF5196CF18700442CAE /* action-sheet-panel@2x.png */; };
 		8425BD2E196B929A0018187E /* SplashScreentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8425BD2C196B929A0018187E /* SplashScreentViewController.m */; };
 		8425BD2F196B929A0018187E /* SplashScreentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8425BD2D196B929A0018187E /* SplashScreentViewController.xib */; };
 		8425BD32196B94A00018187E /* logo_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 8425BD31196B94A00018187E /* logo_03.png */; };
@@ -121,6 +137,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		841A2ADF196CEBC500442CAE /* BlockActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockActionSheet.h; sourceTree = "<group>"; };
+		841A2AE0196CEBC500442CAE /* BlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockActionSheet.m; sourceTree = "<group>"; };
+		841A2AE3196CED4B00442CAE /* BlockBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockBackground.h; sourceTree = "<group>"; };
+		841A2AE4196CED4B00442CAE /* BlockBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockBackground.m; sourceTree = "<group>"; };
+		841A2AE5196CED4B00442CAE /* BlockUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockUI.h; sourceTree = "<group>"; };
+		841A2AE8196CF18700442CAE /* action-black-button-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-black-button-selected.png"; sourceTree = "<group>"; };
+		841A2AE9196CF18700442CAE /* action-black-button-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-black-button-selected@2x.png"; sourceTree = "<group>"; };
+		841A2AEA196CF18700442CAE /* action-black-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-black-button.png"; sourceTree = "<group>"; };
+		841A2AEB196CF18700442CAE /* action-black-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-black-button@2x.png"; sourceTree = "<group>"; };
+		841A2AEC196CF18700442CAE /* action-gray-button-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-gray-button-selected.png"; sourceTree = "<group>"; };
+		841A2AED196CF18700442CAE /* action-gray-button-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-gray-button-selected@2x.png"; sourceTree = "<group>"; };
+		841A2AEE196CF18700442CAE /* action-gray-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-gray-button.png"; sourceTree = "<group>"; };
+		841A2AEF196CF18700442CAE /* action-gray-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-gray-button@2x.png"; sourceTree = "<group>"; };
+		841A2AF0196CF18700442CAE /* action-red-button-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-red-button-selected.png"; sourceTree = "<group>"; };
+		841A2AF1196CF18700442CAE /* action-red-button-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-red-button-selected@2x.png"; sourceTree = "<group>"; };
+		841A2AF2196CF18700442CAE /* action-red-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-red-button.png"; sourceTree = "<group>"; };
+		841A2AF3196CF18700442CAE /* action-red-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-red-button@2x.png"; sourceTree = "<group>"; };
+		841A2AF4196CF18700442CAE /* action-sheet-panel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-sheet-panel.png"; sourceTree = "<group>"; };
+		841A2AF5196CF18700442CAE /* action-sheet-panel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-sheet-panel@2x.png"; sourceTree = "<group>"; };
 		8425BD2B196B929A0018187E /* SplashScreentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashScreentViewController.h; sourceTree = "<group>"; };
 		8425BD2C196B929A0018187E /* SplashScreentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashScreentViewController.m; sourceTree = "<group>"; };
 		8425BD2D196B929A0018187E /* SplashScreentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashScreentViewController.xib; sourceTree = "<group>"; };
@@ -279,6 +314,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		841A2ADE196CEBC500442CAE /* BlockActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				841A2ADF196CEBC500442CAE /* BlockActionSheet.h */,
+				841A2AE0196CEBC500442CAE /* BlockActionSheet.m */,
+			);
+			path = BlockActionSheet;
+			sourceTree = "<group>";
+		};
+		841A2AE2196CED4B00442CAE /* Alert-Background */ = {
+			isa = PBXGroup;
+			children = (
+				841A2AE3196CED4B00442CAE /* BlockBackground.h */,
+				841A2AE4196CED4B00442CAE /* BlockBackground.m */,
+				841A2AE5196CED4B00442CAE /* BlockUI.h */,
+			);
+			path = "Alert-Background";
+			sourceTree = "<group>";
+		};
+		841A2AE7196CF18700442CAE /* ActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				841A2AE8196CF18700442CAE /* action-black-button-selected.png */,
+				841A2AE9196CF18700442CAE /* action-black-button-selected@2x.png */,
+				841A2AEA196CF18700442CAE /* action-black-button.png */,
+				841A2AEB196CF18700442CAE /* action-black-button@2x.png */,
+				841A2AEC196CF18700442CAE /* action-gray-button-selected.png */,
+				841A2AED196CF18700442CAE /* action-gray-button-selected@2x.png */,
+				841A2AEE196CF18700442CAE /* action-gray-button.png */,
+				841A2AEF196CF18700442CAE /* action-gray-button@2x.png */,
+				841A2AF0196CF18700442CAE /* action-red-button-selected.png */,
+				841A2AF1196CF18700442CAE /* action-red-button-selected@2x.png */,
+				841A2AF2196CF18700442CAE /* action-red-button.png */,
+				841A2AF3196CF18700442CAE /* action-red-button@2x.png */,
+				841A2AF4196CF18700442CAE /* action-sheet-panel.png */,
+				841A2AF5196CF18700442CAE /* action-sheet-panel@2x.png */,
+			);
+			path = ActionSheet;
+			sourceTree = "<group>";
+		};
 		8425BD2A196B927C0018187E /* SplashScreent */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,6 +562,7 @@
 		84534A60196253000031D6DA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				841A2AE7196CF18700442CAE /* ActionSheet */,
 				8425BD30196B94970018187E /* Logo */,
 				8429DB101963EF7100A8A381 /* Activity */,
 				84534AB31963038B0031D6DA /* Avatar */,
@@ -500,6 +576,8 @@
 		84534A61196253000031D6DA /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				841A2AE2196CED4B00442CAE /* Alert-Background */,
+				841A2ADE196CEBC500442CAE /* BlockActionSheet */,
 				8484F13D1969013300EBA065 /* XYPieChart */,
 			);
 			path = Library;
@@ -869,11 +947,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841A2AFC196CF18700442CAE /* action-gray-button.png in Resources */,
 				8425BD3A196B9FA50018187E /* google_login.png in Resources */,
 				8429DAFE1963E6AA00A8A381 /* PromiseViewController.xib in Resources */,
 				84534A8219625BF90031D6DA /* SettingViewController.xib in Resources */,
 				84534AC01963039D0031D6DA /* hinh6.jpg in Resources */,
+				841A2AFF196CF18700442CAE /* action-red-button-selected@2x.png in Resources */,
 				8429DAE21963DFD100A8A381 /* icon_promise.png in Resources */,
+				841A2AFA196CF18700442CAE /* action-gray-button-selected.png in Resources */,
 				84534ABE1963039D0031D6DA /* hinh4.jpg in Resources */,
 				84534ABC1963039D0031D6DA /* hinh2.jpg in Resources */,
 				8429DB1D1963EF7100A8A381 /* activity6.jpg in Resources */,
@@ -888,19 +969,28 @@
 				8425BD32196B94A00018187E /* logo_03.png in Resources */,
 				84534ABD1963039D0031D6DA /* hinh3.jpg in Resources */,
 				84A4582B1964E53C00DF96FA /* btn_saveedit.png in Resources */,
+				841A2AFD196CF18700442CAE /* action-gray-button@2x.png in Resources */,
+				841A2AFE196CF18700442CAE /* action-red-button-selected.png in Resources */,
+				841A2B01196CF18700442CAE /* action-red-button@2x.png in Resources */,
 				84534A8B19625F1E0031D6DA /* setting_icon.png in Resources */,
 				8484F13A1968F78500EBA065 /* right_button.png in Resources */,
 				8425BD40196BCAD10018187E /* btn_border2.png in Resources */,
 				84A4583719651E2D00DF96FA /* btn_pick.png in Resources */,
 				84534AA9196272190031D6DA /* ItemMemberView.xib in Resources */,
+				841A2AF9196CF18700442CAE /* action-black-button@2x.png in Resources */,
 				8429DAF41963E68800A8A381 /* ActivityViewController.xib in Resources */,
 				8425BD3E196BA1DD0018187E /* btn_Login.png in Resources */,
 				8429DAF91963E69E00A8A381 /* FriendViewController.xib in Resources */,
 				84A458291964E31200DF96FA /* btn_done.png in Resources */,
 				8429DB1C1963EF7100A8A381 /* activity5.jpg in Resources */,
+				841A2AF8196CF18700442CAE /* action-black-button.png in Resources */,
+				841A2AF6196CF18700442CAE /* action-black-button-selected.png in Resources */,
 				8429DB181963EF7100A8A381 /* activity1.jpg in Resources */,
 				84534A8819625DAD0031D6DA /* btn_skip.png in Resources */,
+				841A2B02196CF18700442CAE /* action-sheet-panel.png in Resources */,
 				8429DB1B1963EF7100A8A381 /* activity4.jpg in Resources */,
+				841A2AF7196CF18700442CAE /* action-black-button-selected@2x.png in Resources */,
+				841A2B03196CF18700442CAE /* action-sheet-panel@2x.png in Resources */,
 				8425BD2F196B929A0018187E /* SplashScreentViewController.xib in Resources */,
 				84534A7D19625BE70031D6DA /* MemberViewController.xib in Resources */,
 				84534A70196257630031D6DA /* LoginViewController.xib in Resources */,
@@ -914,6 +1004,8 @@
 				8425BD3C196BA1200018187E /* btn_SignUp.png in Resources */,
 				84534A3B196252D80031D6DA /* InfoPlist.strings in Resources */,
 				8425BD36196B9E490018187E /* btn_facebook.png in Resources */,
+				841A2AFB196CF18700442CAE /* action-gray-button-selected@2x.png in Resources */,
+				841A2B00196CF18700442CAE /* action-red-button.png in Resources */,
 				8484F169196919E900EBA065 /* SlicesActivityTableViewCell.xib in Resources */,
 				8429DADE196388D300A8A381 /* btn_edit.png in Resources */,
 				84A45847196565EC00DF96FA /* EditPromiseViewController.xib in Resources */,
@@ -964,6 +1056,7 @@
 				84A7DB94196A46A3004516F0 /* DataParser.m in Sources */,
 				84A7DB91196A466B004516F0 /* DataHandler.m in Sources */,
 				84534A6F196257630031D6DA /* LoginViewController.m in Sources */,
+				841A2AE1196CEBC500442CAE /* BlockActionSheet.m in Sources */,
 				84534A75196257840031D6DA /* MainViewController.m in Sources */,
 				8425BD2E196B929A0018187E /* SplashScreentViewController.m in Sources */,
 				84534AB21962C5260031D6DA /* Member.m in Sources */,
@@ -977,6 +1070,7 @@
 				84534A93196268240031D6DA /* Utilities.m in Sources */,
 				84534A8119625BF90031D6DA /* SettingViewController.m in Sources */,
 				8484F1561969174000EBA065 /* CircleView.m in Sources */,
+				841A2AE6196CED4B00442CAE /* BlockBackground.m in Sources */,
 				8484F1401969013300EBA065 /* XYPieChart.m in Sources */,
 				8429DB091963EA6D00A8A381 /* ActivityTableViewCell.m in Sources */,
 				8429DAEB1963E51000A8A381 /* HistoryViewController.m in Sources */,

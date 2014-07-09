@@ -63,6 +63,7 @@
                 itemView.delegate = self;
                 Activity *aActivity = [arrCell objectAtIndex:i];
                 [itemView setDataForItemView:aActivity];
+                [itemView displayforView];
                 [aView setHidden:NO];
             }
             else
@@ -76,9 +77,17 @@
     }
 }
 #pragma mark - ItemActivityView Delegate
--(void)editItemMemberSelected:(id)sender
+-(void)editItemActivityrSelectedView:(Activity *)aActivity
 {
-    [_delegate itemMemberSelectedCell:sender];
+    [_delegate editActivitySelectedCell:aActivity];
+}
+-(void)singleTagItemActivityView
+{
+    [_delegate singleTagItemActivity];
+}
+-(void)longTagItemActivityView
+{
+    [_delegate longTagItemActivity];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {

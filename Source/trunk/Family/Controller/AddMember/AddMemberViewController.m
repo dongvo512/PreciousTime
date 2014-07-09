@@ -8,28 +8,34 @@
 
 #import "AddMemberViewController.h"
 #import "Utilities.h"
+#import "BlockActionSheet.h"
 @interface AddMemberViewController ()
 {
     NSMutableArray *arrMembers;
-    IBOutlet UIImageView *imgAvatar;
+    
     IBOutlet UIButton *btnDelete;
     IBOutlet UIScrollView *scrollViewContent;
+    IBOutlet UIButton *btnAvatar;
     IBOutlet UIButton *btnBirthday;
     IBOutlet UIButton *btnGender;
     IBOutlet UIDatePicker *datePicker;
     IBOutlet UIPickerView *pickerViewGender;
     IBOutlet UIView *viewDatePicker;
+    IBOutlet UITextField *txtRelationship;
     NSArray *arrGender;
-    Boolean isSelectedButtonBirthDay;
+    Boolean isShowViewPicker;
+    Boolean isShowKeyBoard;
+    IBOutlet UITextField *txtName;
 }
 - (IBAction)setBirthDay:(id)sender;
 - (IBAction)setGender:(id)sender;
 - (IBAction)doneDatePicker:(id)sender;
+- (IBAction)handleAvatar:(id)sender;
 
 @end
 
 @implementation AddMemberViewController
-
+#define KEY_BOARD_HEIGHT 216
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -44,7 +50,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     // Display
-    [self isBrandMemberViewController];
+    [self isAddMemberViewController];
     [self customizeBackButton];
     [self radiusAvatarCircle];
     [scrollViewContent setContentSize:CGSizeMake(self.view.frame.size.width, scrollViewContent.frame.size.height)];
@@ -52,7 +58,7 @@
     
 }
 
--(void)isBrandMemberViewController
+-(void)isAddMemberViewController
 {
     if(self.isAddNewMember)
     {
@@ -67,10 +73,10 @@
 }
 -(void)radiusAvatarCircle
 {
-    imgAvatar.layer.cornerRadius = imgAvatar.frame.size.width / 2;
-    imgAvatar.clipsToBounds = YES;
-    imgAvatar.layer.borderWidth = 3.0f;
-    imgAvatar.layer.borderColor = [UIColor blackColor].CGColor;
+    btnAvatar.layer.cornerRadius = btnAvatar.frame.size.width / 2;
+    btnAvatar.clipsToBounds = YES;
+    btnAvatar.layer.borderWidth = 3.0f;
+    btnAvatar.layer.borderColor = [UIColor blackColor].CGColor;
 }
 -(void)customizeBackButton
 {
@@ -107,34 +113,61 @@
 
 - (IBAction)setBirthDay:(id)sender
 {
-    isSelectedButtonBirthDay = YES;
     [pickerViewGender setHidden:YES];
     [datePicker setHidden:NO];
     datePicker.datePickerMode = UIDatePickerModeDate;
-    [self tranfromScrollViewDatePicker:sender];
+   // [self tranfromScrollViewDatePicker:sender];
+    [self upScrollViewDatePicker];
+    [self setContentOfSetScrollView:sender];
 }
 - (IBAction)setGender:(id)sender
 {
-    isSelectedButtonBirthDay = NO;
     [datePicker setHidden:YES];
     [pickerViewGender setHidden:NO];
     [self createDataGender];
     pickerViewGender.dataSource = self;
     pickerViewGender.delegate = self;
-    [self tranfromScrollViewDatePicker:sender];
+    [self upScrollViewDatePicker];
+    [self setContentOfSetScrollView:sender];
 }
-
--(void)tranfromScrollViewDatePicker:(id) sender
+-(void)upScrollViewDatePicker
 {
-    UIView *viewCurr = (UIView *)sender;
-    [viewCurr setUserInteractionEnabled:NO];
+    isShowViewPicker = YES;
+    if(isShowKeyBoard)
+       [self returnScrollViewWithKeyBoard];
+    else if (isShowViewPicker)
+        [self returnScrollViewDatePicker];
     [self animationSlideY:viewDatePicker OriginY:self.view.frame.size.height - viewDatePicker.frame.size.height];
     [self scaleScrollViewContent:scrollViewContent.frame.size.height - viewDatePicker.frame.size.height];
-    float pointCenterScrollView = (self.view.frame.size.height - viewDatePicker.frame.size.height)/2;
-    [scrollViewContent setContentOffset:CGPointMake(0, viewCurr.frame.origin.y - pointCenterScrollView)];
-  
 }
-
+-(void)returnScrollViewDatePicker
+{
+    [self animationSlideY:viewDatePicker OriginY:[Utilities getScreenSize].size.height];
+    [self scaleScrollViewContent:[Utilities getScreenSize].size.height];
+}
+-(void)upScrollViewWithKeyBoard
+{
+    isShowKeyBoard = YES;
+    if(isShowViewPicker)
+        [self returnScrollViewDatePicker];
+    [self scaleScrollViewContent:scrollViewContent.frame.size.height - KEY_BOARD_HEIGHT];
+}
+-(void)returnScrollViewWithKeyBoard
+{
+    [self scaleScrollViewContent:[Utilities getScreenSize].size.height];
+    [self returnKeyBoard];
+}
+-(void)returnKeyBoard
+{
+    [txtName resignFirstResponder];
+    [txtRelationship resignFirstResponder];
+}
+-(void)setContentOfSetScrollView:(id)sender
+{
+    UIView *viewCurr = (UIView *)sender;
+    float pointCenterScrollView = (self.view.frame.size.height - viewDatePicker.frame.size.height)/2;
+     [scrollViewContent setContentOffset:CGPointMake(0, viewCurr.frame.origin.y - pointCenterScrollView)];
+}
 -(void)animationSlideY:(UIView *)viewCurrent OriginY:(float) y
 {
      [UIView beginAnimations:nil context:nil];
@@ -152,37 +185,23 @@
     frameScrollView.size.height = height;
     scrollViewContent.frame = frameScrollView;
 }
-#define TAG_OF_BUTTON_BIRTHDAY 1001
-#define TAG_OF_BUTTON_GENDER 1002
+
 - (IBAction)doneDatePicker:(id)sender
 {
-    [self animationSlideY:viewDatePicker OriginY:[Utilities getScreenSize].size.height];
-    [self scaleScrollViewContent:[Utilities getScreenSize].size.height];
-    if(isSelectedButtonBirthDay)
-    {
+    //[self animationSlideY:viewDatePicker OriginY:[Utilities getScreenSize].size.height];
+    //[self scaleScrollViewContent:[Utilities getScreenSize].size.height];
+    [self returnScrollViewDatePicker];
+    isShowViewPicker = NO;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"dd/MM/yyyy"];
     NSString *dateBirthDay = [formatter stringFromDate:datePicker.date];
     [btnBirthday setTitle:dateBirthDay forState:UIControlStateNormal];
-   
-    }
-        [btnBirthday setUserInteractionEnabled:YES];
-        [btnGender setUserInteractionEnabled:YES];
-   
 }
+
+
 -(void)createDataGender
 {
-        UILabel *lblgenderMale = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, datePicker.frame.size.width, datePicker.frame.size.height)];
-        lblgenderMale.textAlignment = NSTextAlignmentCenter;
-        lblgenderMale.text = @"Male";
-        lblgenderMale.textColor = [UIColor blackColor];
-    
-        UILabel *lblgenderFemale = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, datePicker.frame.size.width, datePicker.frame.size.height)];
-        lblgenderFemale.textAlignment = NSTextAlignmentCenter;
-        lblgenderFemale.text = @"Female";
-        lblgenderFemale.textColor = [UIColor blackColor];
-    
-    arrGender = [NSArray arrayWithObjects:lblgenderMale,lblgenderFemale, nil];
+    arrGender = [NSArray arrayWithObjects:@"Male",@"Female", nil];
 }
 #pragma mark - Picker view data source
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
@@ -193,28 +212,93 @@
     return [arrGender count];
 }
 #pragma mark - Picker view delegate
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
-    
-    return [arrGender objectAtIndex:row];
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+   return [arrGender objectAtIndex:row];
 }
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    UILabel *lblSelected = [arrGender objectAtIndex:row];
-    [btnGender setTitle:lblSelected.text forState:UIControlStateNormal];
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    [btnGender setTitle:[arrGender objectAtIndex:row] forState:UIControlStateNormal];
 }
 #pragma mark - UITextField Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self animationSlideY:viewDatePicker OriginY:[Utilities getScreenSize].size.height];
-    [self scaleScrollViewContent:[Utilities getScreenSize].size.height];
+    isShowKeyBoard = NO;
+    [self returnScrollViewWithKeyBoard];
     [textField resignFirstResponder];
     return YES;
 }
-#define KEY_BOARD_HEIGHT 216
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [self scaleScrollViewContent:scrollViewContent.frame.size.height - KEY_BOARD_HEIGHT];
-    float pointCenterScrollView = (self.view.frame.size.height - KEY_BOARD_HEIGHT)/2;
-    [scrollViewContent setContentOffset:CGPointMake(0, textField.frame.origin.y - pointCenterScrollView)];
+    [self upScrollViewWithKeyBoard];
+    [self setContentOfSetScrollView:textField];
+}
+-(Boolean) isCheckCamrera
+{
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                              message:@"Device has no camera"
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles: nil];
+        
+        [myAlertView show];
+        return NO;
+    }
+    else
+        return YES;
+}
+- (IBAction)handleAvatar:(id)sender
+{
+    BlockActionSheet *blockActionSheet = [[BlockActionSheet alloc] initWithTitle:@"Image Option"];
+    [blockActionSheet setCancelButtonWithTitle:@"Cancel" block:^{
+        NSLog(@"Cancel");
+    }];
+    [blockActionSheet setDestructiveButtonWithTitle:@"Take a Picture" block:^{
+        NSLog(@"Take a Picture");
+        [self takeAPickture];
+    }];
+    [blockActionSheet addButtonWithTitle:@"Camera Roll" block:^{
+        NSLog(@"Camera Roll");
+        if([self isCheckCamrera])
+            [self cameraRoll];
+    }];
+    [blockActionSheet showInView:self.view];
+}
+- (void)takeAPickture
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+-(void)cameraRoll
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+#pragma mark - Image Picker Controller delegate methods
 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    [btnAvatar setImage:chosenImage forState:UIControlStateNormal];
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
 }
 @end

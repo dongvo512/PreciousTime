@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Activity.h"
 @protocol ItemActivityViewDelegate <NSObject>
--(void)editItemMemberSelected:(id)sender;
+-(void)editItemActivityrSelectedView:(Activity*)aActivity;
+-(void)singleTagItemActivityView;
+-(void)longTagItemActivityView;
 @end
 @interface ItemActivityView : UIView
 {
@@ -17,4 +19,6 @@
 }
 -(void) setDataForItemView:(Activity *) aActivity;
 @property (retain) id delegate;
+-(void)displayforView;
+
 @end
