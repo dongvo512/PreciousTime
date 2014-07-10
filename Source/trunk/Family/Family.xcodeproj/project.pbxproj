@@ -122,6 +122,10 @@
 		84A4584119651FA600DF96FA /* Promise.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4584019651FA600DF96FA /* Promise.m */; };
 		84A45846196565EC00DF96FA /* EditPromiseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A45844196565EC00DF96FA /* EditPromiseViewController.m */; };
 		84A45847196565EC00DF96FA /* EditPromiseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A45845196565EC00DF96FA /* EditPromiseViewController.xib */; };
+		84A4A29F196E8C5A00C5DDA8 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A4A29E196E8C5A00C5DDA8 /* Background.png */; };
+		84A4A2A1196E9D0200C5DDA8 /* background_navigationbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A4A2A0196E9D0200C5DDA8 /* background_navigationbar.png */; };
+		84A4C265196E4BF50058B7B3 /* PointSummaryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4C264196E4BF50058B7B3 /* PointSummaryTableView.m */; };
+		84A4C267196E4C0A0058B7B3 /* PointSummaryTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A4C266196E4C0A0058B7B3 /* PointSummaryTableView.xib */; };
 		84A7DB91196A466B004516F0 /* DataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7DB90196A466B004516F0 /* DataHandler.m */; };
 		84A7DB94196A46A3004516F0 /* DataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7DB93196A46A3004516F0 /* DataParser.m */; };
 /* End PBXBuildFile section */
@@ -284,6 +288,11 @@
 		84A45843196565EC00DF96FA /* EditPromiseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPromiseViewController.h; sourceTree = "<group>"; };
 		84A45844196565EC00DF96FA /* EditPromiseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPromiseViewController.m; sourceTree = "<group>"; };
 		84A45845196565EC00DF96FA /* EditPromiseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditPromiseViewController.xib; sourceTree = "<group>"; };
+		84A4A29E196E8C5A00C5DDA8 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
+		84A4A2A0196E9D0200C5DDA8 /* background_navigationbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_navigationbar.png; sourceTree = "<group>"; };
+		84A4C263196E4BF50058B7B3 /* PointSummaryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointSummaryTableView.h; sourceTree = "<group>"; };
+		84A4C264196E4BF50058B7B3 /* PointSummaryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointSummaryTableView.m; sourceTree = "<group>"; };
+		84A4C266196E4C0A0058B7B3 /* PointSummaryTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PointSummaryTableView.xib; sourceTree = "<group>"; };
 		84A7DB8F196A466B004516F0 /* DataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataHandler.h; sourceTree = "<group>"; };
 		84A7DB90196A466B004516F0 /* DataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataHandler.m; sourceTree = "<group>"; };
 		84A7DB92196A46A3004516F0 /* DataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataParser.h; sourceTree = "<group>"; };
@@ -598,6 +607,7 @@
 		84534A63196253000031D6DA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				84A4C25B196E07380058B7B3 /* PointSummary */,
 				8484F16A19691DF900EBA065 /* MemberInfo */,
 				8484F1511969174000EBA065 /* ChartCircle */,
 				84A4582E19651B5000DF96FA /* Promise */,
@@ -650,6 +660,8 @@
 		84534A8319625DAD0031D6DA /* Background */ = {
 			isa = PBXGroup;
 			children = (
+				84A4A2A0196E9D0200C5DDA8 /* background_navigationbar.png */,
+				84A4A29E196E8C5A00C5DDA8 /* Background.png */,
 			);
 			path = Background;
 			sourceTree = "<group>";
@@ -854,6 +866,16 @@
 			path = EditPromise;
 			sourceTree = "<group>";
 		};
+		84A4C25B196E07380058B7B3 /* PointSummary */ = {
+			isa = PBXGroup;
+			children = (
+				84A4C263196E4BF50058B7B3 /* PointSummaryTableView.h */,
+				84A4C264196E4BF50058B7B3 /* PointSummaryTableView.m */,
+				84A4C266196E4C0A0058B7B3 /* PointSummaryTableView.xib */,
+			);
+			path = PointSummary;
+			sourceTree = "<group>";
+		};
 		84A7DB8D196A4653004516F0 /* DataHandler */ = {
 			isa = PBXGroup;
 			children = (
@@ -964,6 +986,7 @@
 				8484F1571969174000EBA065 /* CircleView.xib in Resources */,
 				8484F1391968F78500EBA065 /* left_button.png in Resources */,
 				846347551966615E008B9A6F /* btn_save.png in Resources */,
+				84A4A29F196E8C5A00C5DDA8 /* Background.png in Resources */,
 				84A458271964DCDB00DF96FA /* EditActivityViewController.xib in Resources */,
 				84534ABB1963039D0031D6DA /* hinh1.jpg in Resources */,
 				8425BD32196B94A00018187E /* logo_03.png in Resources */,
@@ -974,6 +997,7 @@
 				841A2B01196CF18700442CAE /* action-red-button@2x.png in Resources */,
 				84534A8B19625F1E0031D6DA /* setting_icon.png in Resources */,
 				8484F13A1968F78500EBA065 /* right_button.png in Resources */,
+				84A4A2A1196E9D0200C5DDA8 /* background_navigationbar.png in Resources */,
 				8425BD40196BCAD10018187E /* btn_border2.png in Resources */,
 				84A4583719651E2D00DF96FA /* btn_pick.png in Resources */,
 				84534AA9196272190031D6DA /* ItemMemberView.xib in Resources */,
@@ -1006,6 +1030,7 @@
 				8425BD36196B9E490018187E /* btn_facebook.png in Resources */,
 				841A2AFB196CF18700442CAE /* action-gray-button-selected@2x.png in Resources */,
 				841A2B00196CF18700442CAE /* action-red-button.png in Resources */,
+				84A4C267196E4C0A0058B7B3 /* PointSummaryTableView.xib in Resources */,
 				8484F169196919E900EBA065 /* SlicesActivityTableViewCell.xib in Resources */,
 				8429DADE196388D300A8A381 /* btn_edit.png in Resources */,
 				84A45847196565EC00DF96FA /* EditPromiseViewController.xib in Resources */,
@@ -1056,6 +1081,7 @@
 				84A7DB94196A46A3004516F0 /* DataParser.m in Sources */,
 				84A7DB91196A466B004516F0 /* DataHandler.m in Sources */,
 				84534A6F196257630031D6DA /* LoginViewController.m in Sources */,
+				84A4C265196E4BF50058B7B3 /* PointSummaryTableView.m in Sources */,
 				841A2AE1196CEBC500442CAE /* BlockActionSheet.m in Sources */,
 				84534A75196257840031D6DA /* MainViewController.m in Sources */,
 				8425BD2E196B929A0018187E /* SplashScreentViewController.m in Sources */,

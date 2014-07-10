@@ -17,10 +17,15 @@
 {
     MainViewController *vcMain = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
     UINavigationController *nvg = [[UINavigationController alloc] initWithRootViewController:vcMain];
-    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
-    {
-        nvg.navigationBar.translucent = NO;
+    
+    NSArray *ver = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
+    if ([[ver objectAtIndex:0] intValue] >= 7) {
+        self.navigationController.navigationBar.barTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_navigationbar.png"]];
+        self.navigationController.navigationBar.translucent = NO;
+    }else {
+        self.navigationController.navigationBar.tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_navigationbar.png"]];
     }
+   
     [self presentViewController:nvg animated:YES completion:nil];
 }
 
@@ -37,6 +42,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     // Do any additional setup after loading the view from its nib.
 }
 

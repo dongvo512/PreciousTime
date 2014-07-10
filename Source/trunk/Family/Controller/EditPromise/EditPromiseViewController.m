@@ -36,6 +36,7 @@
     [super viewDidLoad];
     // Display
     [self radiusForView];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     if(self.isEditPromiseViewController)
         [self displayWithEditPromiseViewController];
     else

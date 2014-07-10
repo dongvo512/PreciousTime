@@ -34,6 +34,7 @@
     [super viewDidLoad];
     // Display
     self.title = @"Member";
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     [self customizeBackButton];
     [self createAddNewMember];
     // Data
@@ -133,6 +134,7 @@
     {
         cell = [[MemberTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    [cell setBackgroundColor:[UIColor clearColor]];
     cell.delegate = self;
     [cell setObjectForCell:arrCell];
     return cell;

@@ -48,7 +48,8 @@
     for(int i = 0; i < 5; i ++)
     {
         Activity *itemActivity = [[Activity alloc] init];
-        itemActivity.point = [NSNumber numberWithInt:rand()%60+20];
+        //itemActivity.point = [NSNumber numberWithInt:rand()%60+20];
+        itemActivity.point = rand()%60 +20;
         itemActivity.name = [arrSlicesName objectAtIndex:i];
         itemActivity.color = [arrSlicesColor objectAtIndex:i];
         [arrSlices addObject:itemActivity];
@@ -61,7 +62,8 @@
     [pieChart setLabelRadius:pieChart.frame.size.height/4];
     [pieChart setShowPercentage:YES];
     [lblPercentagel.layer setCornerRadius:lblPercentagel.frame.size.width/2];
-    [pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
+    //[pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
+    [pieChart setPieBackgroundColor:[UIColor clearColor]];
     [pieChart setUserInteractionEnabled:YES];
     [pieChart setLabelShadowColor:[UIColor blackColor]];
     [pieChart reloadData];
@@ -90,7 +92,7 @@
 - (CGFloat)pieChart:(XYPieChart *)pieChart valueForSliceAtIndex:(NSUInteger)index
 {
     //return [[self.slices objectAtIndex:index] intValue];
-    int aItemSlice = [[arrSlices objectAtIndex:index] point].intValue;
+    int aItemSlice = [[arrSlices objectAtIndex:index] point];
     totalSlices += aItemSlice;
     lblPercentagel.text = [NSString stringWithFormat:@"%d",totalSlices];
     return aItemSlice;
@@ -131,6 +133,7 @@
         }
     }
     // Configure the cell...
+    [cell setBackgroundColor:[UIColor clearColor]];
     Activity *aActivity = [arrSlices objectAtIndex:indexPath.row];
     [cell setObjectForCell:aActivity];
     return cell;

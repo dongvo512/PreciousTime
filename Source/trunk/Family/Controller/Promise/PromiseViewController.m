@@ -35,6 +35,7 @@
     [super viewDidLoad];
     //Display
     self.title = @"Promise";
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     [self createBarButtonDone];
     //Data
     [self createData];
@@ -96,6 +97,7 @@
     }
     Promise *aPromise = [arrPromise objectAtIndex:indexPath.row];
     cell.delegate = self;
+    [cell setBackgroundColor:[UIColor clearColor]];
     [cell setObjectForCell:aPromise];
     return cell;
     
@@ -121,6 +123,7 @@
     whiteRoundedCornerView.backgroundColor = [UIColor whiteColor];
     whiteRoundedCornerView.layer.masksToBounds = NO;
     whiteRoundedCornerView.layer.cornerRadius = 10.0f;
+    [whiteRoundedCornerView setBackgroundColor:[UIColor clearColor]];
     [cell.contentView addSubview:whiteRoundedCornerView];
     [cell.contentView sendSubviewToBack:whiteRoundedCornerView];
 }

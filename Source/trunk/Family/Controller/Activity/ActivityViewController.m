@@ -37,6 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     // Display
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     self.title = @"Activities";
     [self createBarButtonDone];
     // Data
@@ -69,12 +70,11 @@
         Activity *aActivity = [[Activity alloc] init];
         
         NSString *strImg = [NSString stringWithFormat:@"activity%d.jpg",i+1];
-        UIImage *imgCurr = [UIImage imageNamed:strImg];
-        aActivity.avatar = imgCurr;
+        aActivity.strAvatar = strImg;
         aActivity.isSelected = NO;
         NSString *strName = [NSString stringWithFormat:@"Activity%d",i+1];
         aActivity.name = strName;
-        aActivity.time = 5;
+        aActivity.time = 0;
         [arrActivities addObject:aActivity];
     }
     
@@ -112,6 +112,7 @@
         cell = [[ActivityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.delegate = self;
+    [cell setBackgroundColor:[UIColor clearColor]];
     [cell setObjectForCell:arrCell];
     return cell;
     

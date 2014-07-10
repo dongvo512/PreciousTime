@@ -11,8 +11,8 @@
 @interface Activity : NSObject
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic) int time;
-@property (nonatomic, retain) UIImage *avatar;
-@property (nonatomic, retain) NSNumber* point;
+@property (nonatomic, retain) NSString *strAvatar;
+@property (nonatomic) int point;
 @property (nonatomic, retain) UIColor *color;
 @property (nonatomic) Boolean isSelected;
 @end

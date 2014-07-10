@@ -13,7 +13,9 @@
 #import "FriendViewController.h"
 #import "ActivityViewController.h"
 #import "SettingViewController.h"
+#import "PointSummaryTableView.h"
 #import "CircleView.h"
+#import "Utilities.h"
 #import "MemberInfoView.h"
 @interface MainViewController ()
 {
@@ -24,6 +26,7 @@
     int totalSlices;
     IBOutlet UIView *viewChartCircle;
    
+    IBOutlet UIView *viewPointSummary;
     IBOutlet UIView *viewMemberInfo;
    
 }
@@ -31,7 +34,11 @@
 
 @implementation MainViewController
 
-
+#define NAVIGATION_BAR 44
+#define TAG_OF_VIEW_CIRCLE 400
+#define TAG_OF_VIEW_MEMBER_INFO 500
+#define TAG_OF_TABLE_VIEW_POINTSUMMARY 600
+#define MARGIN_BETWEEN_VIEW 5
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -46,9 +53,16 @@
     [super viewDidLoad];
     self.title = @"Home";
     // Display
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     [self createButtonOnNavigationBar];
+    // Member Info
+    [self createViewMemberInfo];
     // charting circle
     [self createViewChartCircle];
+    // Point Summary
+    [self createViewPointSummary];
+    
+    [scrollViewContant setContentSize:CGSizeMake([Utilities getScreenSize].size.width, viewPointSummary.frame.origin.y + viewPointSummary.frame.size.height + NAVIGATION_BAR)];
     
 }
 -(void) createButtonOnNavigationBar
@@ -72,7 +86,7 @@
     self.navigationItem.rightBarButtonItem = memberBarButton;
     
 }
-#define TAG_OF_VIEW_MEMBER_INFO 400
+
 -(void) createViewMemberInfo
 {
     [viewMemberInfo.layer setCornerRadius:10.0f];
@@ -93,7 +107,7 @@
 
     
 }
-#define TAG_OF_VIEW_CIRCLE 400
+
 -(void)createViewChartCircle
 {
     [viewChartCircle.layer setCornerRadius:10.0f];
@@ -113,6 +127,28 @@
          CircleView *itemView = (CircleView *) aView;
         [itemView createCircleSlices];
 
+}
+-(void)createViewPointSummary
+{
+    [viewPointSummary.layer setCornerRadius:10.0f];
+    [viewPointSummary.layer setBorderWidth:1.0f];
+    NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"PointSummaryTableView" owner:nil options:nil];
+    UIView *aView = nil;
+    for(UITableView *viewCurr in views)
+    {
+        if([viewCurr isKindOfClass:[PointSummaryTableView class]])
+        {
+            aView = viewCurr;
+            [aView setTag:TAG_OF_TABLE_VIEW_POINTSUMMARY];
+            [viewPointSummary addSubview:aView];
+        }
+    }
+     PointSummaryTableView *aTableView = (PointSummaryTableView *) aView;
+    [aTableView setDataForTableView];
+    
+    CGRect framePointSummary = viewPointSummary.frame;
+    framePointSummary.size.height = aTableView.frame.size.height + MARGIN_BETWEEN_VIEW;
+    viewPointSummary.frame = framePointSummary;
 }
 -(void)changeSettingViewController
 {

@@ -21,7 +21,8 @@
 
 @end
 @implementation ItemActivityView
-#define TIME_DEFAULT 5
+#define TIME_DEFAULT 0
+#define TIME_UP 5
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -34,10 +35,10 @@
 {
     aActivityCurrent = aActivity;
     if(aActivity.isSelected)
-       [viewBackGround setBackgroundColor:[UIColor grayColor]];
+       [viewBackGround setBackgroundColor:[UIColor yellowColor]];
     else
         [viewBackGround setBackgroundColor:[UIColor clearColor]];
-    imgAvatar.image = aActivity.avatar;
+    imgAvatar.image = [UIImage imageNamed:aActivity.strAvatar];
     lblNameActivity.text = aActivity.name;
     lblTime.text = [NSString stringWithFormat:@"%dm",aActivity.time];
     [self radiusViewBackGround];
@@ -73,7 +74,7 @@
 {
     aActivityCurrent.isSelected = YES;
     NSLog(@"%d",aActivityCurrent.time);
-    aActivityCurrent.time = aActivityCurrent.time + TIME_DEFAULT;
+    aActivityCurrent.time = aActivityCurrent.time + TIME_UP;
     [_delegate singleTagItemActivityView];
 }
 -(void)handleLongPress:(id)sender

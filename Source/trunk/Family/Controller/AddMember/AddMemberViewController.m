@@ -50,6 +50,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     // Display
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     [self isAddMemberViewController];
     [self customizeBackButton];
     [self radiusAvatarCircle];
@@ -76,7 +77,7 @@
     btnAvatar.layer.cornerRadius = btnAvatar.frame.size.width / 2;
     btnAvatar.clipsToBounds = YES;
     btnAvatar.layer.borderWidth = 3.0f;
-    btnAvatar.layer.borderColor = [UIColor blackColor].CGColor;
+    btnAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
 }
 -(void)customizeBackButton
 {
