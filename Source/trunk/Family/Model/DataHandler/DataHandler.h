@@ -17,7 +17,7 @@
 
 +(id)sharedManager;
 #pragma mark - Connection DB
-- (void)copyDatabaseToDocument;
+- (void)copyDatabaseToDocumentWithError:(NSError**)error;
 - (BOOL)openDB:(FMDatabase*)database;
 - (void)closeDB:(FMDatabase*)database;
 

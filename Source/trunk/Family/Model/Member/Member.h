@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSString *relationship;
 @property (nonatomic, retain) NSString *avatarUrl;
 @property (nonatomic, retain) NSString *timestamp;
+@property (nonatomic, assign) int genderValue;
 @property (nonatomic, assign) BOOL deleted;
 @property (nonatomic, assign) BOOL dirty;
 

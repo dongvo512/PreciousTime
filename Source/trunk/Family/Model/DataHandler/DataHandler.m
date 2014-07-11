@@ -52,15 +52,15 @@ static DataHandler *sharedDataHandler = nil;
     return db;
 }
 
-- (void)copyDatabaseToDocument {
+- (void)copyDatabaseToDocumentWithError:(NSError**)error {
     
 	BOOL success;
 	NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSError *error = nil;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     
     if ([paths count]==0)
     {
+        *error = [NSError errorWithDomain:@"Can't find database file" code:1 userInfo:nil];
         return;
     }
 
@@ -73,7 +73,7 @@ static DataHandler *sharedDataHandler = nil;
     
 	if (!success) {
 		NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:databaseFileName];
-		[fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
+		[fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:error];
 	}
      
 }
@@ -152,13 +152,24 @@ static DataHandler *sharedDataHandler = nil;
 
 -(BOOL)insertMember:(Member*)aMember error:(NSError**)error
 {
+    
+    if (aMember==nil) {
+        *error = [NSError errorWithDomain:@"Member object is nil" code:121 userInfo:nil];
+        return NO;
+    }
+    if (aMember.name.length == 0) {
+        *error = [NSError errorWithDomain:@"Member name is nil" code:121 userInfo:nil];
+
+    }
     FMDatabase *db = [self database];
     if (![self openDB:db]) {
+        *error = [NSError errorWithDomain:@"Can't open database" code:122 userInfo:nil];
+
         return NO;
     }
     
     NSString *idString = [Utilities idWithName:aMember.name];
-    BOOL isSuccess = [db executeUpdate:@"insert into Member(id, name, avatarUrl, birthday, gender,dirty) values(?,?,?,?,?,?)",idString,aMember.name,aMember.avatarUrl,aMember.bithday,[NSNumber numberWithInt:0],[NSNumber numberWithBool:aMember.dirty]];
+    BOOL isSuccess = [db executeUpdate:@"insert into Member(id, name, avatarUrl, birthday, gender,relationship,deleted,dirty) values(?,?,?,?,?,?,?,?)",idString,aMember.name,aMember.avatarUrl,aMember.bithday,[NSNumber numberWithInt:aMember.genderValue],aMember.relationship,[NSNumber numberWithBool:false],[NSNumber numberWithBool:true]];
     if (!isSuccess) {
         if (error!=NULL) {
             *error = [db lastError];
@@ -171,6 +182,8 @@ static DataHandler *sharedDataHandler = nil;
     
     [self closeDB:db];
     return YES;
+     
+
 }
 
 -(BOOL)updateMemberInfo:(Member*)aMember error:(NSError**)error

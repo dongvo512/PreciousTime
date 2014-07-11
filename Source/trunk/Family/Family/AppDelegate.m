@@ -22,7 +22,8 @@
       self.window.rootViewController = vcLogin;*/
     
     //Create database
-    //[[DataHandler sharedManager] copyDatabaseToDocument];
+    NSError *error = nil;
+    [[DataHandler sharedManager] copyDatabaseToDocumentWithError:&error];
     
     SplashScreentViewController *vcSplashScreen = [[SplashScreentViewController alloc] initWithNibName:@"SplashScreentViewController" bundle:nil];
     self.window.rootViewController = vcSplashScreen;
