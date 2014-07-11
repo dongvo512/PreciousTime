@@ -7,21 +7,27 @@
 //
 
 #import "EditPromiseViewController.h"
-
+#import "Utilities.h"
 @interface EditPromiseViewController ()
 {
     IBOutlet UITextField *txtName;
-   
     IBOutlet UITextView *textViewDescription;
-    IBOutlet UILabel *lblDueDate;
     IBOutlet UIButton *btnDelete;
     IBOutlet UIDatePicker *datePicker;
-    IBOutlet UIView *viewDueDate;
+    IBOutlet UIView *viewDatePicker;
+    IBOutlet UIButton *btnDueDate;
+    Boolean isShowViewPicker;
+    IBOutlet UIScrollView *scrollViewContent;
+    Boolean isShowKeyBoard;
 }
+- (IBAction)cancelDatePicker:(id)sender;
+- (IBAction)doneDatePicker:(id)sender;
+- (IBAction)setDueDate:(id)sender;
+
 @end
 
 @implementation EditPromiseViewController
-
+#define KEY_BOARD_HEIGHT 216
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -35,23 +41,25 @@
 {
     [super viewDidLoad];
     // Display
-    [self radiusForView];
+    [self radiusForViewDescription];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    
     if(self.isEditPromiseViewController)
         [self displayWithEditPromiseViewController];
     else
         [self displayWithAddNewPromiseViewController];
+    
+     [scrollViewContent setContentSize:CGSizeMake(self.view.frame.size.width, scrollViewContent.frame.size.height)];
+    [viewDatePicker setFrame:CGRectMake(0, [Utilities getScreenSize].size.height, viewDatePicker.frame.size.width, viewDatePicker.frame.size.height)];
+    [self addGestureSingleTagForScrollView];
     // Data for view
-    [self loadDataForView];
+    [self setDataForView];
     
 }
--(void)radiusForView
+-(void)radiusForViewDescription
 {
     [textViewDescription.layer setCornerRadius:5.0f];
     [textViewDescription.layer setBorderWidth:1.0f];
-    [viewDueDate.layer setCornerRadius:5.0f];
-    [viewDueDate.layer setBorderWidth:1.0f];
-
 }
 -(void) displayWithEditPromiseViewController
 {
@@ -82,17 +90,115 @@
 {
 
 }
--(void) loadDataForView
+-(void)addGestureSingleTagForScrollView
+{
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap:)];
+    [scrollViewContent addGestureRecognizer:singleFingerTap];
+    
+}
+-(void)handleSingleTap:(id)sender
+{
+    isShowKeyBoard = NO;
+    isShowViewPicker = NO;
+    [self returnScrollViewWithKeyBoard];
+    [self returnScrollViewPickerView];
+    
+}
+-(void) setDataForView
 {
     txtName.text = self.aPromise.name;
     textViewDescription.text = self.aPromise.description;
-    lblDueDate.text = self.aPromise.dueDate;
+    [btnDueDate setTitle:self.aPromise.dueDate forState:UIControlStateNormal];
     
 }
+-(void)upScrollViewDatePicker
+{
+    isShowViewPicker = YES;
+    if(isShowKeyBoard)
+        [self returnScrollViewWithKeyBoard];
+    
+    [Utilities animationSlideY:viewDatePicker OriginY:self.view.frame.size.height - viewDatePicker.frame.size.height];
+    [Utilities scaleScrollViewContent:scrollViewContent.frame.size.height - viewDatePicker.frame.size.height scrollViewCurrent:scrollViewContent];
+}
+-(void)returnScrollViewPickerView
+{
+    [Utilities animationSlideY:viewDatePicker OriginY:[Utilities getScreenSize].size.height];
+    [Utilities scaleScrollViewContent:[Utilities getScreenSize].size.height scrollViewCurrent:scrollViewContent];
+}
+-(void)upScrollViewWithKeyBoard
+{
+    isShowKeyBoard = YES;
+    if(isShowViewPicker)
+        [self returnScrollViewPickerView];
+    [Utilities scaleScrollViewContent:scrollViewContent.frame.size.height - KEY_BOARD_HEIGHT scrollViewCurrent:scrollViewContent];
+}
+-(void)returnScrollViewWithKeyBoard
+{
+    [self returnKeyBoard];
+    [Utilities scaleScrollViewContent:[Utilities getScreenSize].size.height scrollViewCurrent:scrollViewContent];
+    
+}
+-(void)setContentOfSetScrollView:(id)sender
+{
+    UIView *viewCurr = (UIView *)sender;
+    float pointCenterScrollView = (self.view.frame.size.height - viewDatePicker.frame.size.height)/2;
+    [scrollViewContent setContentOffset:CGPointMake(0, viewCurr.frame.origin.y - pointCenterScrollView)];
+}
+
+-(void)returnKeyBoard
+{
+    [txtName resignFirstResponder];
+    [textViewDescription resignFirstResponder];
+}
+#pragma mark - UITextField Delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    isShowKeyBoard = NO;
+    [self returnScrollViewWithKeyBoard];
+    //[textField resignFirstResponder];
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if(isShowKeyBoard == NO)
+        [self upScrollViewWithKeyBoard];
+    [self setContentOfSetScrollView:textField];
+    isShowKeyBoard = YES;
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)cancelDatePicker:(id)sender
+{
+    isShowViewPicker = NO;
+    [self returnScrollViewPickerView];
+}
+
+- (IBAction)doneDatePicker:(id)sender
+{
+    isShowViewPicker = NO;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd/MM/yyyy"];
+    NSString *dateBirthDay = [formatter stringFromDate:datePicker.date];
+    [btnDueDate setTitle:dateBirthDay forState:UIControlStateNormal];
+    isShowViewPicker = NO;
+    [self returnScrollViewPickerView];
+}
+
+- (IBAction)setDueDate:(id)sender
+{
+    isShowViewPicker = YES;
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    [self upScrollViewDatePicker];
+    [self setContentOfSetScrollView:sender];
+
+}
 @end

@@ -35,7 +35,6 @@
     // Display
     self.title = @"Member";
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
-    [self customizeBackButton];
     [self createAddNewMember];
     // Data
     [self createData];
@@ -60,22 +59,7 @@
     vcAddMember.isAddNewMember = YES;
     [self.navigationController pushViewController:vcAddMember animated:YES];
 }
--(void)customizeBackButton
-{
-    // Button Member
-    UIButton *btnBack = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnBack.frame = CGRectMake(0, 0, 30, 30);
-    [btnBack setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
-    [btnBack addTarget:self action:@selector(popViewController) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnBack];
 
-    self.navigationItem.leftBarButtonItem = backBarButton;
-}
--(void) popViewController
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 // Data
 #define ITEMS 7
 #define ITEM_CELL 2

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddMemberViewController : UIViewController <UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface AddMemberViewController : UIViewController <UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>
 @property (assign) Boolean isAddNewMember;
 @end

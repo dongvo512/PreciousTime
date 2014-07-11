@@ -124,8 +124,10 @@
 		84A45847196565EC00DF96FA /* EditPromiseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A45845196565EC00DF96FA /* EditPromiseViewController.xib */; };
 		84A4A29F196E8C5A00C5DDA8 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A4A29E196E8C5A00C5DDA8 /* Background.png */; };
 		84A4A2A1196E9D0200C5DDA8 /* background_navigationbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A4A2A0196E9D0200C5DDA8 /* background_navigationbar.png */; };
+		84A4A2A3196EE24600C5DDA8 /* btn_edit2.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A4A2A2196EE24600C5DDA8 /* btn_edit2.png */; };
 		84A4C265196E4BF50058B7B3 /* PointSummaryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4C264196E4BF50058B7B3 /* PointSummaryTableView.m */; };
 		84A4C267196E4C0A0058B7B3 /* PointSummaryTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A4C266196E4C0A0058B7B3 /* PointSummaryTableView.xib */; };
+		84A51B2B196F865B00351A71 /* ImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A51B2A196F865B00351A71 /* ImagePickerViewController.m */; };
 		84A7DB91196A466B004516F0 /* DataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7DB90196A466B004516F0 /* DataHandler.m */; };
 		84A7DB94196A46A3004516F0 /* DataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7DB93196A46A3004516F0 /* DataParser.m */; };
 /* End PBXBuildFile section */
@@ -290,9 +292,12 @@
 		84A45845196565EC00DF96FA /* EditPromiseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditPromiseViewController.xib; sourceTree = "<group>"; };
 		84A4A29E196E8C5A00C5DDA8 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		84A4A2A0196E9D0200C5DDA8 /* background_navigationbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_navigationbar.png; sourceTree = "<group>"; };
+		84A4A2A2196EE24600C5DDA8 /* btn_edit2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_edit2.png; sourceTree = "<group>"; };
 		84A4C263196E4BF50058B7B3 /* PointSummaryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointSummaryTableView.h; sourceTree = "<group>"; };
 		84A4C264196E4BF50058B7B3 /* PointSummaryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointSummaryTableView.m; sourceTree = "<group>"; };
 		84A4C266196E4C0A0058B7B3 /* PointSummaryTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PointSummaryTableView.xib; sourceTree = "<group>"; };
+		84A51B29196F865B00351A71 /* ImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerViewController.h; sourceTree = "<group>"; };
+		84A51B2A196F865B00351A71 /* ImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerViewController.m; sourceTree = "<group>"; };
 		84A7DB8F196A466B004516F0 /* DataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataHandler.h; sourceTree = "<group>"; };
 		84A7DB90196A466B004516F0 /* DataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataHandler.m; sourceTree = "<group>"; };
 		84A7DB92196A46A3004516F0 /* DataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataParser.h; sourceTree = "<group>"; };
@@ -595,6 +600,7 @@
 		84534A62196253000031D6DA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				84A51B28196F859300351A71 /* ImagePicker */,
 				84A7DB8D196A4653004516F0 /* DataHandler */,
 				84A7DB8E196A4653004516F0 /* DataParser */,
 				84A4583E19651F7A00DF96FA /* Promise */,
@@ -669,6 +675,7 @@
 		84534A8419625DAD0031D6DA /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				84A4A2A2196EE24600C5DDA8 /* btn_edit2.png */,
 				8425BD3F196BCAD10018187E /* btn_border2.png */,
 				8425BD3D196BA1DD0018187E /* btn_Login.png */,
 				8425BD3B196BA1200018187E /* btn_SignUp.png */,
@@ -876,6 +883,15 @@
 			path = PointSummary;
 			sourceTree = "<group>";
 		};
+		84A51B28196F859300351A71 /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				84A51B29196F865B00351A71 /* ImagePickerViewController.h */,
+				84A51B2A196F865B00351A71 /* ImagePickerViewController.m */,
+			);
+			path = ImagePicker;
+			sourceTree = "<group>";
+		};
 		84A7DB8D196A4653004516F0 /* DataHandler */ = {
 			isa = PBXGroup;
 			children = (
@@ -990,6 +1006,7 @@
 				84A458271964DCDB00DF96FA /* EditActivityViewController.xib in Resources */,
 				84534ABB1963039D0031D6DA /* hinh1.jpg in Resources */,
 				8425BD32196B94A00018187E /* logo_03.png in Resources */,
+				84A4A2A3196EE24600C5DDA8 /* btn_edit2.png in Resources */,
 				84534ABD1963039D0031D6DA /* hinh3.jpg in Resources */,
 				84A4582B1964E53C00DF96FA /* btn_saveedit.png in Resources */,
 				841A2AFD196CF18700442CAE /* action-gray-button@2x.png in Resources */,
@@ -1093,6 +1110,7 @@
 				84534A9A19626F3B0031D6DA /* AddMemberViewController.m in Sources */,
 				84534A7C19625BE70031D6DA /* MemberViewController.m in Sources */,
 				8429DAF31963E68800A8A381 /* ActivityViewController.m in Sources */,
+				84A51B2B196F865B00351A71 /* ImagePickerViewController.m in Sources */,
 				84534A93196268240031D6DA /* Utilities.m in Sources */,
 				84534A8119625BF90031D6DA /* SettingViewController.m in Sources */,
 				8484F1561969174000EBA065 /* CircleView.m in Sources */,

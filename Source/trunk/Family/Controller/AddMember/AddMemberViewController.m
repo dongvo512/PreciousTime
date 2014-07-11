@@ -9,6 +9,7 @@
 #import "AddMemberViewController.h"
 #import "Utilities.h"
 #import "BlockActionSheet.h"
+#import "ImagePickerViewController.h"
 @interface AddMemberViewController ()
 {
     NSMutableArray *arrMembers;
@@ -31,6 +32,8 @@
 - (IBAction)setGender:(id)sender;
 - (IBAction)doneDatePicker:(id)sender;
 - (IBAction)handleAvatar:(id)sender;
+- (IBAction)cancelViewPicker:(id)sender;
+
 
 @end
 
@@ -52,7 +55,7 @@
     // Display
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     [self isAddMemberViewController];
-    [self customizeBackButton];
+    [self addGestureSingleTagForViewParent];
     [self radiusAvatarCircle];
     [scrollViewContent setContentSize:CGSizeMake(self.view.frame.size.width, scrollViewContent.frame.size.height)];
     [viewDatePicker setFrame:CGRectMake(0, [Utilities getScreenSize].size.height, viewDatePicker.frame.size.width, viewDatePicker.frame.size.height)];
@@ -79,50 +82,75 @@
     btnAvatar.layer.borderWidth = 3.0f;
     btnAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
 }
--(void)customizeBackButton
+
+#pragma mark - Take Photo
+- (IBAction)handleAvatar:(id)sender
 {
-    // Button Member
-    UIButton *btnBack = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnBack.frame = CGRectMake(0, 0, 30, 30);
-    [btnBack setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
-    [btnBack addTarget:self action:@selector(popViewController) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnBack];
-    
-    self.navigationItem.leftBarButtonItem = backBarButton;
-}
--(void) popViewController
-{
-    [self.navigationController popViewControllerAnimated:YES];
+    ImagePickerViewController *vcImagePicker = [[ImagePickerViewController alloc] init];
+    vcImagePicker.btnCurrent = btnAvatar;
+    BlockActionSheet *blockActionSheet = [[BlockActionSheet alloc] initWithTitle:nil];
+     [blockActionSheet setCancelButtonWithTitle:@"Cancel" block:^{
+     NSLog(@"Cancel");
+     }];
+     [blockActionSheet addButtonWithTitle:@"Take a Picker" block:^{
+     //NSLog(@"Take a Picture");
+     [vcImagePicker takeAPickture:self];
+     }];
+     [blockActionSheet addButtonWithTitle:@"Camera Roll" block:^{
+    // NSLog(@"Camera Roll");
+     [vcImagePicker cameraRoll:self];
+     }];
+     [blockActionSheet showInView:self.view];
 }
 -(void)createButtonSaveMember
 {
     UIButton *btnSave = [UIButton buttonWithType:UIButtonTypeCustom];
     btnSave.frame = CGRectMake(0, 0, 60, 40);
     [btnSave setImage:[UIImage imageNamed:@"btn_save.png"] forState:UIControlStateNormal];
-    [btnSave addTarget:self action:@selector(popViewController) forControlEvents:UIControlEventTouchUpInside];
+    [btnSave addTarget:self action:@selector(saveMember) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *saveBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnSave];
     
     self.navigationItem.rightBarButtonItem = saveBarButton;
+}
+-(void)saveMember
+{
+    
 }
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)addGestureSingleTagForViewParent
+{
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap:)];
+    [scrollViewContent addGestureRecognizer:singleFingerTap];
+    
+}
+-(void)handleSingleTap:(id)sender
+{
+    isShowKeyBoard = NO;
+    isShowViewPicker = NO;
+    [self returnScrollViewWithKeyBoard];
+    [self returnScrollViewDatePicker];
+    
+}
 
 - (IBAction)setBirthDay:(id)sender
 {
+    isShowViewPicker = YES;
     [pickerViewGender setHidden:YES];
     [datePicker setHidden:NO];
     datePicker.datePickerMode = UIDatePickerModeDate;
-   // [self tranfromScrollViewDatePicker:sender];
     [self upScrollViewDatePicker];
     [self setContentOfSetScrollView:sender];
 }
 - (IBAction)setGender:(id)sender
 {
+    isShowViewPicker = YES;
     [datePicker setHidden:YES];
     [pickerViewGender setHidden:NO];
     [self createDataGender];
@@ -138,25 +166,27 @@
        [self returnScrollViewWithKeyBoard];
     else if (isShowViewPicker)
         [self returnScrollViewDatePicker];
-    [self animationSlideY:viewDatePicker OriginY:self.view.frame.size.height - viewDatePicker.frame.size.height];
-    [self scaleScrollViewContent:scrollViewContent.frame.size.height - viewDatePicker.frame.size.height];
+    
+    [Utilities animationSlideY:viewDatePicker OriginY:self.view.frame.size.height - viewDatePicker.frame.size.height];
+    [Utilities scaleScrollViewContent:scrollViewContent.frame.size.height - viewDatePicker.frame.size.height scrollViewCurrent:scrollViewContent];
 }
 -(void)returnScrollViewDatePicker
 {
-    [self animationSlideY:viewDatePicker OriginY:[Utilities getScreenSize].size.height];
-    [self scaleScrollViewContent:[Utilities getScreenSize].size.height];
+    [Utilities animationSlideY:viewDatePicker OriginY:[Utilities getScreenSize].size.height];
+    [Utilities scaleScrollViewContent:[Utilities getScreenSize].size.height scrollViewCurrent:scrollViewContent];
 }
 -(void)upScrollViewWithKeyBoard
 {
     isShowKeyBoard = YES;
     if(isShowViewPicker)
         [self returnScrollViewDatePicker];
-    [self scaleScrollViewContent:scrollViewContent.frame.size.height - KEY_BOARD_HEIGHT];
+     [Utilities scaleScrollViewContent:scrollViewContent.frame.size.height - KEY_BOARD_HEIGHT scrollViewCurrent:scrollViewContent];
 }
 -(void)returnScrollViewWithKeyBoard
 {
-    [self scaleScrollViewContent:[Utilities getScreenSize].size.height];
     [self returnKeyBoard];
+    [Utilities scaleScrollViewContent:[Utilities getScreenSize].size.height scrollViewCurrent:scrollViewContent];
+   
 }
 -(void)returnKeyBoard
 {
@@ -169,28 +199,9 @@
     float pointCenterScrollView = (self.view.frame.size.height - viewDatePicker.frame.size.height)/2;
      [scrollViewContent setContentOffset:CGPointMake(0, viewCurr.frame.origin.y - pointCenterScrollView)];
 }
--(void)animationSlideY:(UIView *)viewCurrent OriginY:(float) y
-{
-     [UIView beginAnimations:nil context:nil];
-     [UIView animateWithDuration:0.5 animations:^{
-     CGRect frameViewDatePicker = viewCurrent.frame;
-     frameViewDatePicker.origin.y = y;
-     viewCurrent.frame = frameViewDatePicker;
-     }completion:^(BOOL finished){}];
-     
-     [UIView commitAnimations];
-}
--(void)scaleScrollViewContent:(float) height
-{
-     CGRect frameScrollView = scrollViewContent.frame;
-    frameScrollView.size.height = height;
-    scrollViewContent.frame = frameScrollView;
-}
 
 - (IBAction)doneDatePicker:(id)sender
 {
-    //[self animationSlideY:viewDatePicker OriginY:[Utilities getScreenSize].size.height];
-    //[self scaleScrollViewContent:[Utilities getScreenSize].size.height];
     [self returnScrollViewDatePicker];
     isShowViewPicker = NO;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -198,7 +209,11 @@
     NSString *dateBirthDay = [formatter stringFromDate:datePicker.date];
     [btnBirthday setTitle:dateBirthDay forState:UIControlStateNormal];
 }
-
+- (IBAction)cancelViewPicker:(id)sender
+{
+    isShowViewPicker = NO;
+    [self returnScrollViewDatePicker];
+}
 
 -(void)createDataGender
 {
@@ -227,79 +242,22 @@
 {
     isShowKeyBoard = NO;
     [self returnScrollViewWithKeyBoard];
-    [textField resignFirstResponder];
     return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    if(isShowKeyBoard)
+        [self returnScrollViewDatePicker];
+    if(isShowKeyBoard == NO)
     [self upScrollViewWithKeyBoard];
     [self setContentOfSetScrollView:textField];
-}
--(Boolean) isCheckCamrera
-{
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                              message:@"Device has no camera"
-                                                             delegate:nil
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles: nil];
-        
-        [myAlertView show];
-        return NO;
-    }
-    else
-        return YES;
-}
-- (IBAction)handleAvatar:(id)sender
-{
-    BlockActionSheet *blockActionSheet = [[BlockActionSheet alloc] initWithTitle:@"Image Option"];
-    [blockActionSheet setCancelButtonWithTitle:@"Cancel" block:^{
-        NSLog(@"Cancel");
-    }];
-    [blockActionSheet setDestructiveButtonWithTitle:@"Take a Picture" block:^{
-        NSLog(@"Take a Picture");
-        [self takeAPickture];
-    }];
-    [blockActionSheet addButtonWithTitle:@"Camera Roll" block:^{
-        NSLog(@"Camera Roll");
-        if([self isCheckCamrera])
-            [self cameraRoll];
-    }];
-    [blockActionSheet showInView:self.view];
-}
-- (void)takeAPickture
-{
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
-    [self presentViewController:picker animated:YES completion:NULL];
-}
--(void)cameraRoll
-{
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    [self presentViewController:picker animated:YES completion:NULL];
-}
-#pragma mark - Image Picker Controller delegate methods
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    
-    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    [btnAvatar setImage:chosenImage forState:UIControlStateNormal];
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-    
+    isShowKeyBoard = YES;
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-    
-}
+
+
+
+
 @end

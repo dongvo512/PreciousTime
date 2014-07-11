@@ -10,4 +10,6 @@
 
 @interface Utilities : NSObject
 +(CGRect) getScreenSize;
++(void)animationSlideY:(UIView *)viewCurrent OriginY:(float) y;
++(void)scaleScrollViewContent:(float) height scrollViewCurrent:(UIScrollView *)scrollViewCur;
 @end
