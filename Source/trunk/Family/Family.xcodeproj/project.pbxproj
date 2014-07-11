@@ -13,6 +13,7 @@
 		411D26FD196FD9BF00B3BF9B /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 411D26F7196FD9BF00B3BF9B /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		411D26FE196FD9BF00B3BF9B /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 411D26F9196FD9BF00B3BF9B /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		411D2710196FDB4100B3BF9B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 411D270F196FDB4100B3BF9B /* libsqlite3.0.dylib */; };
+		411D271C196FDF2F00B3BF9B /* database.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 411D271B196FDF2F00B3BF9B /* database.sqlite */; };
 		841A2AE1196CEBC500442CAE /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A2AE0196CEBC500442CAE /* BlockActionSheet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		841A2AE6196CED4B00442CAE /* BlockBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A2AE4196CED4B00442CAE /* BlockBackground.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		841A2AF6196CF18700442CAE /* action-black-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AE8196CF18700442CAE /* action-black-button-selected.png */; };
@@ -160,6 +161,7 @@
 		411D26F8196FD9BF00B3BF9B /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		411D26F9196FD9BF00B3BF9B /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		411D270F196FDB4100B3BF9B /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		411D271B196FDF2F00B3BF9B /* database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = database.sqlite; sourceTree = "<group>"; };
 		841A2ADF196CEBC500442CAE /* BlockActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockActionSheet.h; sourceTree = "<group>"; };
 		841A2AE0196CEBC500442CAE /* BlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockActionSheet.m; sourceTree = "<group>"; };
 		841A2AE3196CED4B00442CAE /* BlockBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockBackground.h; sourceTree = "<group>"; };
@@ -363,6 +365,14 @@
 			path = FMDB;
 			sourceTree = "<group>";
 		};
+		411D271A196FDF2F00B3BF9B /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				411D271B196FDF2F00B3BF9B /* database.sqlite */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		841A2ADE196CEBC500442CAE /* BlockActionSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,6 +525,7 @@
 		84534A24196252D80031D6DA = {
 			isa = PBXGroup;
 			children = (
+				411D271A196FDF2F00B3BF9B /* Database */,
 				84534A91196268240031D6DA /* Utilities.h */,
 				84534A92196268240031D6DA /* Utilities.m */,
 				84534A5F196253000031D6DA /* Controller */,
@@ -1080,6 +1091,7 @@
 				8429DB1E1963EF7100A8A381 /* activity7.jpg in Resources */,
 				84534AC11963039D0031D6DA /* hinh7.jpg in Resources */,
 				8425BD3C196BA1200018187E /* btn_SignUp.png in Resources */,
+				411D271C196FDF2F00B3BF9B /* database.sqlite in Resources */,
 				84534A3B196252D80031D6DA /* InfoPlist.strings in Resources */,
 				8425BD36196B9E490018187E /* btn_facebook.png in Resources */,
 				841A2AFB196CF18700442CAE /* action-gray-button-selected@2x.png in Resources */,
