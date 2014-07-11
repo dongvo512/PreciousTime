@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Promise.h"
-@interface EditPromiseViewController : UIViewController
+@interface EditPromiseViewController : UIViewController<UITextFieldDelegate>
 @property (nonatomic, retain) Promise *aPromise;
 @property (nonatomic) Boolean isEditPromiseViewController;
 @end

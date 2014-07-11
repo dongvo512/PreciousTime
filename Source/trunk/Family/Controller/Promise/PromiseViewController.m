@@ -43,9 +43,9 @@
 -(void) createBarButtonDone
 {
     // Button Member
-    UIButton *btnDone = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *btnDone = [UIButton buttonWithType:UIButtonTypeSystem];
     btnDone.frame = CGRectMake(0, 0, 60, 40);
-    [btnDone setImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateNormal];
+    [btnDone setTitle:@"Done" forState:UIControlStateNormal];
     [btnDone addTarget:self action:@selector(donePromise) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnDone];
@@ -96,6 +96,7 @@
         }
     }
     Promise *aPromise = [arrPromise objectAtIndex:indexPath.row];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     cell.delegate = self;
     [cell setBackgroundColor:[UIColor clearColor]];
     [cell setObjectForCell:aPromise];

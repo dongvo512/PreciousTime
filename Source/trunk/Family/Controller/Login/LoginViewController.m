@@ -20,12 +20,13 @@
     
     NSArray *ver = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
     if ([[ver objectAtIndex:0] intValue] >= 7) {
-        self.navigationController.navigationBar.barTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_navigationbar.png"]];
-        self.navigationController.navigationBar.translucent = NO;
+        nvg.navigationBar.barTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_navigationbar.png"]];
+        nvg.navigationBar.translucent = NO;
     }else {
-        self.navigationController.navigationBar.tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_navigationbar.png"]];
+        nvg.navigationBar.tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_navigationbar.png"]];
     }
-   
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+    
     [self presentViewController:nvg animated:YES completion:nil];
 }
 

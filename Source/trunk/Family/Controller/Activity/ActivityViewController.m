@@ -11,6 +11,7 @@
 #import "ActivityTableViewCell.h"
 #import "EditActivityViewController.h"
 #import "BlockActionSheet.h"
+#import "ImagePickerViewController.h"
 @interface ActivityViewController ()
 {
     NSMutableArray *arrActivities;
@@ -46,9 +47,9 @@
 -(void) createBarButtonDone
 {
     // Button Member
-    UIButton *btnDone = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *btnDone = [UIButton buttonWithType:UIButtonTypeSystem];
     btnDone.frame = CGRectMake(0, 0, 60, 40);
-    [btnDone setImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateNormal];
+    [btnDone setTitle:@"Done" forState:UIControlStateNormal];
     [btnDone addTarget:self action:@selector(doneActivityPicked) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnDone];
@@ -144,71 +145,23 @@
 
 - (IBAction)takePhoto:(id)sender
 {
-    BlockActionSheet *blockActionSheet = [[BlockActionSheet alloc] initWithTitle:@"Image Option"];
+    ImagePickerViewController *vcImagePicker = [[ImagePickerViewController alloc] init];
+    BlockActionSheet *blockActionSheet = [[BlockActionSheet alloc] initWithTitle:nil];
     [blockActionSheet setCancelButtonWithTitle:@"Cancel" block:^{
         NSLog(@"Cancel");
     }];
-    [blockActionSheet setDestructiveButtonWithTitle:@"Take a Picture" block:^{
-      //  NSLog(@"Take a Picture");
-        [self takeAPickture];
+    [blockActionSheet addButtonWithTitle:@"Take a Picker" block:^{
+        //NSLog(@"Take a Picture");
+        [vcImagePicker takeAPickture:self];
     }];
     [blockActionSheet addButtonWithTitle:@"Camera Roll" block:^{
-        NSLog(@"Camera Roll");
-        if([self isCheckCamrera])
-            [self cameraRoll];
+        // NSLog(@"Camera Roll");
+        [vcImagePicker cameraRoll:self];
     }];
     [blockActionSheet showInView:self.view];
 
 }
--(Boolean) isCheckCamrera
-{
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            
-            UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                  message:@"Device has no camera"
-                                                                 delegate:nil
-                                                        cancelButtonTitle:@"OK"
-                                                        otherButtonTitles: nil];
-            
-            [myAlertView show];
-            return NO;
-    }
-    else
-            return YES;
-}
-- (void)takeAPickture
-{
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
-    [self presentViewController:picker animated:YES completion:NULL];
-}
--(void)cameraRoll
-{
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    [self presentViewController:picker animated:YES completion:NULL];
-}
-#pragma mark - Image Picker Controller delegate methods
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    
-    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-   // [btnAvatar setImage:chosenImage forState:UIControlStateNormal];
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-    
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-    
-}
 
 - (IBAction)changeAddNewActivityViewController:(id)sender
 {

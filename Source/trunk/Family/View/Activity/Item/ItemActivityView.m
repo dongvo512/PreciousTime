@@ -40,7 +40,13 @@
         [viewBackGround setBackgroundColor:[UIColor clearColor]];
     imgAvatar.image = [UIImage imageNamed:aActivity.strAvatar];
     lblNameActivity.text = aActivity.name;
+    if(aActivity.time == 0)
+        [lblTime setHidden:YES];
+    else
+    {
+        [lblTime setHidden:NO];
     lblTime.text = [NSString stringWithFormat:@"%dm",aActivity.time];
+    }
     [self radiusViewBackGround];
 }
 -(void)radiusViewBackGround

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EditActivityViewController : UIViewController
+@interface EditActivityViewController : UIViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 @property (nonatomic) Boolean isEditActivityViewController;
 @end

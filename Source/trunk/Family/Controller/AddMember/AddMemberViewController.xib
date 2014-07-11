@@ -64,7 +64,7 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Vo Nguyen Dong" borderStyle="roundedRect" minimumFontSize="17" id="Cqg-WQ-npa" userLabel="Round Style Text Field - Name">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Vo Nguyen Dong" textAlignment="center" minimumFontSize="17" id="Cqg-WQ-npa" userLabel="Round Style Text Field - Name">
                             <rect key="frame" x="112" y="133" width="195" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -74,7 +74,7 @@
                                 <outlet property="delegate" destination="-1" id="gfS-5U-4ot"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Young brother" borderStyle="roundedRect" minimumFontSize="17" id="yTK-WA-YeN" userLabel="Round Style Text Field - Relationship">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Young brother" textAlignment="center" minimumFontSize="17" id="yTK-WA-YeN" userLabel="Round Style Text Field - Relationship">
                             <rect key="frame" x="158" y="265" width="149" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -164,10 +164,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="jLL-zR-fsw">
                             <rect key="frame" x="0.0" y="2" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <items>
+                                <barButtonItem title="Cancel" id="pYr-0A-5A7">
+                                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="cancelViewPicker:" destination="-1" id="7KI-hW-XW0"/>
+                                    </connections>
+                                </barButtonItem>
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="j23-9J-QDO"/>
                                 <barButtonItem title="Done" id="ZuP-SD-eRn">
+                                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
                                         <action selector="doneDatePicker:" destination="-1" id="ifZ-5P-JiO"/>
                                     </connections>

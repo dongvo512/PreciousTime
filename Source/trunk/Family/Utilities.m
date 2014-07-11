@@ -28,41 +28,24 @@
     return idString;
 }
 /*+(void)takePhoto:(id)sender viewContent:(UIView *)view
+=======
++(void)animationSlideY:(UIView *)viewCurrent OriginY:(float) y
+>>>>>>> 968bc4ade76c768557ab9a9f0d161a386dc45a59
 {
+    [UIView beginAnimations:nil context:nil];
+    [UIView animateWithDuration:0.5 animations:^{
+        CGRect frameViewDatePicker = viewCurrent.frame;
+        frameViewDatePicker.origin.y = y;
+        viewCurrent.frame = frameViewDatePicker;
+    }completion:^(BOOL finished){}];
     
-    BlockActionSheet *blockActionSheet = [[BlockActionSheet alloc] initWithTitle:@"Image Option"];
-    [blockActionSheet setCancelButtonWithTitle:@"Cancel" block:^{
-        NSLog(@"Cancel");
-    }];
-    [blockActionSheet setDestructiveButtonWithTitle:@"Take a Picture" block:^{
-        NSLog(@"Take a Picture");
-        [self takeAPickture];
-    }];
-    [blockActionSheet addButtonWithTitle:@"Camera Roll" block:^{
-        NSLog(@"Camera Roll");
-        if([self isCheckCamrera])
-            [self cameraRoll];
-    }];
-    [blockActionSheet showInView:view;
-
+    [UIView commitAnimations];
 }
-     - (void)takeAPickture
-    {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.allowsEditing = YES;
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        
-        [self presentViewController:picker animated:YES completion:NULL];
-    }
-     -(void)cameraRoll
-    {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.allowsEditing = YES;
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        
-        [self presentViewController:picker animated:YES completion:NULL];
-    }*/
-
++(void)scaleScrollViewContent:(float) height scrollViewCurrent:(UIScrollView *)scrollViewCur
+{
+    CGRect frameScrollView = scrollViewCur.frame;
+    frameScrollView.size.height = height;
+    scrollViewCur.frame = frameScrollView;
+}
+ */
 @end
