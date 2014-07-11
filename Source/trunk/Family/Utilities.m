@@ -20,6 +20,13 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     return screenRect;
 }
+
++(NSString*)idWithName:(NSString*)name{
+    NSString *idString = [name capitalizedString];
+    [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    idString = [idString stringByReplacingOccurrencesOfString:@" " withString:@""];
+    return idString;
+}
 /*+(void)takePhoto:(id)sender viewContent:(UIView *)view
 {
     

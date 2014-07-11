@@ -10,4 +10,5 @@
 
 @interface Utilities : NSObject
 +(CGRect) getScreenSize;
++(NSString*)idWithName:(NSString*)name;
 @end

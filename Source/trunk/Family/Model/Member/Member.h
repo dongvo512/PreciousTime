@@ -14,4 +14,10 @@
 @property (nonatomic, retain) NSString *bithday;
 @property (nonatomic, retain) NSString *gender;
 @property (nonatomic, retain) NSString *relationship;
+@property (nonatomic, retain) NSString *avatarUrl;
+@property (nonatomic, retain) NSString *timestamp;
+@property (nonatomic, assign) BOOL deleted;
+@property (nonatomic, assign) BOOL dirty;
+
+
 @end
