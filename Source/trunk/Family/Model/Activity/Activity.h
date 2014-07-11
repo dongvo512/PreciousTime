@@ -13,6 +13,7 @@
 @property (nonatomic) int time;
 @property (nonatomic, retain) NSString *strAvatar;
 @property (nonatomic) int point;
+@property (nonatomic, retain) NSString *unitType;
 @property (nonatomic, retain) UIColor *color;
 @property (nonatomic) Boolean isSelected;
 @end

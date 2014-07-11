@@ -11,6 +11,7 @@
 @class FMDatabase;
 @class NSError;
 @class Member;
+@class Activity;
 @interface DataHandler : NSObject
 {
 }
@@ -34,6 +35,7 @@
  * get all Activity in databse
  */
 - (NSMutableArray*)allocAcitivities;
+-(BOOL)insertActivity:(Activity*)anActivity error:(NSError**)error;
 /*
  * get all Promises in databse
  */

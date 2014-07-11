@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "DataHandler.h"
 #import "Member.h"
+#import "Activity.h"
 @interface FamilyTests : XCTestCase
 
 @end
@@ -31,6 +32,10 @@
     [super tearDown];
 }
 
+/*
+ * Member
+ */
+
 - (void)testInsertMember
 {
     //XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
@@ -47,6 +52,39 @@
     NSAssert(isSuccess, error.description);
 
 
+}
+
+/*
+ * Activity
+ */
+- (void)testInsertActivity{
+    NSError *error = nil;
+    Activity *activity = [[Activity alloc] init];
+    activity.name = @"Bicycle";
+    activity.unitType = @"minute";
+    activity.strAvatar = @"http://www.picturesnew.com/media/images/images_of_nature.jpg";
+    activity.point = 10;
+    BOOL isSuccess = [[DataHandler sharedManager] insertActivity:activity error:&error];
+
+    NSAssert(isSuccess, error.description);
+
+}
+
+/*
+ * Promise
+ */
+
+- (void)testInsertPromise{
+    NSError *error = nil;
+    Activity *activity = [[Activity alloc] init];
+    activity.name = @"Bicycle";
+    activity.unitType = @"minute";
+    activity.strAvatar = @"http://www.picturesnew.com/media/images/images_of_nature.jpg";
+    activity.point = 10;
+    BOOL isSuccess = [[DataHandler sharedManager] insertActivity:activity error:&error];
+    
+    NSAssert(isSuccess, error.description);
+    
 }
 
 @end

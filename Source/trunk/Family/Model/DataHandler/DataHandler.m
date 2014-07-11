@@ -11,6 +11,7 @@
 #import "Member.h"
 #import "DataParser.h"
 #import "Utilities.h"
+#import "Activity.h"
 @implementation DataHandler
 
 #pragma mark - Connection DB
@@ -159,6 +160,7 @@ static DataHandler *sharedDataHandler = nil;
     }
     if (aMember.name.length == 0) {
         *error = [NSError errorWithDomain:@"Member name is nil" code:121 userInfo:nil];
+        return NO;
 
     }
     FMDatabase *db = [self database];
@@ -266,6 +268,44 @@ static DataHandler *sharedDataHandler = nil;
         }
     }
     return array;
+}
+
+
+-(BOOL)insertActivity:(Activity*)anActivity error:(NSError**)error
+{
+    
+    if (anActivity==nil) {
+        *error = [NSError errorWithDomain:@"Activity object is nil" code:121 userInfo:nil];
+        return NO;
+    }
+    if (anActivity.name.length == 0) {
+        *error = [NSError errorWithDomain:@"Activity name is nil" code:121 userInfo:nil];
+        return NO;
+
+    }
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [NSError errorWithDomain:@"Can't open database" code:122 userInfo:nil];
+        
+        return NO;
+    }
+    
+    NSString *idString = [Utilities idWithName:anActivity.name];
+    BOOL isSuccess = [db executeUpdate:@"insert into Activity(id, name, unitType, logoUrl, pointPerUnit,deleted,dirty) values(?,?,?,?,?,?,?)",idString,anActivity.name,anActivity.unitType,anActivity.strAvatar,[NSNumber numberWithInt:anActivity.point],[NSNumber numberWithBool:false],[NSNumber numberWithBool:true]];
+    if (!isSuccess) {
+        if (error!=NULL) {
+            *error = [db lastError];
+        }
+        [self closeDB:db];
+        
+        return NO;
+        
+    }
+    
+    [self closeDB:db];
+    return YES;
+    
+    
 }
 #pragma mark Promises
 

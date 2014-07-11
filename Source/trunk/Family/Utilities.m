@@ -22,15 +22,13 @@
 }
 
 +(NSString*)idWithName:(NSString*)name{
-    NSString *idString = [name capitalizedString];
+    NSString *idString = [name lowercaseString];
     [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     idString = [idString stringByReplacingOccurrencesOfString:@" " withString:@""];
     return idString;
 }
-/*+(void)takePhoto:(id)sender viewContent:(UIView *)view
-=======
+
 +(void)animationSlideY:(UIView *)viewCurrent OriginY:(float) y
->>>>>>> 968bc4ade76c768557ab9a9f0d161a386dc45a59
 {
     [UIView beginAnimations:nil context:nil];
     [UIView animateWithDuration:0.5 animations:^{
@@ -41,11 +39,12 @@
     
     [UIView commitAnimations];
 }
+
 +(void)scaleScrollViewContent:(float) height scrollViewCurrent:(UIScrollView *)scrollViewCur
 {
     CGRect frameScrollView = scrollViewCur.frame;
     frameScrollView.size.height = height;
     scrollViewCur.frame = frameScrollView;
 }
- */
+ 
 @end
