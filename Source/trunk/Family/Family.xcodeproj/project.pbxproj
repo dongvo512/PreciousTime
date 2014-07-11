@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		411D26FA196FD9BF00B3BF9B /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 411D26F1196FD9BF00B3BF9B /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		411D26FB196FD9BF00B3BF9B /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 411D26F3196FD9BF00B3BF9B /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		411D26FC196FD9BF00B3BF9B /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 411D26F5196FD9BF00B3BF9B /* FMDatabasePool.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		411D26FD196FD9BF00B3BF9B /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 411D26F7196FD9BF00B3BF9B /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		411D26FE196FD9BF00B3BF9B /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 411D26F9196FD9BF00B3BF9B /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		411D2710196FDB4100B3BF9B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 411D270F196FDB4100B3BF9B /* libsqlite3.0.dylib */; };
+		411D271C196FDF2F00B3BF9B /* database.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 411D271B196FDF2F00B3BF9B /* database.sqlite */; };
 		841A2AE1196CEBC500442CAE /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A2AE0196CEBC500442CAE /* BlockActionSheet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		841A2AE6196CED4B00442CAE /* BlockBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A2AE4196CED4B00442CAE /* BlockBackground.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		841A2AF6196CF18700442CAE /* action-black-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AE8196CF18700442CAE /* action-black-button-selected.png */; };
@@ -145,6 +152,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		411D26F0196FD9BF00B3BF9B /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		411D26F1196FD9BF00B3BF9B /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		411D26F2196FD9BF00B3BF9B /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		411D26F3196FD9BF00B3BF9B /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		411D26F4196FD9BF00B3BF9B /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		411D26F5196FD9BF00B3BF9B /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		411D26F6196FD9BF00B3BF9B /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		411D26F7196FD9BF00B3BF9B /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		411D26F8196FD9BF00B3BF9B /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		411D26F9196FD9BF00B3BF9B /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		411D270F196FDB4100B3BF9B /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		411D271B196FDF2F00B3BF9B /* database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = database.sqlite; sourceTree = "<group>"; };
 		841A2ADF196CEBC500442CAE /* BlockActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockActionSheet.h; sourceTree = "<group>"; };
 		841A2AE0196CEBC500442CAE /* BlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockActionSheet.m; sourceTree = "<group>"; };
 		841A2AE3196CED4B00442CAE /* BlockBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockBackground.h; sourceTree = "<group>"; };
@@ -313,6 +332,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				411D2710196FDB4100B3BF9B /* libsqlite3.0.dylib in Frameworks */,
 				84534A33196252D80031D6DA /* CoreGraphics.framework in Frameworks */,
 				84534A35196252D80031D6DA /* UIKit.framework in Frameworks */,
 				84534A31196252D80031D6DA /* Foundation.framework in Frameworks */,
@@ -332,6 +352,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		411D26EF196FD9BF00B3BF9B /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				411D26F0196FD9BF00B3BF9B /* FMDatabase.h */,
+				411D26F1196FD9BF00B3BF9B /* FMDatabase.m */,
+				411D26F2196FD9BF00B3BF9B /* FMDatabaseAdditions.h */,
+				411D26F3196FD9BF00B3BF9B /* FMDatabaseAdditions.m */,
+				411D26F4196FD9BF00B3BF9B /* FMDatabasePool.h */,
+				411D26F5196FD9BF00B3BF9B /* FMDatabasePool.m */,
+				411D26F6196FD9BF00B3BF9B /* FMDatabaseQueue.h */,
+				411D26F7196FD9BF00B3BF9B /* FMDatabaseQueue.m */,
+				411D26F8196FD9BF00B3BF9B /* FMResultSet.h */,
+				411D26F9196FD9BF00B3BF9B /* FMResultSet.m */,
+			);
+			path = FMDB;
+			sourceTree = "<group>";
+		};
+		411D271A196FDF2F00B3BF9B /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				411D271B196FDF2F00B3BF9B /* database.sqlite */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		841A2ADE196CEBC500442CAE /* BlockActionSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,6 +529,7 @@
 		84534A24196252D80031D6DA = {
 			isa = PBXGroup;
 			children = (
+				411D271A196FDF2F00B3BF9B /* Database */,
 				84534A91196268240031D6DA /* Utilities.h */,
 				84534A92196268240031D6DA /* Utilities.m */,
 				84534A5F196253000031D6DA /* Controller */,
@@ -510,6 +556,7 @@
 		84534A2F196252D80031D6DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				411D270F196FDB4100B3BF9B /* libsqlite3.0.dylib */,
 				84534A30196252D80031D6DA /* Foundation.framework */,
 				84534A32196252D80031D6DA /* CoreGraphics.framework */,
 				84534A34196252D80031D6DA /* UIKit.framework */,
@@ -594,6 +641,7 @@
 		84534A61196253000031D6DA /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				411D26EF196FD9BF00B3BF9B /* FMDB */,
 				841A2AE2196CED4B00442CAE /* Alert-Background */,
 				841A2ADE196CEBC500442CAE /* BlockActionSheet */,
 				8484F13D1969013300EBA065 /* XYPieChart */,
@@ -1050,6 +1098,7 @@
 				8429DB1E1963EF7100A8A381 /* activity7.jpg in Resources */,
 				84534AC11963039D0031D6DA /* hinh7.jpg in Resources */,
 				8425BD3C196BA1200018187E /* btn_SignUp.png in Resources */,
+				411D271C196FDF2F00B3BF9B /* database.sqlite in Resources */,
 				84534A3B196252D80031D6DA /* InfoPlist.strings in Resources */,
 				8425BD36196B9E490018187E /* btn_facebook.png in Resources */,
 				841A2AFB196CF18700442CAE /* action-gray-button-selected@2x.png in Resources */,
@@ -1096,11 +1145,14 @@
 				8484F16D19691E0A00EBA065 /* MemberInfoView.m in Sources */,
 				84A45846196565EC00DF96FA /* EditPromiseViewController.m in Sources */,
 				84534A41196252D80031D6DA /* AppDelegate.m in Sources */,
+				411D26FA196FD9BF00B3BF9B /* FMDatabase.m in Sources */,
 				84A458261964DCDB00DF96FA /* EditActivityViewController.m in Sources */,
 				84534AA7196272030031D6DA /* ItemMemberView.m in Sources */,
+				411D26FE196FD9BF00B3BF9B /* FMResultSet.m in Sources */,
 				8429DAFD1963E6AA00A8A381 /* PromiseViewController.m in Sources */,
 				84534AA3196271E30031D6DA /* MemberTableViewCell.m in Sources */,
 				8429DB041963E8D600A8A381 /* ItemActivityView.m in Sources */,
+				411D26FD196FD9BF00B3BF9B /* FMDatabaseQueue.m in Sources */,
 				84534A3D196252D80031D6DA /* main.m in Sources */,
 				8429DAF81963E69E00A8A381 /* FriendViewController.m in Sources */,
 				84A7DB94196A46A3004516F0 /* DataParser.m in Sources */,
@@ -1114,6 +1166,7 @@
 				8484F168196919E900EBA065 /* SlicesActivityTableViewCell.m in Sources */,
 				84A4583C19651E7F00DF96FA /* PromiseTableViewCell.m in Sources */,
 				84A4584119651FA600DF96FA /* Promise.m in Sources */,
+				411D26FB196FD9BF00B3BF9B /* FMDatabaseAdditions.m in Sources */,
 				8429DB0F1963ED2500A8A381 /* Activity.m in Sources */,
 				84534A9A19626F3B0031D6DA /* AddMemberViewController.m in Sources */,
 				84534A7C19625BE70031D6DA /* MemberViewController.m in Sources */,
@@ -1126,6 +1179,7 @@
 				8484F1401969013300EBA065 /* XYPieChart.m in Sources */,
 				8429DB091963EA6D00A8A381 /* ActivityTableViewCell.m in Sources */,
 				8429DAEB1963E51000A8A381 /* HistoryViewController.m in Sources */,
+				411D26FC196FD9BF00B3BF9B /* FMDatabasePool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

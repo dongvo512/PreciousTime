@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "SplashScreentViewController.h"
+#import "DataHandler.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -19,6 +20,9 @@
    
   /*  LoginViewController *vcLogin = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
       self.window.rootViewController = vcLogin;*/
+    
+    //Create database
+    //[[DataHandler sharedManager] copyDatabaseToDocument];
     
     SplashScreentViewController *vcSplashScreen = [[SplashScreentViewController alloc] initWithNibName:@"SplashScreentViewController" bundle:nil];
     self.window.rootViewController = vcSplashScreen;
