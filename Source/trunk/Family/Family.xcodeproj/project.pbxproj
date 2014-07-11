@@ -100,6 +100,8 @@
 		846347531966587D008B9A6F /* icon_arrowdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 846347521966587D008B9A6F /* icon_arrowdown.png */; };
 		846347551966615E008B9A6F /* btn_save.png in Resources */ = {isa = PBXBuildFile; fileRef = 846347541966615E008B9A6F /* btn_save.png */; };
 		846347571966B143008B9A6F /* btn_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 846347561966B143008B9A6F /* btn_more.png */; };
+		84773D39196FE31C0086B2D6 /* btn_Login_setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 84773D37196FE31C0086B2D6 /* btn_Login_setting.png */; };
+		84773D3A196FE31C0086B2D6 /* btn_logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 84773D38196FE31C0086B2D6 /* btn_logout.png */; };
 		8484F1391968F78500EBA065 /* left_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8484F1371968F78500EBA065 /* left_button.png */; };
 		8484F13A1968F78500EBA065 /* right_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8484F1381968F78500EBA065 /* right_button.png */; };
 		8484F13C1968F78E00EBA065 /* inside.png in Resources */ = {isa = PBXBuildFile; fileRef = 8484F13B1968F78E00EBA065 /* inside.png */; };
@@ -260,6 +262,8 @@
 		846347521966587D008B9A6F /* icon_arrowdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_arrowdown.png; sourceTree = "<group>"; };
 		846347541966615E008B9A6F /* btn_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_save.png; sourceTree = "<group>"; };
 		846347561966B143008B9A6F /* btn_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_more.png; sourceTree = "<group>"; };
+		84773D37196FE31C0086B2D6 /* btn_Login_setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_Login_setting.png; sourceTree = "<group>"; };
+		84773D38196FE31C0086B2D6 /* btn_logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_logout.png; sourceTree = "<group>"; };
 		8484F1371968F78500EBA065 /* left_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_button.png; sourceTree = "<group>"; };
 		8484F1381968F78500EBA065 /* right_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_button.png; sourceTree = "<group>"; };
 		8484F13B1968F78E00EBA065 /* inside.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inside.png; sourceTree = "<group>"; };
@@ -675,6 +679,8 @@
 		84534A8419625DAD0031D6DA /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				84773D37196FE31C0086B2D6 /* btn_Login_setting.png */,
+				84773D38196FE31C0086B2D6 /* btn_logout.png */,
 				84A4A2A2196EE24600C5DDA8 /* btn_edit2.png */,
 				8425BD3F196BCAD10018187E /* btn_border2.png */,
 				8425BD3D196BA1DD0018187E /* btn_Login.png */,
@@ -1004,6 +1010,7 @@
 				846347551966615E008B9A6F /* btn_save.png in Resources */,
 				84A4A29F196E8C5A00C5DDA8 /* Background.png in Resources */,
 				84A458271964DCDB00DF96FA /* EditActivityViewController.xib in Resources */,
+				84773D39196FE31C0086B2D6 /* btn_Login_setting.png in Resources */,
 				84534ABB1963039D0031D6DA /* hinh1.jpg in Resources */,
 				8425BD32196B94A00018187E /* logo_03.png in Resources */,
 				84A4A2A3196EE24600C5DDA8 /* btn_edit2.png in Resources */,
@@ -1058,6 +1065,7 @@
 				84534A9B19626F3B0031D6DA /* AddMemberViewController.xib in Resources */,
 				846347571966B143008B9A6F /* btn_more.png in Resources */,
 				84534A76196257840031D6DA /* MainViewController.xib in Resources */,
+				84773D3A196FE31C0086B2D6 /* btn_logout.png in Resources */,
 				84534A43196252D80031D6DA /* Images.xcassets in Resources */,
 				84534ABF1963039D0031D6DA /* hinh5.jpg in Resources */,
 				8484F16F19691E1800EBA065 /* MemberInfoView.xib in Resources */,
