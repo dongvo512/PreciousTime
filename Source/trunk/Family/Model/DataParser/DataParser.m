@@ -15,14 +15,35 @@
 @implementation DataParser
 
 + (Member*)allocMemberWithResults:(FMResultSet*)results{
-    return nil;
+    Member *item = [[Member alloc] init];
+    item.idMember = [results stringForColumn:@"id"];
+    item.name = [results stringForColumn:@"name"];
+    item.avatarUrl = [results stringForColumn:@"avatarUrl"];
+    item.bithday = [results stringForColumn:@"birthday"];
+    item.genderValue = [results intForColumn:@"gender"];
+    item.timestamp = [results stringForColumn:@"timestamp"];
+
+    return item;
 }
 
 + (Activity*)allocAcitiviyWithResults:(FMResultSet*)results{
-    return nil;
+    Activity *item = [[Activity alloc] init];
+    item.idActivity = [results stringForColumn:@"id"];
+    item.name = [results stringForColumn:@"name"];
+    item.strAvatar = [results stringForColumn:@"logoUrl"];
+    item.point = [results intForColumn:@"pointPerUnit"];
+    item.unitTypeValue = [results intForColumn:@"unitType"];
+    return item;
 }
 
 + (Promise*)allocPromiseWithResults:(FMResultSet*)results{
-    return nil;
+    Promise *item = [[Promise alloc] init];
+    item.idPromise = [results stringForColumn:@"id"];
+    item.name = [results stringForColumn:@"name"];
+    item.description = [results stringForColumn:@"description"];
+    item.dueDate = [results stringForColumn:@"duedate"];
+    item.status = [results intForColumn:@"status"];
+
+    return item;
 }
 @end

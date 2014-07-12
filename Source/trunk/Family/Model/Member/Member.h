@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface Member : NSObject
+@property (nonatomic, retain) NSString *idMember;
 @property (nonatomic, retain) UIImage *avatar;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *bithday;
@@ -17,8 +18,8 @@
 @property (nonatomic, retain) NSString *avatarUrl;
 @property (nonatomic, retain) NSString *timestamp;
 @property (nonatomic, assign) int genderValue;
-@property (nonatomic, assign) BOOL deleted;
-@property (nonatomic, assign) BOOL dirty;
+//@property (nonatomic, assign) BOOL deleted;
+//@property (nonatomic, assign) BOOL dirty;
 
 
 @end
