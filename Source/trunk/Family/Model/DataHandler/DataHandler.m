@@ -158,7 +158,7 @@ static DataHandler *sharedDataHandler = nil;
 }
 
 
--(BOOL)insertMember:(Member*)aMember idMember:(NSString**)idMember error:(NSError**)error
+-(BOOL)insertMember:(Member*)aMember isSync:(BOOL)isSync idMember:(NSString**)idMember error:(NSError**)error
 {
     
     if (aMember==nil) {
@@ -178,8 +178,12 @@ static DataHandler *sharedDataHandler = nil;
     }
     
     NSString *idString = [Utilities idWithName:aMember.name];
+    BOOL isDirty = true;
+    if (isSync) {
+        isDirty = false;
+    }
     *idMember = idString;
-    BOOL isSuccess = [db executeUpdate:@"insert into Member(id, name, avatarUrl, birthday, gender,relationship,deleted,dirty) values(?,?,?,?,?,?,?,?)",idString,aMember.name,aMember.avatarUrl,aMember.bithday,[NSNumber numberWithInt:aMember.genderValue],aMember.relationship,[NSNumber numberWithBool:false],[NSNumber numberWithBool:true]];
+    BOOL isSuccess = [db executeUpdate:@"insert into Member(id, name, avatarUrl, birthday, gender,relationship,deleted,dirty) values(?,?,?,?,?,?,?,?)",idString,aMember.name,aMember.avatarUrl,aMember.bithday,[NSNumber numberWithInt:aMember.genderValue],aMember.relationship,[NSNumber numberWithBool:false],[NSNumber numberWithBool:isDirty]];
     if (!isSuccess) {
         if (error!=NULL) {
             *error = [db lastError];
@@ -196,7 +200,7 @@ static DataHandler *sharedDataHandler = nil;
 
 }
 
--(BOOL)updateMemberInfo:(Member*)aMember error:(NSError**)error
+-(BOOL)updateMemberInfo:(Member*)aMember isSync:(BOOL)isSync error:(NSError**)error
 {
     
     FMDatabase *db = [self database];
@@ -208,11 +212,14 @@ static DataHandler *sharedDataHandler = nil;
         DLog(@"Update Error:%@",[[db lastError] localizedDescription]);
         return NO;
     }
-    
+    BOOL isDirty = true;
+    if (isSync) {
+        isDirty = false;
+    }
     
     [db executeUpdate:@"update Member"
-     " set name = ?,avatarUrl=?,birthday=?,gender=?,deleted=?,dirty=?"
-     " where id = ?",aMember.name,aMember.avatarUrl,aMember.bithday,[NSNumber numberWithInt:aMember.genderValue],[NSNumber numberWithBool:false], [NSNumber numberWithBool:true],aMember.idMember];
+     " set name = ?,avatarUrl=?,birthday=?,gender=?,timestamp=?,deleted=?,dirty=?"
+     " where id = ?",aMember.name,aMember.avatarUrl,aMember.bithday,[NSNumber numberWithInt:aMember.genderValue],aMember.timestamp,[NSNumber numberWithBool:false], [NSNumber numberWithBool:isDirty],aMember.idMember];
     
     
     if ([db hadError]) {
@@ -266,15 +273,15 @@ static DataHandler *sharedDataHandler = nil;
     
 }
 
-- (BOOL)deleteMemberWithId:(NSString*)memberId error:(NSError**)error
+- (BOOL)removeDeletedMembersWithError:(NSError**)error
 {
     FMDatabase *db = [self database];
     if (![self openDB:db]) {
         return NO;
     }
     
-    BOOL isSuccess =  [db executeUpdate:@"delete from Member where id = ?;"
-                       ,memberId];
+    BOOL isSuccess =  [db executeUpdate:@"delete from Member where deleted = ?;"
+                       ,[NSNumber numberWithBool:true]];
     
     if (!isSuccess) {
         if (error!=NULL) {
@@ -320,7 +327,7 @@ static DataHandler *sharedDataHandler = nil;
 }
 
 
--(BOOL)insertActivity:(Activity*)anActivity idActivity:(NSString**)idActivity error:(NSError**)error
+-(BOOL)insertActivity:(Activity*)anActivity isSync:(BOOL)isSync idActivity:(NSString**)idActivity error:(NSError**)error
 {
     
     if (anActivity==nil) {
@@ -341,7 +348,11 @@ static DataHandler *sharedDataHandler = nil;
     
     NSString *idString = [Utilities idWithName:anActivity.name];
     *idActivity = idString;
-    BOOL isSuccess = [db executeUpdate:@"insert into Activity(id, name, unitType, logoUrl, pointPerUnit,deleted,dirty) values(?,?,?,?,?,?,?)",idString,anActivity.name,[NSNumber numberWithInt:anActivity.unitTypeValue],anActivity.strAvatar,[NSNumber numberWithInt:anActivity.point],[NSNumber numberWithBool:false],[NSNumber numberWithBool:true]];
+    BOOL isDirty = true;
+    if (isSync) {
+        isDirty = false;
+    }
+    BOOL isSuccess = [db executeUpdate:@"insert into Activity(id, name, unitType, logoUrl, pointPerUnit,deleted,dirty) values(?,?,?,?,?,?,?)",idString,anActivity.name,[NSNumber numberWithInt:anActivity.unitTypeValue],anActivity.strAvatar,[NSNumber numberWithInt:anActivity.point],[NSNumber numberWithBool:false],[NSNumber numberWithBool:isDirty]];
     if (!isSuccess) {
         if (error!=NULL) {
             *error = [db lastError];
@@ -385,7 +396,7 @@ static DataHandler *sharedDataHandler = nil;
 }
 
 
--(BOOL)updateActivityInfo:(Activity*)anActivity error:(NSError**)error
+-(BOOL)updateActivityInfo:(Activity*)anActivity isSync:(BOOL)isSync error:(NSError**)error
 {
     
     FMDatabase *db = [self database];
@@ -397,11 +408,14 @@ static DataHandler *sharedDataHandler = nil;
         DLog(@"Update Error:%@",[[db lastError] localizedDescription]);
         return NO;
     }
-    
+    BOOL isDirty = true;
+    if (isSync) {
+        isDirty = false;
+    }
     
     [db executeUpdate:@"update Activity"
-     " set name = ?,unitType=?,logoUrl=?,pointPerUnit=?,deleted=?,dirty=?"
-     " where id = ?",anActivity.name,[NSNumber numberWithInt:anActivity.unitTypeValue],anActivity.strAvatar,[NSNumber numberWithInt:anActivity.point],[NSNumber numberWithBool:false], [NSNumber numberWithBool:true],anActivity.idActivity];
+     " set name = ?,unitType=?,logoUrl=?,pointPerUnit=?,timestamp=?,deleted=?,dirty=?"
+     " where id = ?",anActivity.name,[NSNumber numberWithInt:anActivity.unitTypeValue],anActivity.strAvatar,[NSNumber numberWithInt:anActivity.point],anActivity.timestamp,[NSNumber numberWithBool:false], [NSNumber numberWithBool:isDirty],anActivity.idActivity];
     
     
     if ([db hadError]) {
@@ -530,7 +544,7 @@ static DataHandler *sharedDataHandler = nil;
     }
     
     NSString *idString = [Utilities idWithName:aPromise.name];
-    BOOL isSuccess = [db executeUpdate:@"insert into Promise(id, name, description, duedate, status,deleted,dirty) values(?,?,?,?,?,?,?)",idString,aPromise.name,aPromise.description,aPromise.dueDate,[NSNumber numberWithInt:aPromise.status],[NSNumber numberWithBool:false],[NSNumber numberWithBool:true]];
+    BOOL isSuccess = [db executeUpdate:@"insert into Promise(id, idMember,name, description, duedate, status,deleted,dirty) values(?,?,?,?,?,?,?,?)",idString,aPromise.idMember, aPromise.name,aPromise.description,aPromise.dueDate,[NSNumber numberWithInt:aPromise.status],[NSNumber numberWithBool:false],[NSNumber numberWithBool:true]];
     if (!isSuccess) {
         if (error!=NULL) {
             *error = [db lastError];
@@ -620,15 +634,17 @@ static DataHandler *sharedDataHandler = nil;
 
 #pragma mark History
 
-- (NSMutableArray*)allocHistories{
+- (NSMutableArray*)allocHistoriesWithError:(NSError**)error{
     FMDatabase *db = [self database];
     if (![self openDB:db]) {
+        *error = [db lastError];
         return nil;
     }
     
     FMResultSet *results = [db executeQuery:@"select * from History"];
     if ([db hadError]) {
         DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
+        *error = [db lastError];
         [self closeDB:db];
         return nil;
     }

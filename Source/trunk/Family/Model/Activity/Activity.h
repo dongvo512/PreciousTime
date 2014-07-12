@@ -17,5 +17,6 @@
 @property (nonatomic, retain) NSString *unitType;
 @property (nonatomic, assign) int unitTypeValue;
 @property (nonatomic, retain) UIColor *color;
+@property (nonatomic, retain) NSString *timestamp;
 @property (nonatomic) Boolean isSelected;
 @end

@@ -50,7 +50,7 @@
     member.relationship = @"Sister";
     
     NSString *idMember = nil;
-    BOOL isSuccess = [[DataHandler sharedManager] insertMember:member idMember:&idMember error:&error];
+    BOOL isSuccess = [[DataHandler sharedManager] insertMember:member isSync:false idMember:&idMember error:&error];
     DLog(@"%@",idMember);
     NSAssert(isSuccess, error.description);
 
@@ -76,9 +76,9 @@
     member.relationship = @"Daddy";
     
     NSString *idMember = nil;
-    BOOL isSuccess = [[DataHandler sharedManager] insertMember:member idMember:&idMember error:&error];
+    BOOL isSuccess = [[DataHandler sharedManager] insertMember:member isSync:false idMember:&idMember error:&error];
     member.idMember = idMember;
-    isSuccess = [[DataHandler sharedManager] updateMemberInfo:member error:&error];
+    isSuccess = [[DataHandler sharedManager] updateMemberInfo:member isSync:false  error:&error];
     NSAssert(isSuccess, error.description);
 }
 /*
@@ -93,7 +93,7 @@
     activity.point = 10;
     
     NSString *idActivity = nil;
-    BOOL isSuccess = [[DataHandler sharedManager] insertActivity:activity idActivity:&idActivity error:&error];
+    BOOL isSuccess = [[DataHandler sharedManager] insertActivity:activity isSync:false idActivity:&idActivity error:&error];
     DLog(@"%@",idActivity);
     NSAssert(isSuccess, error.description);
 
@@ -117,9 +117,9 @@
 
     
     NSString *idActivity = nil;
-    BOOL isSuccess = [[DataHandler sharedManager] insertActivity:activity idActivity:&idActivity error:&error];
+    BOOL isSuccess = [[DataHandler sharedManager] insertActivity:activity isSync:false idActivity:&idActivity error:&error];
     activity.idActivity = idActivity;
-    isSuccess = [[DataHandler sharedManager] updateActivityInfo:activity error:&error];
+    isSuccess = [[DataHandler sharedManager] updateActivityInfo:activity isSync:false error:&error];
     NSAssert(isSuccess, error.description);
 }
 
@@ -131,6 +131,7 @@
     NSError *error = nil;
     Promise *promise = [[Promise alloc] init];
     promise.name = @"Give a gift for son";
+    promise.idMember = @"kimsa";
     promise.description = @"give a gift for the children";
     promise.dueDate = @"14/2/2014";
     promise.status = 1;

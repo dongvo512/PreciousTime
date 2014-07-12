@@ -39,6 +39,7 @@
 + (Promise*)allocPromiseWithResults:(FMResultSet*)results{
     Promise *item = [[Promise alloc] init];
     item.idPromise = [results stringForColumn:@"id"];
+    item.idMember =[results stringForColumn:@"idMember"];
     item.name = [results stringForColumn:@"name"];
     item.description = [results stringForColumn:@"description"];
     item.dueDate = [results stringForColumn:@"duedate"];

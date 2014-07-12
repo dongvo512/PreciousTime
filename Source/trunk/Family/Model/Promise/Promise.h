@@ -10,9 +10,11 @@
 
 @interface Promise : NSObject
 @property (nonatomic, retain) NSString* idPromise;
+@property (nonatomic, retain) NSString* idMember;
 @property (nonatomic) NSString* name;
 @property (nonatomic, retain) NSString* dueDate;
 @property (nonatomic) Boolean isPick;
 @property (nonatomic, assign) int status;
+@property (nonatomic, retain) NSString* timestamp;
 @property (nonatomic, retain) NSString* description;
 @end

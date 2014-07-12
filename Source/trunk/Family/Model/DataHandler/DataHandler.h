@@ -29,20 +29,23 @@
  */
 - (NSMutableArray*)allocMembersWithError:(NSError**)error;
 - (BOOL)checkExistMemberWithId:(NSString*)idMember error:(NSError**)error;
--(BOOL)insertMember:(Member*)aMember idMember:(NSString**)idMember error:(NSError**)error;
-
+-(BOOL)insertMember:(Member*)aMember isSync:(BOOL)isSync idMember:(NSString**)idMember error:(NSError**)error;
 //Use to update member info
--(BOOL)updateMemberInfo:(Member*)aMember error:(NSError**)error;
+-(BOOL)updateMemberInfo:(Member*)aMember isSync:(BOOL)isSync error:(NSError**)error;
+
+//Use to delete member
 -(BOOL)updateDeletedMember:(NSString*)idMember error:(NSError**)error;
 
-//- (BOOL)deleteMemberWithId:(NSString*)memberId error:(NSError**)error;
+- (BOOL)removeDeletedMembersWithError:(NSError**)error;
 /*
  * get all Activity in databse
  */
 - (NSMutableArray*)allocAcitivitiesWithError:(NSError**)error;
 - (BOOL)checkExistActivityWithId:(NSString*)idActivity error:(NSError**)error;
--(BOOL)insertActivity:(Activity*)anActivity idActivity:(NSString**)idActivity error:(NSError**)error;
--(BOOL)updateActivityInfo:(Activity*)anActivity error:(NSError**)error;
+-(BOOL)insertActivity:(Activity*)anActivity isSync:(BOOL)isSync idActivity:(NSString**)idActivity error:(NSError**)error;
+//Use to update activity info
+-(BOOL)updateActivityInfo:(Activity*)anActivity isSync:(BOOL)isSync error:(NSError**)error;
+//Use to delete activity
 -(BOOL)updateDeletedActivity:(NSString*)idActivity error:(NSError**)error;
 /*
  * get all Promises in databse
@@ -50,7 +53,9 @@
 - (NSMutableArray*)allocPromisesWithError:(NSError**)error;
 - (BOOL)checkExistPromiseWithId:(NSString*)idPromise error:(NSError**)error;
 -(BOOL)insertPromise:(Promise*)aPromise idPromise:(NSString**)idPromise error:(NSError**)error;
+//Use to update promise info
 -(BOOL)updatePromiseInfo:(Promise*)aPromise error:(NSError**)error;
+//Use to delete promise info
 -(BOOL)updateDeletedPromise:(NSString*)idPromise error:(NSError**)error;
 /*
  * get all Histories in databse
