@@ -14,6 +14,7 @@
 		411D26FE196FD9BF00B3BF9B /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 411D26F9196FD9BF00B3BF9B /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		411D2710196FDB4100B3BF9B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 411D270F196FDB4100B3BF9B /* libsqlite3.0.dylib */; };
 		411D271C196FDF2F00B3BF9B /* database.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 411D271B196FDF2F00B3BF9B /* database.sqlite */; };
+		41202E0E19713C9000818695 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 41202E0D19713C9000818695 /* History.m */; };
 		841A2AE1196CEBC500442CAE /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A2AE0196CEBC500442CAE /* BlockActionSheet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		841A2AE6196CED4B00442CAE /* BlockBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A2AE4196CED4B00442CAE /* BlockBackground.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		841A2AF6196CF18700442CAE /* action-black-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AE8196CF18700442CAE /* action-black-button-selected.png */; };
@@ -164,6 +165,8 @@
 		411D26F9196FD9BF00B3BF9B /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		411D270F196FDB4100B3BF9B /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		411D271B196FDF2F00B3BF9B /* database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = database.sqlite; sourceTree = "<group>"; };
+		41202E0C19713C9000818695 /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
+		41202E0D19713C9000818695 /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 		841A2ADF196CEBC500442CAE /* BlockActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockActionSheet.h; sourceTree = "<group>"; };
 		841A2AE0196CEBC500442CAE /* BlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockActionSheet.m; sourceTree = "<group>"; };
 		841A2AE3196CED4B00442CAE /* BlockBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockBackground.h; sourceTree = "<group>"; };
@@ -375,6 +378,15 @@
 				411D271B196FDF2F00B3BF9B /* database.sqlite */,
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		41202E0B19713C7C00818695 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				41202E0C19713C9000818695 /* History.h */,
+				41202E0D19713C9000818695 /* History.m */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 		841A2ADE196CEBC500442CAE /* BlockActionSheet */ = {
@@ -652,6 +664,7 @@
 		84534A62196253000031D6DA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				41202E0B19713C7C00818695 /* History */,
 				84A51B28196F859300351A71 /* ImagePicker */,
 				84A7DB8D196A4653004516F0 /* DataHandler */,
 				84A7DB8E196A4653004516F0 /* DataParser */,
@@ -1147,6 +1160,7 @@
 				84534A41196252D80031D6DA /* AppDelegate.m in Sources */,
 				411D26FA196FD9BF00B3BF9B /* FMDatabase.m in Sources */,
 				84A458261964DCDB00DF96FA /* EditActivityViewController.m in Sources */,
+				41202E0E19713C9000818695 /* History.m in Sources */,
 				84534AA7196272030031D6DA /* ItemMemberView.m in Sources */,
 				411D26FE196FD9BF00B3BF9B /* FMResultSet.m in Sources */,
 				8429DAFD1963E6AA00A8A381 /* PromiseViewController.m in Sources */,

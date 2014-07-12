@@ -13,6 +13,7 @@
 @class Member;
 @class Activity;
 @class Promise;
+@class History;
 @interface DataHandler : NSObject
 {
 }
@@ -60,6 +61,8 @@
 /*
  * get all Histories in databse
  */
-- (NSMutableArray*)allocHistories;
+- (NSMutableArray*)allocHistoriesWithError:(NSError**)error;
+-(BOOL)insertHistory:(History*)aHistory idMember:(NSString*)idMember idActivity:(NSString*)idActivity error:(NSError**)error;
+
 @end
 

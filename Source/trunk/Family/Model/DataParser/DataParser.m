@@ -10,6 +10,7 @@
 #import "Member.h"
 #import "Activity.h"
 #import "Promise.h"
+#import "History.h"
 #import "FMDatabase.h"
 
 @implementation DataParser
@@ -45,6 +46,16 @@
     item.dueDate = [results stringForColumn:@"duedate"];
     item.status = [results intForColumn:@"status"];
 
+    return item;
+}
+
++ (History*)allocHistoryWithResults:(FMResultSet*)results{
+    History *item = [[History alloc] init];
+    item.memberName = [results stringForColumn:@"memberName"];
+    item.activityName =[results stringForColumn:@"activityName"];
+    item.imageUrl = [results stringForColumn:@"imageUrl"];
+    item.totalPoint = [results intForColumn:@"point"];
+    
     return item;
 }
 @end

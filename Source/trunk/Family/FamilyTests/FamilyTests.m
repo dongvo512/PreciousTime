@@ -11,6 +11,7 @@
 #import "Member.h"
 #import "Activity.h"
 #import "Promise.h"
+#import "History.h"
 @interface FamilyTests : XCTestCase
 
 @end
@@ -164,5 +165,23 @@
     promise.idPromise = idPromise;
     isSuccess = [[DataHandler sharedManager] updatePromiseInfo:promise error:&error];
     NSAssert(isSuccess, error.description);
+}
+
+- (void)testGetAllHistory{
+    NSError *error = nil;
+    
+    NSMutableArray *array = [[DataHandler sharedManager] allocHistoriesWithError:&error];
+    NSAssert((array !=nil), error.description);
+
+}
+
+- (void)testInsertHistory{
+    NSError *error = nil;
+    History *history = [[History alloc] init];
+   
+    BOOL isSuccess = [[DataHandler sharedManager] insertHistory:history idMember:@"kimsa" idActivity:@"bicycle" error:&error];
+    
+    NSAssert(isSuccess, error.description);
+    
 }
 @end

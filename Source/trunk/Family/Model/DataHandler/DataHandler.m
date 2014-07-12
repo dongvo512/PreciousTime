@@ -13,6 +13,7 @@
 #import "Utilities.h"
 #import "Activity.h"
 #import "Promise.h"
+#import "History.h"
 @implementation DataHandler
 
 #pragma mark - Connection DB
@@ -641,7 +642,7 @@ static DataHandler *sharedDataHandler = nil;
         return nil;
     }
     
-    FMResultSet *results = [db executeQuery:@"select * from History"];
+    FMResultSet *results = [db executeQuery:@"select m.name memberName,a.name actvityName, h.imageUrl,h.point from History h, Member m, Activity a where  h.idMember=m.id and h.idActivity=a.id"];
     if ([db hadError]) {
         DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
         *error = [db lastError];
@@ -653,9 +654,47 @@ static DataHandler *sharedDataHandler = nil;
     
     while ([results next])
     {
-        
+        History * item = [DataParser allocHistoryWithResults:results];
+        if (item) {
+            [array addObject:item];
+        }
     }
     return array;
 }
+
+-(BOOL)insertHistory:(History*)aHistory idMember:(NSString*)idMember idActivity:(NSString*)idActivity error:(NSError**)error
+{
+    
+    
+    if (aHistory==nil) {
+        *error = [NSError errorWithDomain:@"History object is nil" code:121 userInfo:nil];
+        return NO;
+    }
+
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [NSError errorWithDomain:@"Can't open database" code:122 userInfo:nil];
+        
+        return NO;
+    }
+    
+    BOOL isSuccess = [db executeUpdate:@"insert into History(idMember,idActivity, imageUrl, point, deleted,dirty) values(?,?,?,?,?,?)",idMember, idActivity,aHistory.imageUrl,[NSNumber numberWithInt:aHistory.totalPoint],[NSNumber numberWithBool:false],[NSNumber numberWithBool:true]];
+    if (!isSuccess) {
+        if (error!=NULL) {
+            *error = [db lastError];
+        }
+        [self closeDB:db];
+        
+        return NO;
+        
+    }
+    
+    [self closeDB:db];
+    return YES;
+
+    
+    
+}
+
 
 @end

@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class Member;
+@class Activity;
 @interface History : NSObject
-
+@property (nonatomic, retain) NSString* memberName;
+@property (nonatomic, retain) NSString* activityName;
+@property (nonatomic, retain) NSString* imageUrl;
+@property (nonatomic, retain) NSString *dateTime;
+@property (nonatomic, assign) int totalPoint;
 @end

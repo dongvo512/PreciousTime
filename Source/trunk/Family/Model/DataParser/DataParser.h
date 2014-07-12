@@ -11,9 +11,11 @@
 @class Member;
 @class Activity;
 @class Promise;
+@class History;
 @class FMResultSet;
 @interface DataParser : NSObject
 + (Member*)allocMemberWithResults:(FMResultSet*)results;
 + (Activity*)allocAcitiviyWithResults:(FMResultSet*)results;
 + (Promise*)allocPromiseWithResults:(FMResultSet*)results;
++ (History*)allocHistoryWithResults:(FMResultSet*)results;
 @end
