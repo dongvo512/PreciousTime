@@ -126,6 +126,9 @@
 		84A51B2B196F865B00351A71 /* ImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A51B2A196F865B00351A71 /* ImagePickerViewController.m */; };
 		84A7DB91196A466B004516F0 /* DataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7DB90196A466B004516F0 /* DataHandler.m */; };
 		84A7DB94196A46A3004516F0 /* DataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7DB93196A46A3004516F0 /* DataParser.m */; };
+		84BBD4101972B6F600B47134 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BBD40D1972B6F600B47134 /* icon-120.png */; };
+		84BBD4111972B6F600B47134 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BBD40E1972B6F600B47134 /* icon.png */; };
+		84BBD4121972B6F600B47134 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BBD40F1972B6F600B47134 /* icon@2x.png */; };
 		84E0104A197187A600776E4B /* database.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 84E01049197187A600776E4B /* database.sqlite */; };
 		84E0106019718C8B00776E4B /* icon_Art&Craft.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E0104B19718C8B00776E4B /* icon_Art&Craft.png */; };
 		84E0106119718C8B00776E4B /* icon_bake.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E0104C19718C8B00776E4B /* icon_bake.png */; };
@@ -324,6 +327,9 @@
 		84A7DB90196A466B004516F0 /* DataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataHandler.m; sourceTree = "<group>"; };
 		84A7DB92196A46A3004516F0 /* DataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataParser.h; sourceTree = "<group>"; };
 		84A7DB93196A46A3004516F0 /* DataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataParser.m; sourceTree = "<group>"; };
+		84BBD40D1972B6F600B47134 /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
+		84BBD40E1972B6F600B47134 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		84BBD40F1972B6F600B47134 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		84E01049197187A600776E4B /* database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = database.sqlite; sourceTree = "<group>"; };
 		84E0104B19718C8B00776E4B /* icon_Art&Craft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Art&Craft.png"; sourceTree = "<group>"; };
 		84E0104C19718C8B00776E4B /* icon_bake.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bake.png; sourceTree = "<group>"; };
@@ -615,6 +621,9 @@
 		84534A36196252D80031D6DA /* Family */ = {
 			isa = PBXGroup;
 			children = (
+				84BBD40D1972B6F600B47134 /* icon-120.png */,
+				84BBD40E1972B6F600B47134 /* icon.png */,
+				84BBD40F1972B6F600B47134 /* icon@2x.png */,
 				84534A3F196252D80031D6DA /* AppDelegate.h */,
 				84534A40196252D80031D6DA /* AppDelegate.m */,
 				84534A42196252D80031D6DA /* Images.xcassets */,
@@ -1090,6 +1099,7 @@
 				841A2AFF196CF18700442CAE /* action-red-button-selected@2x.png in Resources */,
 				8429DAE21963DFD100A8A381 /* icon_promise.png in Resources */,
 				84E0104A197187A600776E4B /* database.sqlite in Resources */,
+				84BBD4101972B6F600B47134 /* icon-120.png in Resources */,
 				84E0106E19718C8B00776E4B /* icon_Phone.png in Resources */,
 				84E0106719718C8B00776E4B /* icon_Games.png in Resources */,
 				841A2AFA196CF18700442CAE /* action-gray-button-selected.png in Resources */,
@@ -1158,6 +1168,7 @@
 				84A4582D19651A0700DF96FA /* btn_addnewpromise.png in Resources */,
 				8429DAE01963DDA300A8A381 /* icon_activity.png in Resources */,
 				84534A9B19626F3B0031D6DA /* AddMemberViewController.xib in Resources */,
+				84BBD4111972B6F600B47134 /* icon.png in Resources */,
 				846347571966B143008B9A6F /* btn_more.png in Resources */,
 				84534A76196257840031D6DA /* MainViewController.xib in Resources */,
 				84E0107919718DC600776E4B /* icon_Gardening.png in Resources */,
@@ -1171,6 +1182,7 @@
 				84E0106319718C8B00776E4B /* icon_Bicycle.png in Resources */,
 				8484F16F19691E1800EBA065 /* MemberInfoView.xib in Resources */,
 				8425BD34196B9C6A0018187E /* btn_aboutus.png in Resources */,
+				84BBD4121972B6F600B47134 /* icon@2x.png in Resources */,
 				84E0106119718C8B00776E4B /* icon_bake.png in Resources */,
 				8429DB061963E8E900A8A381 /* ItemActivityView.xib in Resources */,
 				84E0107019718C8B00776E4B /* icon_Playground.png in Resources */,
