@@ -7,7 +7,7 @@
 //
 
 #import "ItemMemberView.h"
-
+#import "Utilities.h"
 @interface ItemMemberView()
 {
     IBOutlet UIImageView *imgAvatar;
@@ -37,7 +37,10 @@
 -(void) setDataForItemView:(Member *) aMember
 {
     memberCurr = aMember;
-    imgAvatar.image = aMember.avatar;
+    NSLog(@"%@",aMember.avatarUrl);
+    NSData *data = [[NSFileManager defaultManager] contentsAtPath:aMember.avatarUrl];
+    imgAvatar.image = [UIImage imageWithData:data];
+
     lblName.text = aMember.name;
    
 }

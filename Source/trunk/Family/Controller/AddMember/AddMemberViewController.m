@@ -10,6 +10,8 @@
 #import "Utilities.h"
 #import "BlockActionSheet.h"
 #import "ImagePickerViewController.h"
+#import "Member.h"
+#import "DataHandler.h"
 @interface AddMemberViewController ()
 {
     NSMutableArray *arrMembers;
@@ -27,12 +29,16 @@
     Boolean isShowViewPicker;
     Boolean isShowKeyBoard;
     IBOutlet UITextField *txtName;
+    ImagePickerViewController *vcImagePicker;
+    int genderChosen;
 }
 - (IBAction)setBirthDay:(id)sender;
 - (IBAction)setGender:(id)sender;
 - (IBAction)doneDatePicker:(id)sender;
 - (IBAction)handleAvatar:(id)sender;
 - (IBAction)cancelViewPicker:(id)sender;
+- (IBAction)deleteOrSaveMember:(id)sender;
+
 
 
 @end
@@ -54,7 +60,7 @@
     // Do any additional setup after loading the view from its nib.
     // Display
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
-    [self isAddMemberViewController];
+    [self displayForView];
     [self addGestureSingleTagForViewParent];
     [self radiusAvatarCircle];
     [scrollViewContent setContentSize:CGSizeMake(self.view.frame.size.width, scrollViewContent.frame.size.height)];
@@ -62,18 +68,40 @@
     
 }
 
--(void)isAddMemberViewController
+-(void)displayForView
 {
     if(self.isAddNewMember)
-    {
-        self.title = @"Add Member";
-        [btnDelete setImage:[UIImage imageNamed:@"btn_save.png"] forState:UIControlStateNormal];
-    }
+        [self loadDisplayAddNewMember];
     else
     {
-        self.title = @"Edit Member";
-        [self createButtonSaveMember];
+        [self loadDisplayWithEditMember];
     }
+}
+-(void)loadDisplayWithEditMember
+{
+    self.title = @"Edit Member";
+    [self createButtonSaveMember];
+    @try {
+        NSData *data = [[NSFileManager defaultManager] contentsAtPath:self.aMemberCurr.avatarUrl];
+        if(data != nil)
+        [btnAvatar setImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
+        NSString *genderCurr = (self.aMemberCurr.genderValue == 0)?@"Male":@"Female";
+        [btnGender setTitle:genderCurr forState:UIControlStateNormal];
+        [btnBirthday setTitle:self.aMemberCurr.bithday forState:UIControlStateNormal];
+        txtName.text = self.aMemberCurr.name;
+        txtRelationship.text = self.aMemberCurr.relationship;
+
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception);
+    }
+    
+   }
+-(void)loadDisplayAddNewMember
+{
+    self.title = @"Add Member";
+    [btnDelete setImage:[UIImage imageNamed:@"btn_save.png"] forState:UIControlStateNormal];
+
 }
 -(void)radiusAvatarCircle
 {
@@ -86,7 +114,7 @@
 #pragma mark - Take Photo
 - (IBAction)handleAvatar:(id)sender
 {
-    ImagePickerViewController *vcImagePicker = [[ImagePickerViewController alloc] init];
+    vcImagePicker = [[ImagePickerViewController alloc] init];
     vcImagePicker.btnCurrent = btnAvatar;
     BlockActionSheet *blockActionSheet = [[BlockActionSheet alloc] initWithTitle:nil];
      [blockActionSheet setCancelButtonWithTitle:@"Cancel" block:^{
@@ -104,9 +132,10 @@
 }
 -(void)createButtonSaveMember
 {
-    UIButton *btnSave = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *btnSave = [UIButton buttonWithType:UIButtonTypeSystem];
     btnSave.frame = CGRectMake(0, 0, 60, 40);
-    [btnSave setImage:[UIImage imageNamed:@"btn_save.png"] forState:UIControlStateNormal];
+    [btnSave setTitle:@"Save" forState:UIControlStateNormal];
+    //[btnSave setImage:[UIImage imageNamed:@"btn_save.png"] forState:UIControlStateNormal];
     [btnSave addTarget:self action:@selector(saveMember) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *saveBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnSave];
@@ -115,7 +144,36 @@
 }
 -(void)saveMember
 {
+    NSError *error = nil;
+    Member *member = [[Member alloc] init];
+    member.idMember = self.aMemberCurr.idMember;
+    member.name = txtName.text;
     
+    NSString *documentsDirectory = [Utilities getPathOfDocument];
+    NSString *avatarPath = nil;
+    
+    if(vcImagePicker.nameImageChosenCurr != nil)
+    {
+        avatarPath = [documentsDirectory stringByAppendingPathComponent:vcImagePicker.nameImageChosenCurr];
+    }
+    else
+        avatarPath = self.aMemberCurr.avatarUrl;
+    
+    member.avatarUrl = avatarPath;
+    
+    member.bithday = btnBirthday.titleLabel.text;
+    member.genderValue = genderChosen;
+    member.relationship = txtRelationship.text;
+    
+   // NSString *idMember = nil;
+    //BOOL isSuccess = [[DataHandler sharedManager] insertMember:member isSync:false idMember:&idMember error:&error];
+   // member.idMember = idMember;
+    BOOL  isSuccess = [[DataHandler sharedManager] updateMemberInfo:member isSync:false  error:&error];
+    NSAssert(isSuccess, error.description);
+    if(isSuccess)
+        [_delegate reloadDataMember];
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 - (void)didReceiveMemoryWarning
 {
@@ -215,6 +273,41 @@
     [self returnScrollViewDatePicker];
 }
 
+- (IBAction)deleteOrSaveMember:(id)sender
+{
+   //With AddMemberPage this button Save
+   //With EditMemberPage this button Delete
+    if(self.isAddNewMember)
+    {
+        NSError *error = nil;
+        Member *member = [[Member alloc] init];
+        member.name = txtName.text;
+        NSString *documentsDirectory = [Utilities getPathOfDocument];
+        NSString *avatarPath = [documentsDirectory stringByAppendingPathComponent:vcImagePicker.nameImageChosenCurr];
+        member.avatarUrl = avatarPath;
+        member.bithday = btnBirthday.titleLabel.text;
+        member.genderValue = genderChosen;
+        member.relationship = txtRelationship.text;
+        
+        NSString *idMember = nil;
+        BOOL isSuccess = [[DataHandler sharedManager] insertMember:member isSync:false idMember:&idMember error:&error];
+       // DLog(@"%@",idMember);
+       // NSAssert(isSuccess, error.description);
+        if(isSuccess)
+           [_delegate reloadDataMember];
+        [self.navigationController popViewControllerAnimated:YES];
+
+    }
+    else
+    {
+        NSError *error = nil;
+        BOOL isDeleteAMember = [[DataHandler sharedManager] updateDeletedMember:self.aMemberCurr.idMember error:&error];
+        if (isDeleteAMember)
+            [_delegate reloadDataMember];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 -(void)createDataGender
 {
     arrGender = [NSArray arrayWithObjects:@"Male",@"Female", nil];
@@ -235,6 +328,7 @@
 }
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    genderChosen = row;
     [btnGender setTitle:[arrGender objectAtIndex:row] forState:UIControlStateNormal];
 }
 #pragma mark - UITextField Delegate

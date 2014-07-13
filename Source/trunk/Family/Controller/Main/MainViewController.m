@@ -28,7 +28,7 @@
    
     IBOutlet UIView *viewPointSummary;
     IBOutlet UIView *viewMemberInfo;
-   
+    
 }
 @end
 
@@ -102,12 +102,11 @@
             [viewMemberInfo addSubview:aView];
         }
     }
-    MemberInfoView *itemView = (MemberInfoView *) aView;
-    [itemView setObjectForView:self.aMemberCurr];
+    self.aMemberInfoCurr = (MemberInfoView *) aView;
+    [self.aMemberInfoCurr setObjectForView:self.aMemberCurr];
 
     
 }
-
 -(void)createViewChartCircle
 {
     [viewChartCircle.layer setCornerRadius:10.0f];

@@ -21,8 +21,8 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="kiR-j5-VDq"/>
-                        <outlet property="delegate" destination="-1" id="L8x-ms-TPB"/>
+                        <outlet property="dataSource" destination="-1" id="IW3-nd-LbM"/>
+                        <outlet property="delegate" destination="-1" id="AX4-eU-gNB"/>
                     </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dTj-st-EPB">

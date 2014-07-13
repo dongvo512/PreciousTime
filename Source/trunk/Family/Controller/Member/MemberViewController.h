@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "MemberTableViewCell.h"
-@interface MemberViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MemberTableViewCellDelegate>
+#import "AddMemberViewController.h"
+#import "MemberInfoView.h"
+@interface MemberViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MemberTableViewCellDelegate,AddMemberViewControllerDelegate>
 
 @end

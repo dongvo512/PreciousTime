@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "ActivityTableViewCell.h"
-@interface ActivityViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,ActivityTableViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-
+#import "EditActivityViewController.h"
+@interface ActivityViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,ActivityTableViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate,EditActivityViewControllerDelegate>
 @end

@@ -10,7 +10,7 @@
 #import "Activity.h"
 @protocol ItemActivityViewDelegate <NSObject>
 -(void)editItemActivityrSelectedView:(Activity*)aActivity;
--(void)singleTagItemActivityView;
+-(void)singleTagItemActivityView:(Activity *)aActivity;
 -(void)longTagItemActivityView;
 @end
 @interface ItemActivityView : UIView

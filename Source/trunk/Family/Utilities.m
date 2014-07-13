@@ -39,7 +39,12 @@
     
     [UIView commitAnimations];
 }
-
++(NSString *) getPathOfDocument
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    return documentsDirectory;
+}
 +(void)scaleScrollViewContent:(float) height scrollViewCurrent:(UIScrollView *)scrollViewCur
 {
     CGRect frameScrollView = scrollViewCur.frame;

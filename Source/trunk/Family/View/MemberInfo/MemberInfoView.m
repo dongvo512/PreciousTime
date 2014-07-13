@@ -7,7 +7,7 @@
 //
 
 #import "MemberInfoView.h"
-
+#import "Utilities.h"
 @interface MemberInfoView()
 {
     IBOutlet UIImageView *imgAvatar;
@@ -27,7 +27,10 @@
 }
 -(void) setObjectForView:(Member *) aMember
 {
-    imgAvatar.image = aMember.avatar;
+ 
+    NSLog(@"%@",aMember.avatarUrl);
+    NSData *data = [[NSFileManager defaultManager] contentsAtPath:aMember.avatarUrl];
+    imgAvatar.image = [UIImage imageWithData:data];
     lblBirthDay.text = aMember.bithday;
 }
 /*

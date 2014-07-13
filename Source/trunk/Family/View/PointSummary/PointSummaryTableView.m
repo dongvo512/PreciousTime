@@ -66,7 +66,7 @@
         NSString *strImg = [NSString stringWithFormat:@"activity%d.jpg",i+1];
      
         aActivity.strAvatar = strImg;
-        aActivity.isSelected = NO;
+        aActivity.dirty = 1;
         NSString *strName = [NSString stringWithFormat:@"Activity%d",i+1];
         aActivity.name = strName;
         aActivity.time = 5;

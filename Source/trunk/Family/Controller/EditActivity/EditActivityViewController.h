@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Activity.h"
+@protocol EditActivityViewControllerDelegate <NSObject>
+-(void)reloadDataActivity;
+@end
 @interface EditActivityViewController : UIViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
+{
+        id <EditActivityViewControllerDelegate> _delegate;
+}
+@property (retain) id delegate;
 @property (nonatomic) Boolean isEditActivityViewController;
+@property (nonatomic, retain) Activity *aActivityCurr;
 @end

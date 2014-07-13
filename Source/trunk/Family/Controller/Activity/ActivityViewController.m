@@ -12,6 +12,7 @@
 #import "EditActivityViewController.h"
 #import "BlockActionSheet.h"
 #import "ImagePickerViewController.h"
+#import "DataHandler.h"
 @interface ActivityViewController ()
 {
     NSMutableArray *arrActivities;
@@ -42,7 +43,8 @@
     self.title = @"Activities";
     [self createBarButtonDone];
     // Data
-    [self createData];
+    //[self createData];
+    [self getAllDataForActivity];
 }
 -(void) createBarButtonDone
 {
@@ -60,9 +62,9 @@
 {
     
 }
-#define ITEMS 7
+//#define ITEMS 7
 #define ITEM_CELL 2
--(void) createData
+/*-(void) createData
 {
     arrActivities = [NSMutableArray array];
     // Member data
@@ -80,7 +82,7 @@
     }
     
     
-}
+}*/
 #pragma mark - Table view data source - delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -127,15 +129,31 @@
 {
     EditActivityViewController *vcEditActivity = [[EditActivityViewController alloc] initWithNibName:@"EditActivityViewController" bundle:nil];
     vcEditActivity.isEditActivityViewController = YES;
+    vcEditActivity.aActivityCurr = aActivity;
+    vcEditActivity.delegate = self;
     [self.navigationController pushViewController:vcEditActivity animated:YES];
 }
--(void)singleTagItemActivity
+-(void)singleTagItemActivity:(Activity *)aActivity
 {
+    NSError *error = nil;
+    /*Activity *activity = [[Activity alloc] init];
+    activity.name = @"Bicycle";
+    activity.unitTypeValue = 0;
+    activity.strAvatar = @"http://www.picturesnew.com/media/images/images_of_nature.jpg";
+    activity.point = 10;*/
+    
+    
+    NSString *idActivity = nil;
+    BOOL isSuccess = [[DataHandler sharedManager] insertActivity:aActivity isSync:false idActivity:&idActivity error:&error];
+    aActivity.idActivity = idActivity;
+    isSuccess = [[DataHandler sharedManager] updateActivityInfo:aActivity isSync:false error:&error];
+    NSAssert(isSuccess, error.description);
+
     [tblContent reloadData];
 }
 -(void)longTagItemActivity
 {
-    [tblContent reloadData];
+       [tblContent reloadData];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -167,7 +185,20 @@
 {
     EditActivityViewController *vcEditActivity = [[EditActivityViewController alloc] initWithNibName:@"EditActivityViewController" bundle:nil];
     vcEditActivity.isEditActivityViewController = NO;
+    vcEditActivity.delegate = self;
     [self.navigationController pushViewController:vcEditActivity animated:YES];
 
+}
+#pragma mark - EditActivityViewController Delete
+-(void)reloadDataActivity
+{
+    [self getAllDataForActivity];
+}
+#pragma mark - get Data Activity
+-(void) getAllDataForActivity
+{
+    NSError *error = nil;
+    arrActivities = [[DataHandler sharedManager] allocAcitivitiesWithError:&error];
+    [tblContent reloadData];
 }
 @end

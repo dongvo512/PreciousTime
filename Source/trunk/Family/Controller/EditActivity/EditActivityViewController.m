@@ -10,6 +10,8 @@
 #import "Utilities.h"
 #import "ImagePickerViewController.h"
 #import "BlockActionSheet.h"
+#import "Activity.h"
+#import "DataHandler.h"
 @interface EditActivityViewController ()
 {
     IBOutlet UIButton *btnDelete;
@@ -22,10 +24,12 @@
     IBOutlet UIScrollView *scrollViewContent;
     Boolean isShowKeyBoard;
     IBOutlet UIButton *btnAvatarActivity;
-    
-    NSMutableArray *arrMinutes;
+    int unitType;
+    NSMutableArray *arrTimeStyle;
+    ImagePickerViewController *vcImagePicker;
 }
 - (IBAction)takeAvatarActivity:(id)sender;
+- (IBAction)deleteOrSaveActivity:(id)sender;
 
 
 - (IBAction)cancelPickerView:(id)sender;
@@ -38,7 +42,7 @@
 
 @implementation EditActivityViewController
 #define KEY_BOARD_HEIGHT 216
-#define LIMIT_MINUTES 60
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -66,11 +70,6 @@
 
     
 }
--(void) displayForEditViewController
-{
-    self.title = @"Edit Activity";
-    [self createButtonSave_Edit];
-}
 -(void)radiusAvatarCircleActivity
 {
     btnAvatarActivity.layer.cornerRadius = btnAvatarActivity.frame.size.width / 2;
@@ -94,6 +93,45 @@
     [self returnScrollViewPickerView];
 
 }
+-(void) displayForEditViewController
+{
+    self.title = @"Edit Activity";
+    [self createButtonSave_Edit];
+    @try {
+        NSData *data = [[NSFileManager defaultManager] contentsAtPath:self.aActivityCurr.strAvatar];
+        UIImage *imgCurr = [UIImage imageNamed:self.aActivityCurr.strAvatar];
+        if(data != nil)
+            [btnAvatarActivity setImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
+        else if(imgCurr != nil)
+            [btnAvatarActivity setImage:[UIImage imageNamed:self.aActivityCurr.strAvatar] forState:UIControlStateNormal];
+        else
+            [btnAvatarActivity setImage:[UIImage imageNamed:@"logo_03.png"] forState:UIControlStateNormal];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception);
+    }
+   
+   
+    txtName.text = self.aActivityCurr.name;
+    
+    switch (self.aActivityCurr.unitTypeValue)
+    {
+        case 0:
+            [btnUnitType setTitle:@"Second" forState:UIControlStateNormal];
+            break;
+        case 1:
+            [btnUnitType setTitle:@"Minute" forState:UIControlStateNormal];
+            break;
+        case 2:
+            [btnUnitType setTitle:@"Hour" forState:UIControlStateNormal];
+            break;
+        default:
+            break;
+    }
+    
+    txtPoint.text = [NSString stringWithFormat:@"%d",self.aActivityCurr.point];
+}
+
 -(void) displayForAddNewActivityViewController
 {
     self.title = @"New Activity";
@@ -107,9 +145,10 @@
 -(void) createButtonSave_Edit
 {
     // Button Member
-    UIButton *btnSaveEdit = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *btnSaveEdit = [UIButton buttonWithType:UIButtonTypeSystem];
     btnSaveEdit.frame = CGRectMake(0, 0, 60, 40);
-    [btnSaveEdit setImage:[UIImage imageNamed:@"btn_saveedit.png"] forState:UIControlStateNormal];
+    [btnSaveEdit setTitle:@"Save" forState:UIControlStateNormal];
+    //[btnSaveEdit setImage:[UIImage imageNamed:@"btn_saveedit.png"] forState:UIControlStateNormal];
     [btnSaveEdit addTarget:self action:@selector(saveEditActivity) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *saveEditBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnSaveEdit];
@@ -117,7 +156,29 @@
 }
 -(void)saveEditActivity
 {
+    NSError *error = nil;
+    Activity *activity = [[Activity alloc] init];
+    activity.name = txtName.text;
+    activity.unitTypeValue = unitType;
+    NSString *documentsDirectory = [Utilities getPathOfDocument];
+    NSString *avatarPath = nil;
     
+    if(vcImagePicker.nameImageChosenCurr != nil)
+    {
+        avatarPath = [documentsDirectory stringByAppendingPathComponent:vcImagePicker.nameImageChosenCurr];
+    }
+    else
+        avatarPath = self.aActivityCurr.strAvatar;
+    
+    activity.strAvatar = avatarPath;
+    activity.point = txtPoint.text.intValue;
+    
+    activity.idActivity = self.aActivityCurr.idActivity;
+    BOOL isSuccess = [[DataHandler sharedManager] updateActivityInfo:activity isSync:false error:&error];
+    NSAssert(isSuccess, error.description);
+    if(isSuccess)
+    [_delegate reloadDataActivity];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -129,7 +190,7 @@
 #pragma mark - Take Photo
 - (IBAction)takeAvatarActivity:(id)sender
 {
-    ImagePickerViewController *vcImagePicker = [[ImagePickerViewController alloc] init];
+    vcImagePicker = [[ImagePickerViewController alloc] init];
     vcImagePicker.btnCurrent = btnAvatarActivity;
     BlockActionSheet *blockActionSheet = [[BlockActionSheet alloc] initWithTitle:nil];
     [blockActionSheet setCancelButtonWithTitle:@"Cancel" block:^{
@@ -144,6 +205,38 @@
         [vcImagePicker cameraRoll:self];
     }];
     [blockActionSheet showInView:self.view];
+}
+
+- (IBAction)deleteOrSaveActivity:(id)sender
+{
+    if(self.isEditActivityViewController)
+    {
+        NSError *error = nil;
+        BOOL isDeleteActivity = [[DataHandler sharedManager] updateDeletedActivity:self.aActivityCurr.idActivity error:&error];
+        if(isDeleteActivity)
+            [_delegate reloadDataActivity];
+    }
+    else
+    {
+        NSError *error = nil;
+        Activity *activity = [[Activity alloc] init];
+        activity.name = txtName.text;
+        activity.unitTypeValue = unitType;
+        NSString *documentsDirectory = [Utilities getPathOfDocument];
+        NSString *avatarPath = [documentsDirectory stringByAppendingPathComponent:vcImagePicker.nameImageChosenCurr];
+
+        activity.strAvatar = avatarPath;
+        activity.point = txtPoint.text.intValue;
+        
+        NSString *idActivity = nil;
+        BOOL isSuccess = [[DataHandler sharedManager] insertActivity:activity isSync:false idActivity:&idActivity error:&error];
+        DLog(@"%@",idActivity);
+      //  NSAssert(isSuccess, error.description);
+        if(isSuccess)
+          [_delegate reloadDataActivity];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 - (IBAction)cancelPickerView:(id)sender
@@ -161,7 +254,7 @@
 - (IBAction)setMinutesActivity:(id)sender
 {
     isShowViewPicker = YES;
-    [self createDataMinutes];
+    [self createDataTime];
     pickerView.dataSource = self;
     pickerView.delegate = self;
     [self upScrollViewPickerMinutes];
@@ -224,31 +317,32 @@
     [self setContentOfSetScrollView:textField];
     isShowKeyBoard = YES;
 }
--(void)createDataMinutes
+-(void)createDataTime
 {
-    arrMinutes = [NSMutableArray array];
-    for(int i=0; i< LIMIT_MINUTES; i++)
-    {
-        [arrMinutes addObject:[NSString stringWithFormat:@"%d",i]];
-    }
+    arrTimeStyle = [NSMutableArray array];
+    [arrTimeStyle addObject:@"Second"];
+    [arrTimeStyle addObject:@"Minute"];
+    [arrTimeStyle addObject:@"Hour"];
+    
 }
 #pragma mark - Picker view data source
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
     return 1;
 }
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return [arrMinutes count];
+    return [arrTimeStyle count];
 }
 #pragma mark - Picker view delegate
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
    // NSLog(@"%@",arrMinutes objectAtIndex:row);
-    return [arrMinutes objectAtIndex:row];
+    return [arrTimeStyle objectAtIndex:row];
 }
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    NSString *strMinuteCur = [NSString stringWithFormat:@"%@m",[arrMinutes objectAtIndex:row]];
+    unitType = row;
+    NSString *strMinuteCur = [arrTimeStyle objectAtIndex:row];
     [btnUnitType setTitle:strMinuteCur forState:UIControlStateNormal];
 }
 

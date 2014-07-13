@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Member.h"
+#import "MemberInfoView.h"
 @interface MainViewController : UIViewController 
 @property (nonatomic, retain) Member *aMemberCurr;
 -(void) createViewMemberInfo;
+@property (nonatomic, retain) MemberInfoView *aMemberInfoCurr;
 @end

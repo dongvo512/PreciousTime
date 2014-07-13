@@ -7,13 +7,14 @@
 //
 
 #import "ImagePickerViewController.h"
-
+#import "Utilities.h"
 @interface ImagePickerViewController ()
 
 @end
 
 @implementation ImagePickerViewController
-
+#define NEW_SIZE_IMAGE_HEIGHT 100
+#define NEW_SIZE_IMAGE_WIDTH 100
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -77,9 +78,30 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    [self.btnCurrent setImage:chosenImage forState:UIControlStateNormal];
+    
+    UIImage *imgNewSize = [self reSizeImage:chosenImage scaledToSize:CGSizeMake(NEW_SIZE_IMAGE_WIDTH, NEW_SIZE_IMAGE_HEIGHT)];
+    NSData *data = UIImagePNGRepresentation(imgNewSize);
+    
+    NSDateFormatter* f = [[NSDateFormatter alloc] init];
+    [f setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSString* dateString = [f stringFromDate:[NSDate date]];
+    self.nameImageChosenCurr = dateString;
+    NSString *documentsDirectory = [Utilities getPathOfDocument];
+    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:dateString];
+    
+    // Save it into file system
+    [data writeToFile:dataPath atomically:YES];
+    [self.btnCurrent setImage:imgNewSize forState:UIControlStateNormal];
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
+}
+- (UIImage *)reSizeImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+  
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     

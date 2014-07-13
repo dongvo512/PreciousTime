@@ -23,6 +23,7 @@
     item.bithday = [results stringForColumn:@"birthday"];
     item.genderValue = [results intForColumn:@"gender"];
     item.timestamp = [results stringForColumn:@"timestamp"];
+    item.relationship = [results stringForColumn:@"relationship"];
 
     return item;
 }

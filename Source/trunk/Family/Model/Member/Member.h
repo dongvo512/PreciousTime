@@ -10,10 +10,8 @@
 
 @interface Member : NSObject
 @property (nonatomic, retain) NSString *idMember;
-@property (nonatomic, retain) UIImage *avatar;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *bithday;
-@property (nonatomic, retain) NSString *gender;
 @property (nonatomic, retain) NSString *relationship;
 @property (nonatomic, retain) NSString *avatarUrl;
 @property (nonatomic, retain) NSString *timestamp;

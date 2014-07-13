@@ -11,7 +11,7 @@
 #import "Activity.h"
 @protocol ActivityTableViewDelegate <NSObject>
 -(void)editActivitySelectedCell:(Activity*)aActivity;
--(void)singleTagItemActivity;
+-(void)singleTagItemActivity:(Activity*)aActivity;
 -(void)longTagItemActivity;
 @end
 @interface ActivityTableViewCell : UITableViewCell<ItemActivityViewDelegate>

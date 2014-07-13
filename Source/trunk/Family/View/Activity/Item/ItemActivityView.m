@@ -38,7 +38,15 @@
        [viewBackGround setBackgroundColor:[UIColor yellowColor]];
     else
         [viewBackGround setBackgroundColor:[UIColor clearColor]];
-    imgAvatar.image = [UIImage imageNamed:aActivity.strAvatar];
+       UIImage *imgCurr = [UIImage imageNamed:aActivity.strAvatar];
+    //imgAvatar.image = [UIImage imageNamed:aActivity.strAvatar];
+    if(imgCurr == nil)
+    {
+        NSData *data = [[NSFileManager defaultManager] contentsAtPath:aActivity.strAvatar];
+        imgAvatar.image = [UIImage imageWithData:data];
+    }
+    else
+        imgAvatar.image = imgCurr;
     lblNameActivity.text = aActivity.name;
     if(aActivity.time == 0)
         [lblTime setHidden:YES];
@@ -81,7 +89,7 @@
     aActivityCurrent.isSelected = YES;
     NSLog(@"%d",aActivityCurrent.time);
     aActivityCurrent.time = aActivityCurrent.time + TIME_UP;
-    [_delegate singleTagItemActivityView];
+    [_delegate singleTagItemActivityView:aActivityCurrent];
 }
 -(void)handleLongPress:(id)sender
 {

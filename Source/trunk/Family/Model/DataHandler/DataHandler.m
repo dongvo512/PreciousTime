@@ -110,7 +110,7 @@ static DataHandler *sharedDataHandler = nil;
         return nil;
     }
     
-    FMResultSet *results = [db executeQuery:@"select * from Member"];
+    FMResultSet *results = [db executeQuery:@"select * from Member where deleted = ?",[NSNumber numberWithBool:false]];
     if ([db hadError]) {
         DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
         *error = [db lastError];
@@ -282,7 +282,7 @@ static DataHandler *sharedDataHandler = nil;
     }
     
     BOOL isSuccess =  [db executeUpdate:@"delete from Member where deleted = ?;"
-                       ,[NSNumber numberWithBool:true]];
+                       ,[NSNumber numberWithBool:false]];
     
     if (!isSuccess) {
         if (error!=NULL) {

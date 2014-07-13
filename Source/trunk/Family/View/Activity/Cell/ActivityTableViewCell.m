@@ -81,9 +81,9 @@
 {
     [_delegate editActivitySelectedCell:aActivity];
 }
--(void)singleTagItemActivityView
+-(void)singleTagItemActivityView:(Activity *)aActivity
 {
-    [_delegate singleTagItemActivity];
+    [_delegate singleTagItemActivity:aActivity];
 }
 -(void)longTagItemActivityView
 {

@@ -13,4 +13,5 @@
 - (void)takeAPickture:(UIViewController *)vcCurrent;
 -(Boolean) isCheckCamrera;
 -(void)cameraRoll:(UIViewController *)vcCurrent;
+@property (nonatomic, retain) NSString *nameImageChosenCurr;
 @end
