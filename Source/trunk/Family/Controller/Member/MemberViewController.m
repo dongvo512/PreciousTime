@@ -93,10 +93,9 @@
 -(void) getAllMembers
 {
     NSError *error = nil;
-    
+    [arrMembers removeAllObjects];
     arrMembers = [[DataHandler sharedManager] allocMembersWithError:&error];
-    if(arrMembers.count != 0)
-       [tblViewContent reloadData];
+    [tblViewContent reloadData];
 }
 #pragma mark - Table view data source - delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

@@ -197,6 +197,7 @@
 #pragma mark - get Data Activity
 -(void) getAllDataForActivity
 {
+    [arrActivities removeAllObjects];
     NSError *error = nil;
     arrActivities = [[DataHandler sharedManager] allocAcitivitiesWithError:&error];
     [tblContent reloadData];
