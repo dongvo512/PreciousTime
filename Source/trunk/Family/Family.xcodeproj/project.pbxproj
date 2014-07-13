@@ -14,6 +14,7 @@
 		411D26FE196FD9BF00B3BF9B /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 411D26F9196FD9BF00B3BF9B /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		411D2710196FDB4100B3BF9B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 411D270F196FDB4100B3BF9B /* libsqlite3.0.dylib */; };
 		41202E0E19713C9000818695 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 41202E0D19713C9000818695 /* History.m */; };
+		41C568E11972D39F004FEB75 /* Database in Resources */ = {isa = PBXBuildFile; fileRef = 41C568E01972D39F004FEB75 /* Database */; };
 		841A2AE1196CEBC500442CAE /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A2AE0196CEBC500442CAE /* BlockActionSheet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		841A2AE6196CED4B00442CAE /* BlockBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A2AE4196CED4B00442CAE /* BlockBackground.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		841A2AF6196CF18700442CAE /* action-black-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AE8196CF18700442CAE /* action-black-button-selected.png */; };
@@ -132,7 +133,6 @@
 		84BBD41C1972C1D300B47134 /* Default-568@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BBD4191972C1D300B47134 /* Default-568@2x.png */; };
 		84BBD41D1972C1D300B47134 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BBD41A1972C1D300B47134 /* Default.png */; };
 		84BBD41E1972C1D300B47134 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BBD41B1972C1D300B47134 /* Default@2x.png */; };
-		84E0104A197187A600776E4B /* database.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 84E01049197187A600776E4B /* database.sqlite */; };
 		84E0106019718C8B00776E4B /* icon_Art&Craft.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E0104B19718C8B00776E4B /* icon_Art&Craft.png */; };
 		84E0106119718C8B00776E4B /* icon_bake.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E0104C19718C8B00776E4B /* icon_bake.png */; };
 		84E0106219718C8B00776E4B /* icon_bedtime.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E0104D19718C8B00776E4B /* icon_bedtime.png */; };
@@ -182,6 +182,7 @@
 		411D270F196FDB4100B3BF9B /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		41202E0C19713C9000818695 /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
 		41202E0D19713C9000818695 /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
+		41C568E01972D39F004FEB75 /* Database */ = {isa = PBXFileReference; lastKnownFileType = file; path = Database; sourceTree = "<group>"; };
 		841A2ADF196CEBC500442CAE /* BlockActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockActionSheet.h; sourceTree = "<group>"; };
 		841A2AE0196CEBC500442CAE /* BlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockActionSheet.m; sourceTree = "<group>"; };
 		841A2AE3196CED4B00442CAE /* BlockBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockBackground.h; sourceTree = "<group>"; };
@@ -336,7 +337,6 @@
 		84BBD4191972C1D300B47134 /* Default-568@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568@2x.png"; sourceTree = "<group>"; };
 		84BBD41A1972C1D300B47134 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		84BBD41B1972C1D300B47134 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		84E01049197187A600776E4B /* database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = database.sqlite; sourceTree = "<group>"; };
 		84E0104B19718C8B00776E4B /* icon_Art&Craft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Art&Craft.png"; sourceTree = "<group>"; };
 		84E0104C19718C8B00776E4B /* icon_bake.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bake.png; sourceTree = "<group>"; };
 		84E0104D19718C8B00776E4B /* icon_bedtime.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bedtime.png; sourceTree = "<group>"; };
@@ -404,14 +404,6 @@
 			path = FMDB;
 			sourceTree = "<group>";
 		};
-		411D271A196FDF2F00B3BF9B /* Database */ = {
-			isa = PBXGroup;
-			children = (
-				84E01049197187A600776E4B /* database.sqlite */,
-			);
-			path = Database;
-			sourceTree = "<group>";
-		};
 		41202E0B19713C7C00818695 /* History */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,6 +411,14 @@
 				41202E0D19713C9000818695 /* History.m */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		41C568DF1972D39F004FEB75 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				41C568E01972D39F004FEB75 /* Database */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 		841A2ADE196CEBC500442CAE /* BlockActionSheet */ = {
@@ -588,7 +588,7 @@
 		84534A24196252D80031D6DA = {
 			isa = PBXGroup;
 			children = (
-				411D271A196FDF2F00B3BF9B /* Database */,
+				41C568DF1972D39F004FEB75 /* Database */,
 				84534A91196268240031D6DA /* Utilities.h */,
 				84534A92196268240031D6DA /* Utilities.m */,
 				84534A5F196253000031D6DA /* Controller */,
@@ -1107,7 +1107,6 @@
 				84E0107119718C8B00776E4B /* icon_Reading.png in Resources */,
 				841A2AFF196CF18700442CAE /* action-red-button-selected@2x.png in Resources */,
 				8429DAE21963DFD100A8A381 /* icon_promise.png in Resources */,
-				84E0104A197187A600776E4B /* database.sqlite in Resources */,
 				84BBD4161972B98100B47134 /* icon-120.png in Resources */,
 				84BBD41C1972C1D300B47134 /* Default-568@2x.png in Resources */,
 				84E0106E19718C8B00776E4B /* icon_Phone.png in Resources */,
@@ -1125,6 +1124,7 @@
 				84A458271964DCDB00DF96FA /* EditActivityViewController.xib in Resources */,
 				84E010801971B2C100776E4B /* avatar_default.png in Resources */,
 				84773D39196FE31C0086B2D6 /* btn_Login_setting.png in Resources */,
+				41C568E11972D39F004FEB75 /* Database in Resources */,
 				84E0106219718C8B00776E4B /* icon_bedtime.png in Resources */,
 				84E0106C19718C8B00776E4B /* icon_Music&Singing.png in Resources */,
 				84BBD41E1972C1D300B47134 /* Default@2x.png in Resources */,

@@ -18,7 +18,7 @@
 
 #pragma mark - Connection DB
 
-static NSString *DATABASE_NAME = @"Database.sqlite";
+static NSString *DATABASE_NAME = @"Database";
 static DataHandler *sharedDataHandler = nil;
 
 /*
