@@ -143,10 +143,10 @@
     activity.point = 10;*/
     
     
-    NSString *idActivity = nil;
-    BOOL isSuccess = [[DataHandler sharedManager] insertActivity:aActivity isSync:false idActivity:&idActivity error:&error];
-    aActivity.idActivity = idActivity;
-    isSuccess = [[DataHandler sharedManager] updateActivityInfo:aActivity isSync:false error:&error];
+  //  NSString *idActivity = nil;
+   // BOOL isSuccess = [[DataHandler sharedManager] insertActivity:aActivity isSync:false idActivity:&idActivity error:&error];
+   // aActivity.idActivity = idActivity;
+   BOOL isSuccess = [[DataHandler sharedManager] updateActivityInfo:aActivity isSync:false error:&error];
     NSAssert(isSuccess, error.description);
 
     [tblContent reloadData];
