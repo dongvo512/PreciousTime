@@ -47,7 +47,7 @@
 }
 -(void) setDataForTableView
 {
-    arrGenPointSummaryGen = [NSArray arrayWithObjects:@"Point Summary",@"Promise", nil];
+    arrGenPointSummaryGen = [NSArray arrayWithObjects:@"Activity point",@"Promise", nil];
     arrPointSummary = [NSMutableArray array];
     [arrPointSummary addObject:[self allocDataActivity]];
     [arrPointSummary addObject:[self allocDataPromise]];

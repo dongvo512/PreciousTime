@@ -168,6 +168,7 @@
 - (IBAction)changePromiseViewController:(id)sender
 {
     PromiseViewController *vcPromise = [[PromiseViewController alloc] initWithNibName:@"PromiseViewController" bundle:nil];
+    vcPromise.idMemberCurr = self.aMemberCurr.idMember;
     [self.navigationController   pushViewController:vcPromise animated:YES];
 }
 - (IBAction)changeFriendViewController:(id)sender
@@ -185,65 +186,4 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-/*// Charting Circle
--(void) createSlices
-{
-    arrSlices = [NSMutableArray arrayWithCapacity:10];
-    
-    for(int i = 0; i < 5; i ++)
-    {
-        Activity *itemActivity = [[Activity alloc] init];
-        itemActivity.point = [NSNumber numberWithInt:rand()%60+20];
-        itemActivity.name = [arrSlicesName objectAtIndex:i];
-        itemActivity.color = [arrSlicesColor objectAtIndex:i];
-        [arrSlices addObject:itemActivity];
-    }
-    
-    [pieChart setDataSource:self];
-    [pieChart setStartPieAngle:M_PI_2];
-    [pieChart setAnimationSpeed:1.0];
-    [pieChart setLabelFont:[UIFont fontWithName:@"DBLCDTempBlack" size:14]];
-    [pieChart setLabelRadius:pieChart.frame.size.height/4];
-    [pieChart setShowPercentage:YES];
-    [lblPercentagel.layer setCornerRadius:lblPercentagel.frame.size.width/2];
-    [pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
-    [pieChart setUserInteractionEnabled:YES];
-    [pieChart setLabelShadowColor:[UIColor blackColor]];
-    [pieChart reloadData];
-}
--(void) createListSlicesColor
-{
-    arrSlicesColor =[NSArray arrayWithObjects:
-                     [UIColor colorWithRed:246/255.0 green:155/255.0 blue:0/255.0 alpha:1],
-                     [UIColor colorWithRed:129/255.0 green:195/255.0 blue:29/255.0 alpha:1],
-                     [UIColor colorWithRed:62/255.0 green:173/255.0 blue:219/255.0 alpha:1],
-                     [UIColor colorWithRed:229/255.0 green:66/255.0 blue:115/255.0 alpha:1],
-                     [UIColor colorWithRed:148/255.0 green:141/255.0 blue:139/255.0 alpha:1],nil];
-}
--(void) createListSlicesName
-{
-    arrSlicesName = [NSArray arrayWithObjects:@"WatchTV",@"Bicycle",@"Swim",@"Soccer",@"Video Game", nil];
-}
-#pragma mark - XYPieChart Data Source
-
-- (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
-{
-    NSLog(@"%d", arrSlices.count);
-    return arrSlices.count;
-}
-
-- (CGFloat)pieChart:(XYPieChart *)pieChart valueForSliceAtIndex:(NSUInteger)index
-{
-    //return [[self.slices objectAtIndex:index] intValue];
-    int aItemSlice = [[arrSlices objectAtIndex:index] point].intValue;
-    totalSlices += aItemSlice;
-    lblPercentagel.text = [NSString stringWithFormat:@"%d",totalSlices];
-    return aItemSlice;
-}
-
-- (UIColor *)pieChart:(XYPieChart *)pieChart colorForSliceAtIndex:(NSUInteger)index
-{
-    return [[arrSlices objectAtIndex:index] color];
-}
-*/
 @end

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PromiseTableViewCell.h"
-@interface PromiseViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,PromiseTableViewCellDelegate>
-
+#import "EditPromiseViewController.h"
+@interface PromiseViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,PromiseTableViewCellDelegate,EditPromiseViewControllerDelegate>
+@property (nonatomic,retain) NSString *idMemberCurr;
 @end

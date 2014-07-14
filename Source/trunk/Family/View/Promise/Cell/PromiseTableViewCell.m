@@ -7,6 +7,7 @@
 //
 
 #import "PromiseTableViewCell.h"
+#import "DataHandler.h"
 @interface PromiseTableViewCell()
 {
     IBOutlet UILabel *lblRank;
@@ -36,14 +37,18 @@
     lblRank.text = aPromise.name;
     lblDate.text = aPromise.dueDate;
     
-   if(aPromise.isPick)
+   if(aPromise.status == 0)
        [btnPick setImage:[UIImage imageNamed:@"btn_pick.png"] forState:UIControlStateNormal];
     else
         [btnPick setImage:[UIImage imageNamed:@"btn_nonepick.png"] forState:UIControlStateNormal];
 }
 - (IBAction)pickPromise:(id)sender
 {
-    aPromiseCurr.isPick = (aPromiseCurr.isPick)?NO:YES;
+    NSError *error = nil;
+     aPromiseCurr.status = (aPromiseCurr.status == 0)?1:0;
+    BOOL isSuccess = [[DataHandler sharedManager] updatePromiseInfo:aPromiseCurr error:&error];
+    NSAssert(isSuccess, error.description);
+    if(isSuccess)
     [_delegate reloadTableViewWithButtonCell];
 }
 @end

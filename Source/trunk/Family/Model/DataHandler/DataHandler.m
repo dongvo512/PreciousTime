@@ -471,14 +471,40 @@ static DataHandler *sharedDataHandler = nil;
 }
 #pragma mark Promises
 
-- (NSMutableArray*)allocPromisesWithError:(NSError**)error{
+/*- (NSMutableArray*)allocPromisesWithError:(NSError**)error{
     FMDatabase *db = [self database];
     if (![self openDB:db]) {
         *error = [NSError errorWithDomain:@"Can't open database" code:123 userInfo:nil];
         return nil;
     }
     
-    FMResultSet *results = [db executeQuery:@"select * from Promise where deleted=?",[NSNumber numberWithBool:false]];
+    FMResultSet *results = [db executeQuery:@"select * from Promise where deleted=? ",[NSNumber numberWithBool:false]];
+    if ([db hadError]) {
+        DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
+        *error = [db lastError];
+        [self closeDB:db];
+        return nil;
+    }
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    while ([results next])
+    {
+        Promise * item = [DataParser allocPromiseWithResults:results];
+        if (item) {
+            [array addObject:item];
+        }
+    }
+    return array;
+}*/
+- (NSMutableArray*)allocPromisesWithError:(NSError**)error idMember:(NSString*) idMember{
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [NSError errorWithDomain:@"Can't open database" code:123 userInfo:nil];
+        return nil;
+    }
+    
+    FMResultSet *results = [db executeQuery:@"select * from Promise where idMember = ? AND deleted=? ",idMember,[NSNumber numberWithBool:false]];
     if ([db hadError]) {
         DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
         *error = [db lastError];
@@ -497,7 +523,6 @@ static DataHandler *sharedDataHandler = nil;
     }
     return array;
 }
-
 - (BOOL)checkExistPromiseWithId:(NSString*)idPromise error:(NSError**)error
 {
     
@@ -508,7 +533,6 @@ static DataHandler *sharedDataHandler = nil;
         *error = [db lastError];
         return NO;
     }
-    
     
     FMResultSet *results = [db executeQuery:@"select * from Promise where id=? and deleted = ?",idPromise,[NSNumber numberWithBool:false]];
     if ([db hadError]) {
@@ -575,12 +599,10 @@ static DataHandler *sharedDataHandler = nil;
         return NO;
     }
     
-    
     [db executeUpdate:@"update Promise"
      " set name = ?,description=?,duedate=?,status=?,deleted=?,dirty=?"
      " where id = ?",aPromise.name,aPromise.description,aPromise.dueDate,[NSNumber numberWithInt:aPromise.status],[NSNumber numberWithBool:false], [NSNumber numberWithBool:true],aPromise.idPromise];
-    
-    
+
     if ([db hadError]) {
         if (error!=NULL) {
             *error = [db lastError];

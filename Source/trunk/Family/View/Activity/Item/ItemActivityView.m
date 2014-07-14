@@ -38,24 +38,49 @@
        [viewBackGround setBackgroundColor:[UIColor yellowColor]];
     else
         [viewBackGround setBackgroundColor:[UIColor clearColor]];
+    
+        NSData *data = [[NSFileManager defaultManager] contentsAtPath:aActivity.strAvatar];
        UIImage *imgCurr = [UIImage imageNamed:aActivity.strAvatar];
     //imgAvatar.image = [UIImage imageNamed:aActivity.strAvatar];
-    if(imgCurr == nil)
+    if(data != nil)
     {
-        NSData *data = [[NSFileManager defaultManager] contentsAtPath:aActivity.strAvatar];
         imgAvatar.image = [UIImage imageWithData:data];
     }
+    else if(imgCurr != nil)
+    {
+         imgAvatar.image = imgCurr;
+    }
     else
-        imgAvatar.image = imgCurr;
+        imgAvatar.image = [UIImage imageNamed:@"logo_03.png"];
+    
     lblNameActivity.text = aActivity.name;
+    [self loadDataTime:aActivity];
+      [self radiusViewBackGround];
+   }
+-(void) loadDataTime :(Activity *) aActivity
+{
     if(aActivity.time == 0)
         [lblTime setHidden:YES];
     else
     {
         [lblTime setHidden:NO];
-    lblTime.text = [NSString stringWithFormat:@"%dm",aActivity.time];
+        switch (aActivity.unitTypeValue) {
+            case 0:
+                lblTime.text = [NSString stringWithFormat:@"%ds",aActivity.time];
+                break;
+            case 1:
+                lblTime.text = [NSString stringWithFormat:@"%dm",aActivity.time];
+                break;
+            case 2:
+                lblTime.text = [NSString stringWithFormat:@"%dh",aActivity.time];
+                break;
+
+            default:
+                break;
+        }
     }
-    [self radiusViewBackGround];
+  
+
 }
 -(void)radiusViewBackGround
 {

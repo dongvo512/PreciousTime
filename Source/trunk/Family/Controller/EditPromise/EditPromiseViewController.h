@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "Promise.h"
-@interface EditPromiseViewController : UIViewController<UITextFieldDelegate>
+@protocol EditPromiseViewControllerDelegate <NSObject>
+-(void)reloadDataPromise;
+@end
+@interface EditPromiseViewController : UIViewController<UITextFieldDelegate,UITextViewDelegate>
+{
+    id <EditPromiseViewControllerDelegate> _delegate;
+}
+@property (retain) id delegate;
 @property (nonatomic, retain) Promise *aPromise;
 @property (nonatomic) Boolean isEditPromiseViewController;
 @end

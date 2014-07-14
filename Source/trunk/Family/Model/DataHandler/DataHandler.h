@@ -51,7 +51,8 @@
 /*
  * get all Promises in databse
  */
-- (NSMutableArray*)allocPromisesWithError:(NSError**)error;
+//- (NSMutableArray*)allocPromisesWithError:(NSError**)error;
+- (NSMutableArray*)allocPromisesWithError:(NSError**)error idMember:(NSString*) idMember;
 - (BOOL)checkExistPromiseWithId:(NSString*)idPromise error:(NSError**)error;
 -(BOOL)insertPromise:(Promise*)aPromise idPromise:(NSString**)idPromise error:(NSError**)error;
 //Use to update promise info

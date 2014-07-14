@@ -10,6 +10,7 @@
 #import "Promise.h"
 #import "PromiseTableViewCell.h"
 #import "EditPromiseViewController.h"
+#import "Datahandler.h"
 @interface PromiseViewController ()
 {
     NSMutableArray *arrPromise;
@@ -38,7 +39,8 @@
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     [self createBarButtonDone];
     //Data
-    [self createData];
+   // [self createData];
+    [self getAllPromise];
 }
 -(void) createBarButtonDone
 {
@@ -57,19 +59,13 @@
     
 }
 #define ITEM 5
--(void) createData
+-(void) getAllPromise
 {
-    arrPromise = [NSMutableArray array];
-    for(int i =0; i< ITEM; i++)
-    {
-        Promise *aPromise = [[Promise alloc] init];
-        aPromise.name = [NSString stringWithFormat:@"Promise %d",i+1];
-        NSString *strDate = [NSString stringWithFormat:@"June %i,2014",i+5];
-        aPromise.dueDate = strDate;
-        aPromise.description = [NSString stringWithFormat:@"Walking with my son %d",i +1];
-        aPromise.isPick = NO;
-        [arrPromise addObject:aPromise];
-    }
+     NSError *error = nil;
+    [arrPromise removeAllObjects];
+    arrPromise = [[DataHandler sharedManager] allocPromisesWithError:&error idMember:self.idMemberCurr];
+    NSAssert((arrPromise !=nil), error.description);
+    [tblViewPromise reloadData];
 }
 #pragma mark - Table view data source - delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -106,9 +102,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EditPromiseViewController *vcEditPromise = [[EditPromiseViewController alloc] initWithNibName:@"EditPromiseViewController" bundle:nil];
-    vcEditPromise.aPromise = [arrPromise objectAtIndex:indexPath.row];
+    Promise *aPromiseCurr = [arrPromise objectAtIndex:indexPath.row];
+    vcEditPromise.aPromise = aPromiseCurr;
     vcEditPromise.isEditPromiseViewController = YES;
+    vcEditPromise.delegate = self;
     [self.navigationController pushViewController:vcEditPromise animated:YES];
+      
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -143,6 +142,11 @@
 {
     EditPromiseViewController *vcEditPromise = [[EditPromiseViewController alloc] initWithNibName:@"EditPromiseViewController" bundle:nil];
     vcEditPromise.isEditPromiseViewController = NO;
+    vcEditPromise.delegate = self;
     [self.navigationController pushViewController:vcEditPromise animated:YES];
+}
+-(void)reloadDataPromise
+{
+    [self getAllPromise];
 }
 @end

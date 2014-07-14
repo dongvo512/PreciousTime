@@ -8,6 +8,8 @@
 
 #import "EditPromiseViewController.h"
 #import "Utilities.h"
+#import "Datahandler.h"
+
 @interface EditPromiseViewController ()
 {
     IBOutlet UITextField *txtName;
@@ -23,6 +25,7 @@
 - (IBAction)cancelDatePicker:(id)sender;
 - (IBAction)doneDatePicker:(id)sender;
 - (IBAction)setDueDate:(id)sender;
+- (IBAction)deleteOrSavePromise:(id)sender;
 
 @end
 
@@ -59,16 +62,17 @@
 -(void)radiusForViewDescription
 {
     [textViewDescription.layer setCornerRadius:5.0f];
-    [textViewDescription.layer setBorderWidth:1.0f];
+    [textViewDescription.layer setBorderWidth:0.5f];
 }
 -(void) displayWithEditPromiseViewController
 {
     self.title = @"Edit Promise";
+     [self createButtonSave_Edit];
 }
 -(void) displayWithAddNewPromiseViewController
 {
     self.title = @"New Promise";
-    [self createButtonSave_Edit];
+   
     [btnDelete setImage:[UIImage imageNamed:@"btn_save.png"] forState:UIControlStateNormal];
     CGRect frameBtnDelete = btnDelete.frame;
     frameBtnDelete.size.width = 120;
@@ -78,17 +82,30 @@
 -(void) createButtonSave_Edit
 {
     // Button Member
-    UIButton *btnSaveEdit = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *btnSaveEdit = [UIButton buttonWithType:UIButtonTypeSystem];
     btnSaveEdit.frame = CGRectMake(0, 0, 60, 40);
-    [btnSaveEdit setImage:[UIImage imageNamed:@"btn_saveedit.png"] forState:UIControlStateNormal];
-    [btnSaveEdit addTarget:self action:@selector(saveEditActivity) forControlEvents:UIControlEventTouchUpInside];
+    [btnSaveEdit setTitle:@"Save" forState:UIControlStateNormal];
+   // [btnSaveEdit setImage:[UIImage imageNamed:@"btn_saveedit.png"] forState:UIControlStateNormal];
+    [btnSaveEdit addTarget:self action:@selector(saveEditPromise) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *saveEditBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnSaveEdit];
     self.navigationItem.rightBarButtonItem = saveEditBarButton;
 }
--(void) saveEditActivity
+-(void) saveEditPromise
 {
-
+    NSError *error = nil;
+    Promise *promise = [[Promise alloc] init];
+    promise.name = txtName.text;
+    promise.description = textViewDescription.text;
+    promise.dueDate = btnDueDate.titleLabel.text;
+    promise.status = 1;
+    
+    promise.idPromise = self.aPromise.idPromise;
+   BOOL isSuccess = [[DataHandler sharedManager] updatePromiseInfo:promise error:&error];
+    NSAssert(isSuccess, error.description);
+    if(isSuccess)
+        [_delegate reloadDataPromise];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)addGestureSingleTagForScrollView
 {
@@ -168,8 +185,19 @@
     [self setContentOfSetScrollView:textField];
     isShowKeyBoard = YES;
 }
-
-
+#pragma mark - UItextView Delegate
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if(isShowKeyBoard == NO)
+        [self upScrollViewWithKeyBoard];
+    [self setContentOfSetScrollView:textView];
+    isShowKeyBoard = YES;
+}
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    isShowKeyBoard = NO;
+    [textView resignFirstResponder];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -200,5 +228,34 @@
     [self upScrollViewDatePicker];
     [self setContentOfSetScrollView:sender];
 
+}
+
+- (IBAction)deleteOrSavePromise:(id)sender
+{
+    
+    if(self.isEditPromiseViewController)
+    {
+        NSError *error = nil;
+        BOOL isdeletePromise = [[DataHandler sharedManager] updateDeletedPromise:self.aPromise.idPromise error:&error];
+        if(isdeletePromise)
+            [_delegate reloadDataPromise];
+    }
+    else
+    {
+    NSError *error = nil;
+    Promise *promise = [[Promise alloc] init];
+    promise.name = txtName.text;
+    promise.idMember = self.aPromise.idPromise;
+    promise.description = textViewDescription.text;
+    promise.dueDate = btnDueDate.titleLabel.text;
+    promise.status = 1;
+    
+    NSString *idPromise = nil;
+    BOOL isSuccess = [[DataHandler sharedManager] insertPromise:promise idPromise:&idPromise error:&error];
+    NSAssert(isSuccess, error.description);
+    if(isSuccess)
+        [_delegate reloadDataPromise];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end
