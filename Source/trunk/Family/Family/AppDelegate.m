@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "LoginViewController.h"
+#import "InitialLandingViewController.h"
 #import "SplashScreentViewController.h"
 #import "DataHandler.h"
 #import "Activity.h"

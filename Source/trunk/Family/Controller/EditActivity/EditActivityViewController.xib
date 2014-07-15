@@ -74,7 +74,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mof-4e-atW" userLabel="Button - avatar Activity">
                             <rect key="frame" x="54" y="34" width="100" height="100"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="logo_03.png">
+                            <state key="normal" image="icon_FamLink2.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -87,7 +87,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             <connections>
-                                <outlet property="delegate" destination="-1" id="tmp-tj-qwy"/>
+                                <outlet property="delegate" destination="-1" id="Hla-Lp-fC2"/>
                             </connections>
                         </textField>
                     </subviews>
@@ -130,6 +130,6 @@
     <resources>
         <image name="btn_border3.png" width="360" height="80"/>
         <image name="btn_delete.png" width="108" height="65"/>
-        <image name="logo_03.png" width="75" height="63"/>
+        <image name="icon_FamLink2.png" width="75" height="63"/>
     </resources>
 </document>

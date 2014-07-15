@@ -190,13 +190,19 @@
 #pragma mark - Take Photo
 - (IBAction)takeAvatarActivity:(id)sender
 {
+   
+    if(isShowViewPicker)
+        [self returnScrollViewPickerView];
+    if(isShowKeyBoard)
+        [self returnScrollViewWithKeyBoard];
+    
     vcImagePicker = [[ImagePickerViewController alloc] init];
     vcImagePicker.btnCurrent = btnAvatarActivity;
     BlockActionSheet *blockActionSheet = [[BlockActionSheet alloc] initWithTitle:nil];
     [blockActionSheet setCancelButtonWithTitle:@"Cancel" block:^{
         NSLog(@"Cancel");
     }];
-    [blockActionSheet addButtonWithTitle:@"Take a Picker" block:^{
+    [blockActionSheet addButtonWithTitle:@"Take Photo" block:^{
         //NSLog(@"Take a Picture");
         [vcImagePicker takeAPickture:self];
     }];
@@ -253,12 +259,18 @@
 
 - (IBAction)setMinutesActivity:(id)sender
 {
-    isShowViewPicker = YES;
+    if(isShowViewPicker)
+        [self returnScrollViewPickerView];
+    
+     if (isShowKeyBoard)
+        [self returnScrollViewWithKeyBoard];
+    
     [self createDataTime];
     pickerView.dataSource = self;
     pickerView.delegate = self;
     [self upScrollViewPickerMinutes];
     [self setContentOfSetScrollView:sender];
+       isShowViewPicker = YES;
 }
 -(void)upScrollViewPickerMinutes
 {
@@ -312,9 +324,19 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
    
+    if(isShowViewPicker)
+    {
+        [self returnScrollViewPickerView];
+        isShowViewPicker = NO;
+        [self upScrollViewWithKeyBoard];
+        [self setContentOfSetScrollView:textField];
+    }
+    
     if(isShowKeyBoard == NO)
+    {
     [self upScrollViewWithKeyBoard];
     [self setContentOfSetScrollView:textField];
+    }
     isShowKeyBoard = YES;
 }
 -(void)createDataTime

@@ -120,7 +120,7 @@
      [blockActionSheet setCancelButtonWithTitle:@"Cancel" block:^{
      NSLog(@"Cancel");
      }];
-     [blockActionSheet addButtonWithTitle:@"Take a Picker" block:^{
+     [blockActionSheet addButtonWithTitle:@"Take Photo" block:^{
      //NSLog(@"Take a Picture");
      [vcImagePicker takeAPickture:self];
      }];

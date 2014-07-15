@@ -27,6 +27,7 @@
 {
     [super viewDidLoad];
     //Display
+     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     self.title = @"Your Friend's Activities";
 }
 

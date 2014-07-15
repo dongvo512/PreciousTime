@@ -7,9 +7,13 @@
 //
 
 #import "HistoryViewController.h"
-
+#import "DataHandler.h"
+#import "History.h"
 @interface HistoryViewController ()
-
+{
+    NSMutableArray *arrHistories;
+    IBOutlet UITableView *tblContent;
+}
 @end
 
 @implementation HistoryViewController
@@ -27,53 +31,54 @@
 {
     [super viewDidLoad];
     // Display
+     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     self.title = @"History";
-    // Do any additional setup after loading the view from its nib.
+    // Data
+    [self getDataHistory];
 }
--(void) createData
+-(void) getDataHistory
 {
+    NSError *error = nil;
+    arrHistories = [[DataHandler sharedManager] allocHistoriesWithError:&error idMember:self.idMember];
+    [tblContent reloadData];
+
 }
-/*#pragma mark - Table view data source - delegate
+#pragma mark - Table view data source - delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
-    return arrPromise.count;
+    return arrHistories.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"PromiseCell";
-    PromiseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"HistoryCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    NSArray *arrObj = [[NSBundle mainBundle] loadNibNamed:@"PromiseTableViewCell" owner:nil options:nil];
-    
-    for(id curObject in arrObj)
+    if(cell == nil)
     {
-        if([curObject isKindOfClass:[UITableViewCell class]])
-        {
-            cell = (PromiseTableViewCell *)curObject;
-            break;
-        }
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
-    Promise *aPromise = [arrPromise objectAtIndex:indexPath.row];
-    cell.delegate = self;
-    [cell setObjectForCell:aPromise];
-    return cell;
+    [cell setBackgroundColor:[UIColor clearColor]];
     
+    // don't know to get point history about.
+    History *aHistory = [arrHistories objectAtIndex:indexPath.row];
+    NSString *strDate = aHistory.timeTamp;
+    NSString *strActivity = aHistory.activityName;
+    NSString *strMemberName = aHistory.memberName;
+    
+    [cell.textLabel setFont:[UIFont systemFontOfSize:13]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@:%@ - %@ - Time",strDate,strActivity,strMemberName];
+    cell.imageView.image = [UIImage imageNamed:aHistory.imageUrl];
+    return cell;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    EditPromiseViewController *vcEditPromise = [[EditPromiseViewController alloc] initWithNibName:@"EditPromiseViewController" bundle:nil];
-    vcEditPromise.aPromise = [arrPromise objectAtIndex:indexPath.row];
-    vcEditPromise.isEditPromiseViewController = YES;
-    [self.navigationController pushViewController:vcEditPromise animated:YES];
-}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
-}*/
+    return 40;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

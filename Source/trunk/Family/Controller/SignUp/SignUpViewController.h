@@ -1,5 +1,5 @@
 //
-//  LoginViewController.h
+//  SignUpViewController.h
 //  Family
 //
 //  Created by Admin on 7/15/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginViewController : UIViewController
+@interface SignUpViewController : UIViewController<UITextFieldDelegate>
 
 @end

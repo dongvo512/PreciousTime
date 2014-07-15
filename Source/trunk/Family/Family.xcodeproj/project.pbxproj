@@ -15,6 +15,9 @@
 		411D2710196FDB4100B3BF9B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 411D270F196FDB4100B3BF9B /* libsqlite3.0.dylib */; };
 		41202E0E19713C9000818695 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 41202E0D19713C9000818695 /* History.m */; };
 		41C568E11972D39F004FEB75 /* Database in Resources */ = {isa = PBXBuildFile; fileRef = 41C568E01972D39F004FEB75 /* Database */; };
+		840FEF4D1974FF9600ACF89F /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840FEF4B1974FF9600ACF89F /* SignUpViewController.m */; };
+		840FEF4E1974FF9600ACF89F /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840FEF4C1974FF9600ACF89F /* SignUpViewController.xib */; };
+		840FEF50197509EE00ACF89F /* btn_signup2.png in Resources */ = {isa = PBXBuildFile; fileRef = 840FEF4F197509EE00ACF89F /* btn_signup2.png */; };
 		841A2AE1196CEBC500442CAE /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A2AE0196CEBC500442CAE /* BlockActionSheet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		841A2AE6196CED4B00442CAE /* BlockBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A2AE4196CED4B00442CAE /* BlockBackground.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		841A2AF6196CF18700442CAE /* action-black-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 841A2AE8196CF18700442CAE /* action-black-button-selected.png */; };
@@ -59,6 +62,11 @@
 		8429DB091963EA6D00A8A381 /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8429DB081963EA6D00A8A381 /* ActivityTableViewCell.m */; };
 		8429DB0B1963EC5000A8A381 /* btn_border.png in Resources */ = {isa = PBXBuildFile; fileRef = 8429DB0A1963EC5000A8A381 /* btn_border.png */; };
 		8429DB0F1963ED2500A8A381 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8429DB0E1963ED2500A8A381 /* Activity.m */; };
+		84404A44197530FB0013412F /* InitialLandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84404A42197530FB0013412F /* InitialLandingViewController.m */; };
+		84404A45197530FB0013412F /* InitialLandingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84404A43197530FB0013412F /* InitialLandingViewController.xib */; };
+		84404A4A197531D60013412F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84404A48197531D60013412F /* LoginViewController.m */; };
+		84404A4B197531D60013412F /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84404A49197531D60013412F /* LoginViewController.xib */; };
+		84404A4D197533530013412F /* btn_login2.png in Resources */ = {isa = PBXBuildFile; fileRef = 84404A4C197533530013412F /* btn_login2.png */; };
 		84534A31196252D80031D6DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84534A30196252D80031D6DA /* Foundation.framework */; };
 		84534A33196252D80031D6DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84534A32196252D80031D6DA /* CoreGraphics.framework */; };
 		84534A35196252D80031D6DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84534A34196252D80031D6DA /* UIKit.framework */; };
@@ -71,8 +79,6 @@
 		84534A4C196252D90031D6DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84534A34196252D80031D6DA /* UIKit.framework */; };
 		84534A54196252D90031D6DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84534A52196252D90031D6DA /* InfoPlist.strings */; };
 		84534A56196252D90031D6DA /* FamilyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84534A55196252D90031D6DA /* FamilyTests.m */; };
-		84534A6F196257630031D6DA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84534A6D196257630031D6DA /* LoginViewController.m */; };
-		84534A70196257630031D6DA /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84534A6E196257630031D6DA /* LoginViewController.xib */; };
 		84534A75196257840031D6DA /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84534A73196257840031D6DA /* MainViewController.m */; };
 		84534A76196257840031D6DA /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84534A74196257840031D6DA /* MainViewController.xib */; };
 		84534A7C19625BE70031D6DA /* MemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84534A7A19625BE70031D6DA /* MemberViewController.m */; };
@@ -107,6 +113,7 @@
 		8484F16D19691E0A00EBA065 /* MemberInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8484F16C19691E0A00EBA065 /* MemberInfoView.m */; };
 		8484F16F19691E1800EBA065 /* MemberInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8484F16E19691E1800EBA065 /* MemberInfoView.xib */; };
 		849AE51A197230A300E18ECC /* btn_border3.png in Resources */ = {isa = PBXBuildFile; fileRef = 849AE519197230A300E18ECC /* btn_border3.png */; };
+		84A03FD81975365500CA420E /* icon_FamLink2.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A03FD71975365500CA420E /* icon_FamLink2.png */; };
 		84A458261964DCDB00DF96FA /* EditActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A458241964DCDB00DF96FA /* EditActivityViewController.m */; };
 		84A458271964DCDB00DF96FA /* EditActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A458251964DCDB00DF96FA /* EditActivityViewController.xib */; };
 		84A458291964E31200DF96FA /* btn_done.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A458281964E31200DF96FA /* btn_done.png */; };
@@ -183,6 +190,10 @@
 		41202E0C19713C9000818695 /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
 		41202E0D19713C9000818695 /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 		41C568E01972D39F004FEB75 /* Database */ = {isa = PBXFileReference; lastKnownFileType = file; path = Database; sourceTree = "<group>"; };
+		840FEF4A1974FF9600ACF89F /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		840FEF4B1974FF9600ACF89F /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		840FEF4C1974FF9600ACF89F /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
+		840FEF4F197509EE00ACF89F /* btn_signup2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_signup2.png; sourceTree = "<group>"; };
 		841A2ADF196CEBC500442CAE /* BlockActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockActionSheet.h; sourceTree = "<group>"; };
 		841A2AE0196CEBC500442CAE /* BlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockActionSheet.m; sourceTree = "<group>"; };
 		841A2AE3196CED4B00442CAE /* BlockBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockBackground.h; sourceTree = "<group>"; };
@@ -238,6 +249,13 @@
 		8429DB0A1963EC5000A8A381 /* btn_border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_border.png; sourceTree = "<group>"; };
 		8429DB0D1963ED2500A8A381 /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
 		8429DB0E1963ED2500A8A381 /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
+		84404A41197530FB0013412F /* InitialLandingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialLandingViewController.h; sourceTree = "<group>"; };
+		84404A42197530FB0013412F /* InitialLandingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialLandingViewController.m; sourceTree = "<group>"; };
+		84404A43197530FB0013412F /* InitialLandingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InitialLandingViewController.xib; sourceTree = "<group>"; };
+		84404A47197531D60013412F /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		84404A48197531D60013412F /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		84404A49197531D60013412F /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		84404A4C197533530013412F /* btn_login2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_login2.png; sourceTree = "<group>"; };
 		84534A2D196252D80031D6DA /* Family.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Family.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84534A30196252D80031D6DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		84534A32196252D80031D6DA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -254,9 +272,6 @@
 		84534A51196252D90031D6DA /* FamilyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FamilyTests-Info.plist"; sourceTree = "<group>"; };
 		84534A53196252D90031D6DA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		84534A55196252D90031D6DA /* FamilyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FamilyTests.m; sourceTree = "<group>"; };
-		84534A6C196257630031D6DA /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		84534A6D196257630031D6DA /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		84534A6E196257630031D6DA /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		84534A72196257840031D6DA /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		84534A73196257840031D6DA /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		84534A74196257840031D6DA /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
@@ -303,6 +318,7 @@
 		8484F16C19691E0A00EBA065 /* MemberInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberInfoView.m; sourceTree = "<group>"; };
 		8484F16E19691E1800EBA065 /* MemberInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemberInfoView.xib; sourceTree = "<group>"; };
 		849AE519197230A300E18ECC /* btn_border3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_border3.png; sourceTree = "<group>"; };
+		84A03FD71975365500CA420E /* icon_FamLink2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_FamLink2.png; sourceTree = "<group>"; };
 		84A458231964DCDB00DF96FA /* EditActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditActivityViewController.h; sourceTree = "<group>"; };
 		84A458241964DCDB00DF96FA /* EditActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditActivityViewController.m; sourceTree = "<group>"; };
 		84A458251964DCDB00DF96FA /* EditActivityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActivityViewController.xib; sourceTree = "<group>"; };
@@ -419,6 +435,16 @@
 				41C568E01972D39F004FEB75 /* Database */,
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		840FEF491974FF8300ACF89F /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				840FEF4A1974FF9600ACF89F /* SignUpViewController.h */,
+				840FEF4B1974FF9600ACF89F /* SignUpViewController.m */,
+				840FEF4C1974FF9600ACF89F /* SignUpViewController.xib */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		841A2ADE196CEBC500442CAE /* BlockActionSheet */ = {
@@ -585,6 +611,26 @@
 			path = Activity;
 			sourceTree = "<group>";
 		};
+		84404A40197530FB0013412F /* InitialLanding */ = {
+			isa = PBXGroup;
+			children = (
+				84404A41197530FB0013412F /* InitialLandingViewController.h */,
+				84404A42197530FB0013412F /* InitialLandingViewController.m */,
+				84404A43197530FB0013412F /* InitialLandingViewController.xib */,
+			);
+			path = InitialLanding;
+			sourceTree = "<group>";
+		};
+		84404A46197531C40013412F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				84404A47197531D60013412F /* LoginViewController.h */,
+				84404A48197531D60013412F /* LoginViewController.m */,
+				84404A49197531D60013412F /* LoginViewController.xib */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		84534A24196252D80031D6DA = {
 			isa = PBXGroup;
 			children = (
@@ -673,6 +719,9 @@
 		84534A5F196253000031D6DA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				84404A46197531C40013412F /* Login */,
+				84404A40197530FB0013412F /* InitialLanding */,
+				840FEF491974FF8300ACF89F /* SignUp */,
 				8425BD2A196B927C0018187E /* SplashScreent */,
 				84A45842196565D400DF96FA /* EditPromise */,
 				84A458221964DCC600DF96FA /* EditActivity */,
@@ -684,7 +733,6 @@
 				84534A7719625BDC0031D6DA /* Member */,
 				84534A7819625BDC0031D6DA /* Setting */,
 				84534A71196257760031D6DA /* Main */,
-				84534A6B196257630031D6DA /* Login */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -741,16 +789,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		84534A6B196257630031D6DA /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				84534A6C196257630031D6DA /* LoginViewController.h */,
-				84534A6D196257630031D6DA /* LoginViewController.m */,
-				84534A6E196257630031D6DA /* LoginViewController.xib */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
 		84534A71196257760031D6DA /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -793,6 +831,8 @@
 		84534A8419625DAD0031D6DA /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				84404A4C197533530013412F /* btn_login2.png */,
+				840FEF4F197509EE00ACF89F /* btn_signup2.png */,
 				849AE519197230A300E18ECC /* btn_border3.png */,
 				84773D37196FE31C0086B2D6 /* btn_Login_setting.png */,
 				84773D38196FE31C0086B2D6 /* btn_logout.png */,
@@ -824,6 +864,7 @@
 		84534A8619625DAD0031D6DA /* Icon */ = {
 			isa = PBXGroup;
 			children = (
+				84A03FD71975365500CA420E /* icon_FamLink2.png */,
 				846347521966587D008B9A6F /* icon_arrowdown.png */,
 				8429DAE51963E19F00A8A381 /* icon_history.png */,
 				8429DAE31963E0AC00A8A381 /* icon_friend.png */,
@@ -1100,6 +1141,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84404A45197530FB0013412F /* InitialLandingViewController.xib in Resources */,
 				841A2AFC196CF18700442CAE /* action-gray-button.png in Resources */,
 				8425BD3A196B9FA50018187E /* google_login.png in Resources */,
 				8429DAFE1963E6AA00A8A381 /* PromiseViewController.xib in Resources */,
@@ -1137,15 +1179,18 @@
 				841A2B01196CF18700442CAE /* action-red-button@2x.png in Resources */,
 				84534A8B19625F1E0031D6DA /* setting_icon.png in Resources */,
 				8484F13A1968F78500EBA065 /* right_button.png in Resources */,
+				84A03FD81975365500CA420E /* icon_FamLink2.png in Resources */,
 				84A4A2A1196E9D0200C5DDA8 /* background_navigationbar.png in Resources */,
 				8425BD40196BCAD10018187E /* btn_border2.png in Resources */,
 				84A4583719651E2D00DF96FA /* btn_pick.png in Resources */,
+				840FEF4E1974FF9600ACF89F /* SignUpViewController.xib in Resources */,
 				84534AA9196272190031D6DA /* ItemMemberView.xib in Resources */,
 				841A2AF9196CF18700442CAE /* action-black-button@2x.png in Resources */,
 				849AE51A197230A300E18ECC /* btn_border3.png in Resources */,
 				8429DAF41963E68800A8A381 /* ActivityViewController.xib in Resources */,
 				84E0106019718C8B00776E4B /* icon_Art&Craft.png in Resources */,
 				8425BD3E196BA1DD0018187E /* btn_Login.png in Resources */,
+				84404A4B197531D60013412F /* LoginViewController.xib in Resources */,
 				84E0107419718C8B00776E4B /* icon_WatchTV.png in Resources */,
 				8429DAF91963E69E00A8A381 /* FriendViewController.xib in Resources */,
 				84E0106619718C8B00776E4B /* icon_Eating.png in Resources */,
@@ -1160,7 +1205,6 @@
 				8425BD2F196B929A0018187E /* SplashScreentViewController.xib in Resources */,
 				84534A7D19625BE70031D6DA /* MemberViewController.xib in Resources */,
 				84E0106A19718C8B00776E4B /* icon_Hugs.png in Resources */,
-				84534A70196257630031D6DA /* LoginViewController.xib in Resources */,
 				84534A8919625DAD0031D6DA /* customer_service.png in Resources */,
 				84A4583D19651E7F00DF96FA /* PromiseTableViewCell.xib in Resources */,
 				84E0107E19718F4D00776E4B /* Tours.png in Resources */,
@@ -1177,6 +1221,7 @@
 				8429DADE196388D300A8A381 /* btn_edit.png in Resources */,
 				84A45847196565EC00DF96FA /* EditPromiseViewController.xib in Resources */,
 				8429DAEC1963E51000A8A381 /* HistoryViewController.xib in Resources */,
+				840FEF50197509EE00ACF89F /* btn_signup2.png in Resources */,
 				84A4582D19651A0700DF96FA /* btn_addnewpromise.png in Resources */,
 				8429DAE01963DDA300A8A381 /* icon_activity.png in Resources */,
 				84534A9B19626F3B0031D6DA /* AddMemberViewController.xib in Resources */,
@@ -1185,6 +1230,7 @@
 				84534A76196257840031D6DA /* MainViewController.xib in Resources */,
 				84E0107919718DC600776E4B /* icon_Gardening.png in Resources */,
 				84E0107319718C8B00776E4B /* icon_Swim.png in Resources */,
+				84404A4D197533530013412F /* btn_login2.png in Resources */,
 				84773D3A196FE31C0086B2D6 /* btn_logout.png in Resources */,
 				84E0106519718C8B00776E4B /* icon_DIY.png in Resources */,
 				84E0106919718C8B00776E4B /* icon_Hairstyling&Makeup.png in Resources */,
@@ -1225,6 +1271,7 @@
 				411D26FA196FD9BF00B3BF9B /* FMDatabase.m in Sources */,
 				84A458261964DCDB00DF96FA /* EditActivityViewController.m in Sources */,
 				41202E0E19713C9000818695 /* History.m in Sources */,
+				840FEF4D1974FF9600ACF89F /* SignUpViewController.m in Sources */,
 				84534AA7196272030031D6DA /* ItemMemberView.m in Sources */,
 				411D26FE196FD9BF00B3BF9B /* FMResultSet.m in Sources */,
 				8429DAFD1963E6AA00A8A381 /* PromiseViewController.m in Sources */,
@@ -1235,9 +1282,9 @@
 				8429DAF81963E69E00A8A381 /* FriendViewController.m in Sources */,
 				84A7DB94196A46A3004516F0 /* DataParser.m in Sources */,
 				84A7DB91196A466B004516F0 /* DataHandler.m in Sources */,
-				84534A6F196257630031D6DA /* LoginViewController.m in Sources */,
 				84A4C265196E4BF50058B7B3 /* PointSummaryTableView.m in Sources */,
 				841A2AE1196CEBC500442CAE /* BlockActionSheet.m in Sources */,
+				84404A4A197531D60013412F /* LoginViewController.m in Sources */,
 				84534A75196257840031D6DA /* MainViewController.m in Sources */,
 				8425BD2E196B929A0018187E /* SplashScreentViewController.m in Sources */,
 				84534AB21962C5260031D6DA /* Member.m in Sources */,
@@ -1249,6 +1296,7 @@
 				84534A9A19626F3B0031D6DA /* AddMemberViewController.m in Sources */,
 				84534A7C19625BE70031D6DA /* MemberViewController.m in Sources */,
 				8429DAF31963E68800A8A381 /* ActivityViewController.m in Sources */,
+				84404A44197530FB0013412F /* InitialLandingViewController.m in Sources */,
 				84A51B2B196F865B00351A71 /* ImagePickerViewController.m in Sources */,
 				84534A93196268240031D6DA /* Utilities.m in Sources */,
 				84534A8119625BF90031D6DA /* SettingViewController.m in Sources */,

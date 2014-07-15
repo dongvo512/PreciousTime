@@ -68,9 +68,12 @@
             History *historyItem = [[History alloc] init];
             historyItem.memberName = self.member.name;
             historyItem.activityName = item.name;
-            historyItem.imageUrl = @"";
+            historyItem.imageUrl = item.strAvatar;
             historyItem.totalPoint = item.unitTypeValue * item.time;
-            //historyItem.dateTime = [NSDate date]
+           /* NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"dd/MM/yyyy"];
+            NSString *dateCurr = [formatter stringFromDate:[NSDate date]];
+            historyItem.timeTamp = dateCurr;*/
             BOOL isSuccess = [[DataHandler sharedManager] insertHistory:historyItem idMember:self.member.idMember idActivity:item.idActivity error:&error];
         }
        
@@ -151,21 +154,6 @@
 }
 -(void)singleTagItemActivity:(Activity *)aActivity
 {
-    //NSError *error = nil;
-    /*Activity *activity = [[Activity alloc] init];
-    activity.name = @"Bicycle";
-    activity.unitTypeValue = 0;
-    activity.strAvatar = @"http://www.picturesnew.com/media/images/images_of_nature.jpg";
-    activity.point = 10;*/
-    
-    
-  //  NSString *idActivity = nil;
-   // BOOL isSuccess = [[DataHandler sharedManager] insertActivity:aActivity isSync:false idActivity:&idActivity error:&error];
-   // aActivity.idActivity = idActivity;
-  // BOOL isSuccess = [[DataHandler sharedManager] updateActivityInfo:aActivity isSync:false error:&error];
-   // NSAssert(isSuccess, error.description);
-
-   // aActivity.time ++;
     [tblContent reloadData];
 }
 -(void)longTagItemActivity
@@ -185,7 +173,7 @@
     [blockActionSheet setCancelButtonWithTitle:@"Cancel" block:^{
         NSLog(@"Cancel");
     }];
-    [blockActionSheet addButtonWithTitle:@"Take a Picker" block:^{
+    [blockActionSheet addButtonWithTitle:@"Take Photo" block:^{
         //NSLog(@"Take a Picture");
         [vcImagePicker takeAPickture:self];
     }];

@@ -144,12 +144,12 @@
     
 }
 
-- (void)testGetAllPromise{
+/*- (void)testGetAllPromise{
     NSError *error = nil;
     
     NSMutableArray *array = [[DataHandler sharedManager] allocPromisesWithError:&error];
     NSAssert((array !=nil), error.description);
-}
+}*/
 
 - (void)testUpdateInfoPromise{
     NSError *error = nil;
@@ -167,13 +167,13 @@
     NSAssert(isSuccess, error.description);
 }
 
-- (void)testGetAllHistory{
+/*- (void)testGetAllHistory{
     NSError *error = nil;
     
     NSMutableArray *array = [[DataHandler sharedManager] allocHistoriesWithError:&error];
     NSAssert((array !=nil), error.description);
 
-}
+}*/
 
 - (void)testInsertHistory{
     NSError *error = nil;

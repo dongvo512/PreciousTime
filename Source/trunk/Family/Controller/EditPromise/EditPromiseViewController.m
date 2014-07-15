@@ -130,6 +130,19 @@
     [btnDueDate setTitle:self.aPromise.dueDate forState:UIControlStateNormal];
     
 }
+- (IBAction)setDueDate:(id)sender
+{
+       if(isShowKeyBoard)
+    {
+        [self returnScrollViewWithKeyBoard];
+        isShowKeyBoard = NO;
+    }
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    [self upScrollViewDatePicker];
+    [self setContentOfSetScrollView:sender];
+    isShowViewPicker = YES;
+    
+}
 -(void)upScrollViewDatePicker
 {
     isShowViewPicker = YES;
@@ -172,32 +185,47 @@
 #pragma mark - UITextField Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    isShowKeyBoard = NO;
     [self returnScrollViewWithKeyBoard];
-    //[textField resignFirstResponder];
-    return YES;
+    isShowKeyBoard = NO;
+      return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if(isShowKeyBoard == NO)
-        [self upScrollViewWithKeyBoard];
+   if(isShowViewPicker)
+   {
+       [self returnScrollViewPickerView];
+       isShowViewPicker = NO;
+   }
+    if(isShowKeyBoard == YES)
+    {
+    [self returnScrollViewPickerView];
+        isShowKeyBoard = NO;
+    }
+    
+    [self upScrollViewWithKeyBoard];
     [self setContentOfSetScrollView:textField];
     isShowKeyBoard = YES;
 }
 #pragma mark - UItextView Delegate
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+   if(isShowViewPicker)
+   {
+       [self returnScrollViewPickerView];
+       isShowViewPicker = NO;
+       
+   }
     if(isShowKeyBoard == NO)
+    {
         [self upScrollViewWithKeyBoard];
+        isShowKeyBoard = YES;
+    }
+   
     [self setContentOfSetScrollView:textView];
     isShowKeyBoard = YES;
 }
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-    isShowKeyBoard = NO;
-    [textView resignFirstResponder];
-}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -212,7 +240,6 @@
 
 - (IBAction)doneDatePicker:(id)sender
 {
-    isShowViewPicker = NO;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"dd/MM/yyyy"];
     NSString *dateBirthDay = [formatter stringFromDate:datePicker.date];
@@ -221,14 +248,7 @@
     [self returnScrollViewPickerView];
 }
 
-- (IBAction)setDueDate:(id)sender
-{
-    isShowViewPicker = YES;
-    datePicker.datePickerMode = UIDatePickerModeDate;
-    [self upScrollViewDatePicker];
-    [self setContentOfSetScrollView:sender];
 
-}
 
 - (IBAction)deleteOrSavePromise:(id)sender
 {

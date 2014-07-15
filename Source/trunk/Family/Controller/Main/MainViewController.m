@@ -57,6 +57,7 @@
     [super viewDidLoad];
     self.title = @"Home";
     // Display
+    [[self navigationController] setNavigationBarHidden:NO animated:NO];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     [self createButtonOnNavigationBar];
    
@@ -230,6 +231,7 @@
 - (IBAction)changeHistoryViewController:(id)sender
 {
     HistoryViewController *vcHistory = [[HistoryViewController alloc] initWithNibName:@"HistoryViewController" bundle:nil];
+    vcHistory.idMember = self.aMemberCurr.idMember;
     [self.navigationController pushViewController:vcHistory animated:YES];
 }
 - (void)didReceiveMemoryWarning

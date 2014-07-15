@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HistoryViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
-
+@property (nonatomic, retain) NSString *idMember;
 @end

@@ -51,7 +51,7 @@
          imgAvatar.image = imgCurr;
     }
     else
-        imgAvatar.image = [UIImage imageNamed:@"logo_03.png"];
+        imgAvatar.image = [UIImage imageNamed:@"icon_FamLink2.png"];
     
     lblNameActivity.text = aActivity.name;
     [self loadDataTime:aActivity];

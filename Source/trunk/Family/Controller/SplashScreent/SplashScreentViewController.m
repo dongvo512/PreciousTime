@@ -7,7 +7,7 @@
 //
 
 #import "SplashScreentViewController.h"
-#import "LoginViewController.h"
+#import "InitialLandingViewController.h"
 @interface SplashScreentViewController ()
 {
     IBOutlet UIProgressView *progressView;
@@ -48,8 +48,21 @@
    if(timeCurr > FINAL_VALUE_PROGRESS)
    {
        [timer invalidate];
-       LoginViewController *vcLogin = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-       [self presentViewController:vcLogin animated:YES completion:nil];
+       /*LoginViewController *vcLogin = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+       [self presentViewController:vcLogin animated:YES completion:nil];*/
+       InitialLandingViewController *vcLogin = [[InitialLandingViewController alloc] initWithNibName:@"InitialLandingViewController" bundle:nil];
+       UINavigationController *nvg = [[UINavigationController alloc] initWithRootViewController:vcLogin];
+       [nvg setNavigationBarHidden:YES animated:NO];
+       NSArray *ver = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
+       if ([[ver objectAtIndex:0] intValue] >= 7) {
+           nvg.navigationBar.barTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_navigationbar.png"]];
+           nvg.navigationBar.translucent = NO;
+       }else {
+           nvg.navigationBar.tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_navigationbar.png"]];
+       }
+       [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+       
+       [self presentViewController:nvg animated:YES completion:nil];
    }
     else
         progressView.progress += 0.25;

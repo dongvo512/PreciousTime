@@ -13,6 +13,6 @@
 @property (nonatomic, retain) NSString* memberName;
 @property (nonatomic, retain) NSString* activityName;
 @property (nonatomic, retain) NSString* imageUrl;
-@property (nonatomic, retain) NSString *dateTime;
+@property (nonatomic, retain) NSString *timeTamp;
 @property (nonatomic, assign) int totalPoint;
 @end
