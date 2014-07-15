@@ -17,6 +17,7 @@
 #import "CircleView.h"
 #import "Utilities.h"
 #import "MemberInfoView.h"
+#import "DataHandler.h"
 @interface MainViewController ()
 {
     IBOutlet UIScrollView *scrollViewContant;
@@ -28,6 +29,9 @@
    
     IBOutlet UIView *viewPointSummary;
     IBOutlet UIView *viewMemberInfo;
+    
+    IBOutlet UILabel *lbNotice;
+    IBOutlet UIToolbar *toolBarMenu;
     
 }
 @end
@@ -55,15 +59,37 @@
     // Display
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     [self createButtonOnNavigationBar];
-    // Member Info
-    [self createViewMemberInfo];
-    // charting circle
-    [self createViewChartCircle];
-    // Point Summary
-    [self createViewPointSummary];
+   
     
-    [scrollViewContant setContentSize:CGSizeMake([Utilities getScreenSize].size.width, viewPointSummary.frame.origin.y + viewPointSummary.frame.size.height + NAVIGATION_BAR)];
+ 
     
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [self getCurrentMember];
+    
+    if (self.aMemberCurr) {
+        
+        // Member Info
+        [self createViewMemberInfo];
+        // charting circle
+        [self createViewChartCircle];
+        
+        // Point Summary
+        [self createViewPointSummary];
+        scrollViewContant.hidden = NO;
+        lbNotice.hidden = YES;
+        toolBarMenu.hidden = NO;
+
+        [scrollViewContant setContentSize:CGSizeMake([Utilities getScreenSize].size.width, viewPointSummary.frame.origin.y + viewPointSummary.frame.size.height + NAVIGATION_BAR)];
+    }else{
+        scrollViewContant.hidden = YES;
+        lbNotice.hidden = NO;
+        toolBarMenu.hidden = YES;
+
+
+    }
+   
 }
 -(void) createButtonOnNavigationBar
 {
@@ -87,11 +113,21 @@
     
 }
 
--(void) createViewMemberInfo
+- (void)getCurrentMember{
+    NSString *currentIdMember = [Utilities getCurrentUserNameFromUserDefault];
+    NSError *error = nil;
+    self.aMemberCurr = [[DataHandler sharedManager] allocMemberWithId:currentIdMember error:&error];
+}
+-(void)createViewMemberInfo
 {
     [viewMemberInfo.layer setCornerRadius:10.0f];
     [viewMemberInfo.layer setBorderWidth:1.0f];
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"MemberInfoView" owner:nil options:nil];
+    
+    MemberInfoView *memberInfoView = (MemberInfoView*)[viewMemberInfo viewWithTag:TAG_OF_VIEW_MEMBER_INFO];
+    if (memberInfoView) {
+        [memberInfoView removeFromSuperview];
+    }
     UIView *aView = nil;
     for(UIView *viewCurr in views)
     {
@@ -112,6 +148,10 @@
     [viewChartCircle.layer setCornerRadius:10.0f];
     [viewChartCircle.layer setBorderWidth:1.0f];
     
+    CircleView *circleView = (CircleView*)[viewChartCircle viewWithTag:TAG_OF_VIEW_CIRCLE];
+    if (circleView) {
+        [circleView removeFromSuperview];
+    }
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"CircleView" owner:nil options:nil];
         UIView *aView = nil;
         for(UIView *viewCurr in views)
@@ -131,6 +171,14 @@
 {
     [viewPointSummary.layer setCornerRadius:10.0f];
     [viewPointSummary.layer setBorderWidth:1.0f];
+    
+    //TO DO: Remove old Point summary table view
+    PointSummaryTableView *pointSummaryTableView = (PointSummaryTableView*)[viewPointSummary viewWithTag:TAG_OF_TABLE_VIEW_POINTSUMMARY];
+    if (pointSummaryTableView) {
+        [pointSummaryTableView removeFromSuperview];
+        pointSummaryTableView = nil;
+    }
+    
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"PointSummaryTableView" owner:nil options:nil];
     UIView *aView = nil;
     for(UITableView *viewCurr in views)
@@ -143,12 +191,15 @@
         }
     }
      PointSummaryTableView *aTableView = (PointSummaryTableView *) aView;
+    aTableView.idMember = self.aMemberCurr.idMember;
     [aTableView setDataForTableView];
     
     CGRect framePointSummary = viewPointSummary.frame;
     framePointSummary.size.height = aTableView.frame.size.height + MARGIN_BETWEEN_VIEW;
     viewPointSummary.frame = framePointSummary;
 }
+
+
 -(void)changeSettingViewController
 {
     SettingViewController *vcSetting = [[SettingViewController alloc] initWithNibName:@"SettingViewController" bundle:nil];
@@ -163,12 +214,12 @@
 - (IBAction)changeActivityViewController:(id)sender
 {
     ActivityViewController *vcActivity = [[ActivityViewController alloc] initWithNibName:@"ActivityViewController" bundle:nil];
+    vcActivity.member = self.aMemberCurr;
     [self.navigationController pushViewController:vcActivity animated:YES];
 }
 - (IBAction)changePromiseViewController:(id)sender
 {
-    PromiseViewController *vcPromise = [[PromiseViewController alloc] initWithNibName:@"PromiseViewController" bundle:nil];
-    vcPromise.idMemberCurr = self.aMemberCurr.idMember;
+    PromiseViewController *vcPromise = [[PromiseViewController alloc] initWithNibName:@"PromiseViewController" bundle:nil withIdMember:self.aMemberCurr.idMember];
     [self.navigationController   pushViewController:vcPromise animated:YES];
 }
 - (IBAction)changeFriendViewController:(id)sender

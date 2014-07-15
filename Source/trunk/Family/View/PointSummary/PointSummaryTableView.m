@@ -9,9 +9,11 @@
 #import "PointSummaryTableView.h"
 #import "Activity.h"
 #import "Promise.h"
+#import "DataHandler.h"
+#import "History.h"
 @interface PointSummaryTableView()
 {
-    NSMutableArray *arrActivities;
+    NSMutableArray *arrHistories;
     NSMutableArray *arrPromise;
     NSMutableArray *arrPointSummary;
     NSArray *arrGenPointSummaryGen;
@@ -57,38 +59,39 @@
 }
 -(NSMutableArray *)allocDataActivity
 {
-    arrActivities = [NSMutableArray array];
-    // Member data
-    for(int i =0; i<ITEM_ACTIVITY; i++)
-    {
-        Activity *aActivity = [[Activity alloc] init];
-        
-        NSString *strImg = [NSString stringWithFormat:@"activity%d.jpg",i+1];
-     
-        aActivity.strAvatar = strImg;
-        aActivity.dirty = 1;
-        NSString *strName = [NSString stringWithFormat:@"Activity%d",i+1];
-        aActivity.name = strName;
-        aActivity.time = 5;
-        aActivity.point = 20 + i;
-        [arrActivities addObject:aActivity];
+    if (self.idMember) {
+        NSError *error = nil;
+        arrHistories = [[DataHandler sharedManager] allocHistoriesWithError:&error idMember:self.idMember];
+        /*
+         // Member data
+         for(int i =0; i<ITEM_ACTIVITY; i++)
+         {
+         Activity *aActivity = [[Activity alloc] init];
+         
+         NSString *strImg = [NSString stringWithFormat:@"activity%d.jpg",i+1];
+         
+         aActivity.strAvatar = strImg;
+         aActivity.dirty = 1;
+         NSString *strName = [NSString stringWithFormat:@"Activity%d",i+1];
+         aActivity.name = strName;
+         aActivity.time = 5;
+         aActivity.point = 20 + i;
+         [arrActivities addObject:aActivity];
+         }
+         */
+        return arrHistories;
     }
-    return arrActivities;
+    return nil;
 }
 -(NSMutableArray *)allocDataPromise
 {
-    arrPromise = [NSMutableArray array];
-    for(int i =0; i< ITEM_PROMISE; i++)
-    {
-        Promise *aPromise = [[Promise alloc] init];
-        aPromise.name = [NSString stringWithFormat:@"Promise %d",i+1];
-        NSString *strDate = [NSString stringWithFormat:@"June %i,2014",i+5];
-        aPromise.dueDate = strDate;
-        aPromise.description = [NSString stringWithFormat:@"Walking with my son %d",i +1];
-        aPromise.isPick = NO;
-        [arrPromise addObject:aPromise];
+    if (self.idMember) {
+        NSError *error = nil;
+        arrPromise = [[DataHandler sharedManager] allocDoneOverDuePromisesWithError:&error idMember:self.idMember];
+        
+        return arrPromise;
     }
-    return arrPromise;
+    return nil;
 }
 #pragma mark - Table view data source - delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -112,14 +115,21 @@
     
    if(indexPath.section == 0)
    {
-       Activity *aActivity = [arrActivities objectAtIndex:indexPath.row];
-       NSString *strPointActivity = [NSString stringWithFormat:@"%d point/%d minutes for %@",aActivity.point,aActivity.time,aActivity.name];
+       History *history = [arrHistories objectAtIndex:indexPath.row];
+       NSString *strPointActivity = [NSString stringWithFormat:@"%d point for %@",history.totalPoint,history.activityName];
        cell.textLabel.text = strPointActivity;
    }
     else
     {
         Promise *aPromise = [arrPromise objectAtIndex:indexPath.row];
-        NSString *strPromise = [NSString stringWithFormat:@"%@ overdue",aPromise.name];
+        NSString *strPromise = @"";
+        if (aPromise.status == 1) {
+            strPromise = [NSString stringWithFormat:@"%@ Done",aPromise.name];
+
+        }else if(aPromise.status == 2){
+            strPromise = [NSString stringWithFormat:@"%@ Overdue",aPromise.name];
+
+        }
         cell.textLabel.text = strPromise;
     }
     return cell;

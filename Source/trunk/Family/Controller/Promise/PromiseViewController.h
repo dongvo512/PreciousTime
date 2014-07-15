@@ -11,4 +11,6 @@
 #import "EditPromiseViewController.h"
 @interface PromiseViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,PromiseTableViewCellDelegate,EditPromiseViewControllerDelegate>
 @property (nonatomic,retain) NSString *idMemberCurr;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withIdMember:(NSString*)idMember;
 @end

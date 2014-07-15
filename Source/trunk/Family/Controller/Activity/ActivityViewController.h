@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ActivityTableViewCell.h"
 #import "EditActivityViewController.h"
+
+@class Member;
 @interface ActivityViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,ActivityTableViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate,EditActivityViewControllerDelegate>
+@property (nonatomic, retain) Member *member;
 @end

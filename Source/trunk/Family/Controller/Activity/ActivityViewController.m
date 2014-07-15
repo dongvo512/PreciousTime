@@ -13,6 +13,8 @@
 #import "BlockActionSheet.h"
 #import "ImagePickerViewController.h"
 #import "DataHandler.h"
+#import "History.h"
+#import "Member.h"
 @interface ActivityViewController ()
 {
     NSMutableArray *arrActivities;
@@ -60,7 +62,21 @@
 }
 -(void)doneActivityPicked
 {
-    
+    for (Activity *item in arrActivities) {
+        if (item.isSelected) {
+            NSError *error = nil;
+            History *historyItem = [[History alloc] init];
+            historyItem.memberName = self.member.name;
+            historyItem.activityName = item.name;
+            historyItem.imageUrl = @"";
+            historyItem.totalPoint = item.unitTypeValue * item.time;
+            //historyItem.dateTime = [NSDate date]
+            BOOL isSuccess = [[DataHandler sharedManager] insertHistory:historyItem idMember:self.member.idMember idActivity:item.idActivity error:&error];
+        }
+       
+        
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 //#define ITEMS 7
 #define ITEM_CELL 2
@@ -135,7 +151,7 @@
 }
 -(void)singleTagItemActivity:(Activity *)aActivity
 {
-    NSError *error = nil;
+    //NSError *error = nil;
     /*Activity *activity = [[Activity alloc] init];
     activity.name = @"Bicycle";
     activity.unitTypeValue = 0;
@@ -146,9 +162,10 @@
   //  NSString *idActivity = nil;
    // BOOL isSuccess = [[DataHandler sharedManager] insertActivity:aActivity isSync:false idActivity:&idActivity error:&error];
    // aActivity.idActivity = idActivity;
-   BOOL isSuccess = [[DataHandler sharedManager] updateActivityInfo:aActivity isSync:false error:&error];
-    NSAssert(isSuccess, error.description);
+  // BOOL isSuccess = [[DataHandler sharedManager] updateActivityInfo:aActivity isSync:false error:&error];
+   // NSAssert(isSuccess, error.description);
 
+   // aActivity.time ++;
     [tblContent reloadData];
 }
 -(void)longTagItemActivity

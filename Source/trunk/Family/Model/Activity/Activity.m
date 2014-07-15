@@ -9,5 +9,12 @@
 #import "Activity.h"
 
 @implementation Activity
-
+@synthesize time = _time;
+- (id)init{
+    self = [super init];
+    if (self) {
+        _time = 0;
+    }
+    return self;
+}
 @end

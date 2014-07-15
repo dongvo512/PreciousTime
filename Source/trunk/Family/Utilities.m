@@ -51,5 +51,16 @@
     frameScrollView.size.height = height;
     scrollViewCur.frame = frameScrollView;
 }
- 
+
++(void)saveCurrentUserNameToUserDefault:(NSString*)idMember{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:idMember forKey:@"idMember"];
+    [defaults synchronize];
+}
++(NSString*)getCurrentUserNameFromUserDefault{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *idMember = [defaults objectForKey:@"idMember"];
+    return idMember;
+}
+
 @end

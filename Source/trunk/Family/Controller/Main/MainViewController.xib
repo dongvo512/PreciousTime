@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -7,7 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
+                <outlet property="lbNotice" destination="BMa-1f-oG5" id="BvV-Bg-6Jd"/>
                 <outlet property="scrollViewContant" destination="LZN-Z3-Amb" id="F7r-Wx-y9L"/>
+                <outlet property="toolBarMenu" destination="aGJ-vD-Nko" id="PvM-AP-XbL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewChartCircle" destination="NwR-rm-6xZ" id="WDG-VS-BPJ"/>
                 <outlet property="viewMemberInfo" destination="1lR-5n-nnn" id="Abo-7j-R0H"/>
@@ -75,18 +77,18 @@
                                 </label>
                             </subviews>
                         </view>
-                        <view contentMode="scaleToFill" id="NwR-rm-6xZ" userLabel="View - ChartingSlices">
-                            <rect key="frame" x="13" y="155" width="300" height="150"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </view>
                         <view contentMode="scaleToFill" id="a1x-dP-7UX" userLabel="View - Point summary">
                             <rect key="frame" x="13" y="320" width="300" height="160"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </view>
+                        <view contentMode="scaleToFill" id="NwR-rm-6xZ" userLabel="View - ChartingSlices">
+                            <rect key="frame" x="13" y="155" width="300" height="150"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </view>
                     </subviews>
                 </scrollView>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="aGJ-vD-Nko">
-                    <rect key="frame" x="0.0" y="436" width="314" height="44"/>
+                    <rect key="frame" x="0.0" y="436" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <items>
                         <barButtonItem image="icon_activity.png" style="done" id="w1C-g3-cMr" userLabel="Bar Button Item - Activity">
@@ -115,9 +117,17 @@
                     </items>
                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </toolbar>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You haven't any activity. Tap Member to choose a member" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BMa-1f-oG5">
+                    <rect key="frame" x="10" y="10" width="300" height="50"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>

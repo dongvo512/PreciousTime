@@ -14,4 +14,6 @@
 +(void)animationSlideY:(UIView *)viewCurrent OriginY:(float) y;
 +(void)scaleScrollViewContent:(float) height scrollViewCurrent:(UIScrollView *)scrollViewCur;
 +(NSString *) getPathOfDocument;
++(void)saveCurrentUserNameToUserDefault:(NSString*)idMember;
++(NSString*)getCurrentUserNameFromUserDefault;
 @end

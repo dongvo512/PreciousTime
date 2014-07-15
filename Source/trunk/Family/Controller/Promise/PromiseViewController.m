@@ -22,11 +22,12 @@
 
 @implementation PromiseViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withIdMember:(NSString*)idMember
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.idMemberCurr = idMember;
     }
     return self;
 }
@@ -40,7 +41,11 @@
     [self createBarButtonDone];
     //Data
    // [self createData];
-    [self getAllPromise];
+   
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+     [self getAllPromise];
 }
 -(void) createBarButtonDone
 {
@@ -56,15 +61,20 @@
 }
 -(void) donePromise
 {
-    
+    for (Promise *item in arrPromise) {
+        if (item.status == 1) {
+            NSError *error = nil;
+            BOOL isSuccess = [[DataHandler sharedManager] updatePromiseInfo:item error:&error];
+        }
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 #define ITEM 5
 -(void) getAllPromise
 {
      NSError *error = nil;
     [arrPromise removeAllObjects];
-    arrPromise = [[DataHandler sharedManager] allocPromisesWithError:&error idMember:self.idMemberCurr];
-    NSAssert((arrPromise !=nil), error.description);
+    arrPromise = [[DataHandler sharedManager] allocNotDonePromisesWithError:&error idMember:self.idMemberCurr];
     [tblViewPromise reloadData];
 }
 #pragma mark - Table view data source - delegate

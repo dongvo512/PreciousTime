@@ -96,9 +96,9 @@
     NSError *error = nil;
     Promise *promise = [[Promise alloc] init];
     promise.name = txtName.text;
+    promise.idMember = [Utilities getCurrentUserNameFromUserDefault];
     promise.description = textViewDescription.text;
     promise.dueDate = btnDueDate.titleLabel.text;
-    promise.status = 1;
     
     promise.idPromise = self.aPromise.idPromise;
    BOOL isSuccess = [[DataHandler sharedManager] updatePromiseInfo:promise error:&error];
@@ -236,25 +236,26 @@
     if(self.isEditPromiseViewController)
     {
         NSError *error = nil;
-        BOOL isdeletePromise = [[DataHandler sharedManager] updateDeletedPromise:self.aPromise.idPromise error:&error];
-        if(isdeletePromise)
-            [_delegate reloadDataPromise];
+        self.aPromise.idMember = [Utilities getCurrentUserNameFromUserDefault];
+        BOOL isdeletePromise = [[DataHandler sharedManager] updateDeletedPromise:self.aPromise.idPromise idMember:self.aPromise.idMember error:&error];
+//        if(isdeletePromise)
+//            [_delegate reloadDataPromise];
     }
     else
     {
-    NSError *error = nil;
-    Promise *promise = [[Promise alloc] init];
-    promise.name = txtName.text;
-    promise.idMember = self.aPromise.idPromise;
-    promise.description = textViewDescription.text;
-    promise.dueDate = btnDueDate.titleLabel.text;
-    promise.status = 1;
-    
-    NSString *idPromise = nil;
-    BOOL isSuccess = [[DataHandler sharedManager] insertPromise:promise idPromise:&idPromise error:&error];
-    NSAssert(isSuccess, error.description);
-    if(isSuccess)
-        [_delegate reloadDataPromise];
+        NSError *error = nil;
+        Promise *promise = [[Promise alloc] init];
+        promise.name = txtName.text;
+        promise.idMember = [Utilities getCurrentUserNameFromUserDefault];
+        promise.description = textViewDescription.text;
+        promise.dueDate = btnDueDate.titleLabel.text;
+        promise.status = 0;
+        
+        NSString *idPromise = nil;
+        BOOL isSuccess = [[DataHandler sharedManager] insertPromise:promise idPromise:&idPromise error:&error];
+    //    NSAssert(isSuccess, error.description);
+    //    if(isSuccess)
+    //        [_delegate reloadDataPromise];
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

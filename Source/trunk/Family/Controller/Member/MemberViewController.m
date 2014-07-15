@@ -12,6 +12,7 @@
 #import "MemberTableViewCell.h"
 #import "MainViewController.h"
 #import "DataHandler.h"
+#import "Utilities.h"
 @interface MemberViewController ()
 {
     NSMutableArray *arrMembers;
@@ -149,11 +150,13 @@
 }
 -(void)itemMemberSelectedCell:(id)sender MemberCurrent:(Member *)aMember
 {
-     NSArray *arrViewController = [self.navigationController viewControllers];
-    MainViewController *vcMain = [arrViewController objectAtIndex:0];
-    vcMain.aMemberCurr = aMember;
-    [vcMain.aMemberInfoCurr setObjectForView:aMember];
-    [self.navigationController popToViewController:vcMain animated:YES];
+    // NSArray *arrViewController = [self.navigationController viewControllers];
+    //MainViewController *vcMain = [arrViewController objectAtIndex:0];
+    //vcMain.aMemberCurr = aMember;
+    //[vcMain.aMemberInfoCurr setObjectForView:aMember];
+    //[self.navigationController popToViewController:vcMain animated:YES];
+    [Utilities saveCurrentUserNameToUserDefault:aMember.idMember];
+    [self.navigationController popViewControllerAnimated:YES];
    
 }
 #pragma mark - AddMemberViewController Delegate

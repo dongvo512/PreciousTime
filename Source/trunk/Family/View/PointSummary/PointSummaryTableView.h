@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface PointSummaryTableView : UITableView<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic, retain) NSString *idMember;
+
 -(void) setDataForTableView;
 @end

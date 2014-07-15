@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface Activity : NSObject
+{
+    int _time;
+}
 @property (nonatomic, retain) NSString *idActivity;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic) int time;

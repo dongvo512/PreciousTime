@@ -298,6 +298,31 @@ static DataHandler *sharedDataHandler = nil;
     return isSuccess;
 }
 
+- (Member*)allocMemberWithId:(NSString*)memberId error:(NSError**)error{
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [NSError errorWithDomain:@"Can't open database" code:123 userInfo:nil];
+        return nil;
+    }
+    
+    FMResultSet *results = [db executeQuery:@"select * from Member where id = ? and deleted=?",memberId,[NSNumber numberWithBool:false]];
+    if ([db hadError]) {
+        DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
+        *error = [db lastError];
+        [self closeDB:db];
+        return nil;
+    }
+    
+    
+    while ([results next])
+    {
+        Member * item = [DataParser allocMemberWithResults:results];
+        if (item) {
+            return item;
+        }
+    }
+    return nil;
+}
 #pragma mark Activities
 
 - (NSMutableArray*)allocAcitivitiesWithError:(NSError**)error{
@@ -497,14 +522,14 @@ static DataHandler *sharedDataHandler = nil;
     }
     return array;
 }*/
-- (NSMutableArray*)allocPromisesWithError:(NSError**)error idMember:(NSString*) idMember{
+- (NSMutableArray*)allocNotDonePromisesWithError:(NSError**)error idMember:(NSString*) idMember{
     FMDatabase *db = [self database];
     if (![self openDB:db]) {
         *error = [NSError errorWithDomain:@"Can't open database" code:123 userInfo:nil];
         return nil;
     }
     
-    FMResultSet *results = [db executeQuery:@"select * from Promise where idMember = ? AND deleted=? ",idMember,[NSNumber numberWithBool:false]];
+    FMResultSet *results = [db executeQuery:@"select * from Promise where idMember = ? and status = 0 and deleted=? ",idMember,[NSNumber numberWithInt:0],[NSNumber numberWithBool:false]];
     if ([db hadError]) {
         DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
         *error = [db lastError];
@@ -523,6 +548,34 @@ static DataHandler *sharedDataHandler = nil;
     }
     return array;
 }
+
+- (NSMutableArray*)allocDoneOverDuePromisesWithError:(NSError**)error idMember:(NSString*) idMember{
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [NSError errorWithDomain:@"Can't open database" code:123 userInfo:nil];
+        return nil;
+    }
+    
+    FMResultSet *results = [db executeQuery:@"select * from Promise where idMember = ? and status = 1 or status = 2 and deleted=? ",idMember,[NSNumber numberWithInt:0],[NSNumber numberWithBool:false]];
+    if ([db hadError]) {
+        DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
+        *error = [db lastError];
+        [self closeDB:db];
+        return nil;
+    }
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    while ([results next])
+    {
+        Promise * item = [DataParser allocPromiseWithResults:results];
+        if (item) {
+            [array addObject:item];
+        }
+    }
+    return array;
+}
+
 - (BOOL)checkExistPromiseWithId:(NSString*)idPromise error:(NSError**)error
 {
     
@@ -569,7 +622,7 @@ static DataHandler *sharedDataHandler = nil;
     }
     
     NSString *idString = [Utilities idWithName:aPromise.name];
-    BOOL isSuccess = [db executeUpdate:@"insert into Promise(id, idMember,name, description, duedate, status,deleted,dirty) values(?,?,?,?,?,?,?,?)",idString,aPromise.idMember, aPromise.name,aPromise.description,aPromise.dueDate,[NSNumber numberWithInt:aPromise.status],[NSNumber numberWithBool:false],[NSNumber numberWithBool:true]];
+    BOOL isSuccess = [db executeUpdate:@"insert into Promise(id, idMember,name, description, duedate, status,deleted,dirty) values(?,?,?,?,?,?,?,?)",idString,aPromise.idMember, aPromise.name,aPromise.description,aPromise.dueDate,[NSNumber numberWithInt:0],[NSNumber numberWithBool:false],[NSNumber numberWithBool:true]];
     if (!isSuccess) {
         if (error!=NULL) {
             *error = [db lastError];
@@ -601,7 +654,7 @@ static DataHandler *sharedDataHandler = nil;
     
     [db executeUpdate:@"update Promise"
      " set name = ?,description=?,duedate=?,status=?,deleted=?,dirty=?"
-     " where id = ?",aPromise.name,aPromise.description,aPromise.dueDate,[NSNumber numberWithInt:aPromise.status],[NSNumber numberWithBool:false], [NSNumber numberWithBool:true],aPromise.idPromise];
+     " where id = ? and idMember = ?",aPromise.name,aPromise.description,aPromise.dueDate,[NSNumber numberWithInt:aPromise.status],[NSNumber numberWithBool:false], [NSNumber numberWithBool:true],aPromise.idPromise, aPromise.idMember];
 
     if ([db hadError]) {
         if (error!=NULL) {
@@ -619,7 +672,7 @@ static DataHandler *sharedDataHandler = nil;
     
 }
 
--(BOOL)updateDeletedPromise:(NSString*)idPromise error:(NSError**)error
+-(BOOL)updateDeletedPromise:(NSString*)idPromise idMember:(NSString*)idMember error:(NSError**)error
 {
     
     FMDatabase *db = [self database];
@@ -635,7 +688,7 @@ static DataHandler *sharedDataHandler = nil;
     
     [db executeUpdate:@"update Promise"
      " set deleted=?,dirty=?"
-     " where id = ?",[NSNumber numberWithBool:true], [NSNumber numberWithBool:true],idPromise];
+     " where id = ? and idMember = ?",[NSNumber numberWithBool:true], [NSNumber numberWithBool:true],idPromise,idMember];
     
     
     if ([db hadError]) {
@@ -657,14 +710,14 @@ static DataHandler *sharedDataHandler = nil;
 
 #pragma mark History
 
-- (NSMutableArray*)allocHistoriesWithError:(NSError**)error{
+- (NSMutableArray*)allocHistoriesWithError:(NSError**)error idMember:(NSString*)idMember{
     FMDatabase *db = [self database];
     if (![self openDB:db]) {
         *error = [db lastError];
         return nil;
     }
     
-    FMResultSet *results = [db executeQuery:@"select m.name memberName,a.name actvityName, h.imageUrl,h.point from History h, Member m, Activity a where  h.idMember=m.id and h.idActivity=a.id"];
+    FMResultSet *results = [db executeQuery:@"select m.name as memberName,a.name as activityName, h.imageUrl,h.point from History h, Member m, Activity a where h.idMember=m.id and h.idActivity=a.id and m.id = ?",idMember];
     if ([db hadError]) {
         DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
         *error = [db lastError];

@@ -36,6 +36,7 @@
 
 //Use to delete member
 -(BOOL)updateDeletedMember:(NSString*)idMember error:(NSError**)error;
+- (Member*)allocMemberWithId:(NSString*)memberId error:(NSError**)error;
 
 - (BOOL)removeDeletedMembersWithError:(NSError**)error;
 /*
@@ -52,17 +53,18 @@
  * get all Promises in databse
  */
 //- (NSMutableArray*)allocPromisesWithError:(NSError**)error;
-- (NSMutableArray*)allocPromisesWithError:(NSError**)error idMember:(NSString*) idMember;
+- (NSMutableArray*)allocNotDonePromisesWithError:(NSError**)error idMember:(NSString*) idMember;
+- (NSMutableArray*)allocDoneOverDuePromisesWithError:(NSError**)error idMember:(NSString*) idMember;
 - (BOOL)checkExistPromiseWithId:(NSString*)idPromise error:(NSError**)error;
 -(BOOL)insertPromise:(Promise*)aPromise idPromise:(NSString**)idPromise error:(NSError**)error;
 //Use to update promise info
 -(BOOL)updatePromiseInfo:(Promise*)aPromise error:(NSError**)error;
 //Use to delete promise info
--(BOOL)updateDeletedPromise:(NSString*)idPromise error:(NSError**)error;
+-(BOOL)updateDeletedPromise:(NSString*)idPromise idMember:(NSString*)idMember error:(NSError**)error;
 /*
  * get all Histories in databse
  */
-- (NSMutableArray*)allocHistoriesWithError:(NSError**)error;
+- (NSMutableArray*)allocHistoriesWithError:(NSError**)error idMember:(NSString*)idMember;
 -(BOOL)insertHistory:(History*)aHistory idMember:(NSString*)idMember idActivity:(NSString*)idActivity error:(NSError**)error;
 
 @end

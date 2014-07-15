@@ -37,18 +37,21 @@
     lblRank.text = aPromise.name;
     lblDate.text = aPromise.dueDate;
     
+    
    if(aPromise.status == 0)
-       [btnPick setImage:[UIImage imageNamed:@"btn_pick.png"] forState:UIControlStateNormal];
-    else
-        [btnPick setImage:[UIImage imageNamed:@"btn_nonepick.png"] forState:UIControlStateNormal];
+       [btnPick setImage:[UIImage imageNamed:@"btn_nonepick.png"] forState:UIControlStateNormal];
+    else if (aPromise.status == 1)
+        [btnPick setImage:[UIImage imageNamed:@"btn_pick.png"] forState:UIControlStateNormal];
 }
 - (IBAction)pickPromise:(id)sender
 {
-    NSError *error = nil;
-     aPromiseCurr.status = (aPromiseCurr.status == 0)?1:0;
-    BOOL isSuccess = [[DataHandler sharedManager] updatePromiseInfo:aPromiseCurr error:&error];
-    NSAssert(isSuccess, error.description);
-    if(isSuccess)
+    //NSError *error = nil;
+    if (aPromiseCurr.status!=2) {
+        aPromiseCurr.status = !aPromiseCurr.status;
+    }
+    //BOOL isSuccess = [[DataHandler sharedManager] updatePromiseInfo:aPromiseCurr error:&error];
+    //NSAssert(isSuccess, error.description);
+    //if(isSuccess)
     [_delegate reloadTableViewWithButtonCell];
 }
 @end
