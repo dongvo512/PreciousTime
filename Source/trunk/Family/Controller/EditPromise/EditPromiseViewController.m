@@ -44,7 +44,7 @@
 {
     [super viewDidLoad];
     // Display
-    [self radiusForViewDescription];
+    [self radiusForView];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     
     if(self.isEditPromiseViewController)
@@ -59,10 +59,17 @@
     [self setDataForView];
     
 }
--(void)radiusForViewDescription
+-(void)radiusForView
 {
     [textViewDescription.layer setCornerRadius:5.0f];
     [textViewDescription.layer setBorderWidth:0.5f];
+    
+    [txtName.layer setCornerRadius:5.0f];
+    [txtName.layer setBorderWidth:0.5f];
+    
+    [btnDueDate.layer setCornerRadius:5.0f];
+    [btnDueDate.layer setBorderWidth:0.5f];
+    
 }
 -(void) displayWithEditPromiseViewController
 {

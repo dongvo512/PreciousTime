@@ -66,7 +66,7 @@
                                 <action selector="deleteOrSavePromise:" destination="-1" eventType="touchUpInside" id="zXD-v7-cg0"/>
                             </connections>
                         </button>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Promise 1" textAlignment="center" minimumFontSize="17" background="btn_border3.png" id="2Gw-Zq-gAx">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Promise 1" textAlignment="center" minimumFontSize="17" id="2Gw-Zq-gAx">
                             <rect key="frame" x="108" y="49" width="195" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -79,9 +79,8 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="o5x-RR-Rnn">
                             <rect key="frame" x="130" y="234" width="182" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="5/12/2014" backgroundImage="btn_border3.png">
+                            <state key="normal" title="5/12/2014">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="setDueDate:" destination="-1" eventType="touchUpInside" id="hcZ-K1-k4p"/>
@@ -149,7 +148,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </view>
     </objects>
     <resources>
-        <image name="btn_border3.png" width="360" height="80"/>
         <image name="btn_delete.png" width="108" height="65"/>
     </resources>
 </document>

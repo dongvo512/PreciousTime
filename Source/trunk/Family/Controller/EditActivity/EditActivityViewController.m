@@ -76,6 +76,16 @@
     btnAvatarActivity.clipsToBounds = YES;
     btnAvatarActivity.layer.borderWidth = 3.0f;
     btnAvatarActivity.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    [btnUnitType.layer setCornerRadius:5.0f];
+    [btnUnitType.layer setBorderWidth:0.5f];
+    
+    [txtName.layer setCornerRadius:5.0f];
+    [txtName.layer setBorderWidth:0.5f];
+    
+    [txtPoint.layer setCornerRadius:5.0f];
+    [txtPoint.layer setBorderWidth:0.5f];
+
 }
 -(void)addGestureSingleTagForScrollView
 {
