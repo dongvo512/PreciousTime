@@ -75,6 +75,7 @@
             [formatter setDateFormat:@"MM/dd/yyyy"];
             NSString *dateCurr = [formatter stringFromDate:[NSDate date]];
             historyItem.date = dateCurr;
+            historyItem.unitType = item.unitTypeValue;
             BOOL isSuccess = [[DataHandler sharedManager] insertHistory:historyItem idMember:self.member.idMember idActivity:item.idActivity error:&error];
         }
     }

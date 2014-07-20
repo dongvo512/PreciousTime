@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSString *timeTamp;
 @property (nonatomic, retain) NSString *date;
 @property (nonatomic, assign) int totalPoint;
+@property (nonatomic, assign) int unitType;
 @property (nonatomic, retain) NSString *time;
 
 @end

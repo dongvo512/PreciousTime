@@ -65,17 +65,34 @@
     
     // don't know to get point history about.
     History *aHistory = [arrHistories objectAtIndex:indexPath.row];
-    NSString *strDate = aHistory.timeTamp;
+    NSString *strDate = aHistory.date;
     NSString *strActivity = aHistory.activityName;
     NSString *strMemberName = aHistory.memberName;
-    NSString *strTime = aHistory.time;
+    NSString *strTime = [self getUnitType:aHistory.unitType];
     
     [cell.textLabel setFont:[UIFont systemFontOfSize:13]];
     cell.textLabel.text = [NSString stringWithFormat:@"%@:%@ - %@ - %@",strDate,strActivity,strMemberName,strTime];
     cell.imageView.image = [UIImage imageNamed:aHistory.imageUrl];
     return cell;
 }
-
+-(NSString *) getUnitType:(int) unitType
+{
+    NSString *strUnittype = nil;
+    switch (unitType) {
+        case 0:
+            strUnittype = @"Second";
+            break;
+        case 1:
+            strUnittype = @"Minute";
+            break;
+        case 2:
+            strUnittype = @"Hour";
+            break;
+        default:
+            break;
+    }
+    return strUnittype;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 40;

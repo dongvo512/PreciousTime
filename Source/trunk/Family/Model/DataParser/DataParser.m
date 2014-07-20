@@ -61,6 +61,8 @@
 + (History*)allocHistoryWithResults:(FMResultSet*)results{
     History *item = [[History alloc] init];
     item.memberName = [results stringForColumn:@"memberName"];
+    item.unitType = [results intForColumn:@"unitType"];
+    item.date = [results stringForColumn:@"date"];
     item.activityName =[results stringForColumn:@"activityName"];
     item.imageUrl = [results stringForColumn:@"imageUrl"];
     item.totalPoint = [results intForColumn:@"point"];
