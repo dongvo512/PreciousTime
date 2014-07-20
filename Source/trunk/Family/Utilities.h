@@ -10,10 +10,15 @@
 
 @interface Utilities : NSObject
 +(CGRect) getScreenSize;
-+(NSString*)idWithName:(NSString*)name;
+//+(NSString*)idWithName:(NSString*)name;
 +(void)animationSlideY:(UIView *)viewCurrent OriginY:(float) y;
 +(void)scaleScrollViewContent:(float) height scrollViewCurrent:(UIScrollView *)scrollViewCur;
 +(NSString *) getPathOfDocument;
 +(void)saveCurrentUserNameToUserDefault:(NSString*)idMember;
 +(NSString*)getCurrentUserNameFromUserDefault;
++(NSString *) getDateBefore:(int) rangeDay;
++(NSString *) idWithDate;
++(NSString *)getStringCurrentWithDateMMddyyyy;
++(NSString *)convertMMddyyyyToddMMyyyy:(NSString *) stringDate;
++(NSString *)convertddMMyyyyToMMddyyyy:(NSString *) stringDate;
 @end

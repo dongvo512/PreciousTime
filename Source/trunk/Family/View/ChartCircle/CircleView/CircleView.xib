@@ -25,7 +25,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ddj-FU-fEi">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ddj-FU-fEi" userLabel="Table View - List Activity">
                     <rect key="frame" x="152" y="14" width="120" height="122"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -36,7 +36,7 @@
             <connections>
                 <outlet property="lblPercentagel" destination="OlW-a6-eQU" id="Pc9-dP-EHW"/>
                 <outlet property="pieChart" destination="2qQ-YO-XWc" id="gfe-rT-3HO"/>
-                <outlet property="tblViewSliceActivity" destination="ddj-FU-fEi" id="HMl-jt-oIA"/>
+                <outlet property="tblViewSliceActivity" destination="ddj-FU-fEi" id="dzM-Zf-V9A"/>
             </connections>
         </view>
     </objects>

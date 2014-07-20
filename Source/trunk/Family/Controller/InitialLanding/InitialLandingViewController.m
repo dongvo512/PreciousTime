@@ -10,9 +10,14 @@
 #import "MainViewController.h"
 #import "SignUpViewController.h"
 #import "LoginViewController.h"
+#import "AppDelegate.h"
 @interface InitialLandingViewController ()
+{
+    AppDelegate *appDelegate;
+}
 - (IBAction)signUpUser:(id)sender;
 - (IBAction)loginUser:(id)sender;
+- (IBAction)SigninWithFacebook:(id)sender;
 
 @end
 
@@ -36,6 +41,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
      [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     // Do any additional setup after loading the view from its nib.
 }
@@ -59,5 +66,49 @@
 {
     LoginViewController *vcLogin = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     [self.navigationController pushViewController:vcLogin animated:YES];
+}
+
+- (IBAction)SigninWithFacebook:(id)sender
+{
+    if (!FBSession.activeSession.isOpen) {
+        // if the session is closed, then we open it here, and establish a handler for state changes
+        [FBSession openActiveSessionWithReadPermissions:nil
+                                           allowLoginUI:YES
+                                      completionHandler:^(FBSession *session,
+                                                          FBSessionState state,
+                                                          NSError *error) {
+                                          if (error) {
+                                              
+                                              NSLog(@"%@",[error description]);
+                                              
+                                          } else if (session.isOpen) {
+                                              
+                                              [self getUserInfo];
+                                          }
+                                      }];
+    }
+    else
+        [self getUserInfo];
+
+}
+-(void) getUserInfo
+{
+    [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        appDelegate.accessTK = (NSString *)[FBSession activeSession].accessTokenData;
+        NSLog(@"AccessTK :%@",(NSString *)[FBSession activeSession].accessTokenData);
+        appDelegate.idFacebook = [result objectForKey:@"id"];
+        NSLog(@"IDFacebook :%@",[result objectForKey:@"id"]);
+        appDelegate.nameUser = [result objectForKey:@"name"];
+        NSLog(@"Facebook Name :%@",[result objectForKey:@"name"]);
+        //result contains a dictionary of your user, including Facebook ID.
+        if(!error)
+        {
+            MainViewController *vcMain = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+            [self.navigationController pushViewController:vcMain animated:YES];
+        }
+        else
+            NSLog(@"Error :%@",error);
+    }];
+
 }
 @end

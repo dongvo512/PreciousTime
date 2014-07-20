@@ -98,8 +98,8 @@
     promise.name = txtName.text;
     promise.idMember = [Utilities getCurrentUserNameFromUserDefault];
     promise.description = textViewDescription.text;
-    promise.dueDate = btnDueDate.titleLabel.text;
-    
+    NSString *strDueDate = [Utilities convertddMMyyyyToMMddyyyy:btnDueDate.titleLabel.text];
+    promise.dueDate = strDueDate;
     promise.idPromise = self.aPromise.idPromise;
    BOOL isSuccess = [[DataHandler sharedManager] updatePromiseInfo:promise error:&error];
     NSAssert(isSuccess, error.description);
@@ -127,7 +127,8 @@
 {
     txtName.text = self.aPromise.name;
     textViewDescription.text = self.aPromise.description;
-    [btnDueDate setTitle:self.aPromise.dueDate forState:UIControlStateNormal];
+    NSString *strDueDate = [Utilities convertMMddyyyyToddMMyyyy:self.aPromise.dueDate];
+    [btnDueDate setTitle:strDueDate forState:UIControlStateNormal];
     
 }
 - (IBAction)setDueDate:(id)sender
@@ -240,10 +241,22 @@
 
 - (IBAction)doneDatePicker:(id)sender
 {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd/MM/yyyy"];
-    NSString *dateBirthDay = [formatter stringFromDate:datePicker.date];
-    [btnDueDate setTitle:dateBirthDay forState:UIControlStateNormal];
+    NSDate *dateCurrent =[NSDate date];
+    NSDate *dateOfDatePicker = datePicker.date;
+    
+    if([dateCurrent compare:dateOfDatePicker] == NSOrderedDescending)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Date must be larger than to day " delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    else
+    {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"dd/MM/yyyy"];
+        NSString *dateBirthDay = [formatter stringFromDate:datePicker.date];
+        [btnDueDate setTitle:dateBirthDay forState:UIControlStateNormal];
+    }
+  
     isShowViewPicker = NO;
     [self returnScrollViewPickerView];
 }
@@ -268,7 +281,8 @@
         promise.name = txtName.text;
         promise.idMember = [Utilities getCurrentUserNameFromUserDefault];
         promise.description = textViewDescription.text;
-        promise.dueDate = btnDueDate.titleLabel.text;
+         NSString *strDueDate = [Utilities convertddMMyyyyToMMddyyyy:btnDueDate.titleLabel.text];
+        promise.dueDate = strDueDate;
         promise.status = 0;
         
         NSString *idPromise = nil;

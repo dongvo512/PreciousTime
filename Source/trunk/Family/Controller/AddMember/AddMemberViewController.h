@@ -11,7 +11,7 @@
 @protocol AddMemberViewControllerDelegate <NSObject>
 -(void)reloadDataMember;
 @end
-@interface AddMemberViewController : UIViewController <UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>
+@interface AddMemberViewController : UIViewController <UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate,UIAlertViewDelegate>
 {
     id <AddMemberViewControllerDelegate> _delegate;
 }

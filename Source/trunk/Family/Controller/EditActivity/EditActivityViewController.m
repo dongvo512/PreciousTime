@@ -105,7 +105,7 @@
         else if(imgCurr != nil)
             [btnAvatarActivity setImage:[UIImage imageNamed:self.aActivityCurr.strAvatar] forState:UIControlStateNormal];
         else
-            [btnAvatarActivity setImage:[UIImage imageNamed:@"logo_03.png"] forState:UIControlStateNormal];
+            [btnAvatarActivity setImage:[UIImage imageNamed:@"icon_FamLink2.png"] forState:UIControlStateNormal];
     }
     @catch (NSException *exception) {
         NSLog(@"%@",exception);
@@ -172,13 +172,36 @@
     
     activity.strAvatar = avatarPath;
     activity.point = txtPoint.text.intValue;
-    
     activity.idActivity = self.aActivityCurr.idActivity;
-    BOOL isSuccess = [[DataHandler sharedManager] updateActivityInfo:activity isSync:false error:&error];
-    NSAssert(isSuccess, error.description);
-    if(isSuccess)
-    [_delegate reloadDataActivity];
-    [self.navigationController popViewControllerAnimated:YES];
+   
+    if([activity.name isEqualToString:self.aActivityCurr.name])
+    {
+        
+        BOOL isSuccess = [[DataHandler sharedManager] updateActivityInfo:activity isSync:false error:&error];
+        NSAssert(isSuccess, error.description);
+        if(isSuccess)
+            [_delegate reloadDataActivity];
+        [self.navigationController popViewControllerAnimated:YES];
+
+    }
+    else
+    {
+        BOOL isCheckExistActivity = [[DataHandler sharedManager] checkExistActivityWithName:activity.name error:&error];
+        if(isCheckExistActivity)
+        {
+            UIAlertView *alertExist = [[UIAlertView alloc] initWithTitle:nil message:@"This name existed" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            [alertExist show];
+        }
+        else
+        {
+            BOOL isSuccess = [[DataHandler sharedManager] updateActivityInfo:activity isSync:false error:&error];
+            NSAssert(isSuccess, error.description);
+            if(isSuccess)
+                [_delegate reloadDataActivity];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+
+    }
 }
 - (void)didReceiveMemoryWarning
 {
@@ -217,10 +240,8 @@
 {
     if(self.isEditActivityViewController)
     {
-        NSError *error = nil;
-        BOOL isDeleteActivity = [[DataHandler sharedManager] updateDeletedActivity:self.aActivityCurr.idActivity error:&error];
-        if(isDeleteActivity)
-            [_delegate reloadDataActivity];
+        UIAlertView *alertDelete = [[UIAlertView alloc] initWithTitle:nil message:@"Are you sure want to delete this activity ?" delegate:self cancelButtonTitle:@"Cancel"otherButtonTitles:@"OK", nil];
+        [alertDelete show];
     }
     else
     {
@@ -234,17 +255,43 @@
         activity.strAvatar = avatarPath;
         activity.point = txtPoint.text.intValue;
         
-        NSString *idActivity = nil;
-        BOOL isSuccess = [[DataHandler sharedManager] insertActivity:activity isSync:false idActivity:&idActivity error:&error];
-        DLog(@"%@",idActivity);
-      //  NSAssert(isSuccess, error.description);
-        if(isSuccess)
-          [_delegate reloadDataActivity];
+        
+         if(! [[DataHandler sharedManager] checkExistActivityWithName:activity.name error:&error])
+         {
+             if(error == nil)
+             {
+                 NSString *idActivity = nil;
+                 BOOL isSuccess = [[DataHandler sharedManager] insertActivity:activity isSync:false idActivity:&idActivity error:&error];
+                 DLog(@"%@",idActivity);
+                 if(isSuccess)
+                     [_delegate reloadDataActivity];
+                 [self.navigationController popViewControllerAnimated:YES];
+             }
+         }
+         else
+         {
+             UIAlertView *alertExistUser = [[UIAlertView alloc] initWithTitle:nil message:@"Activity Name existed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+             [alertExistUser show];
+         }
+
     }
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    
 
 }
-
+#pragma mark - UIAlert Delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        NSError *error = nil;
+        BOOL isDeleteActivity = [[DataHandler sharedManager] updateDeletedActivity:self.aActivityCurr.idActivity error:&error];
+        if(isDeleteActivity)
+            [_delegate reloadDataActivity];
+            [self.navigationController popViewControllerAnimated:YES];
+        
+    }
+}
 - (IBAction)cancelPickerView:(id)sender
 {
     isShowViewPicker = NO;

@@ -50,13 +50,21 @@
     return item;
 }
 
++(History*)allocHistoryWithResultsGroupByIdActivity:(FMResultSet*)results
+{
+    History *item = [[History alloc] init];
+    item.activityName =[results stringForColumn:@"activityName"];
+    item.totalPoint = [results intForColumn:@"totalPoint"];
+    return item;
+
+}
 + (History*)allocHistoryWithResults:(FMResultSet*)results{
     History *item = [[History alloc] init];
     item.memberName = [results stringForColumn:@"memberName"];
     item.activityName =[results stringForColumn:@"activityName"];
     item.imageUrl = [results stringForColumn:@"imageUrl"];
     item.totalPoint = [results intForColumn:@"point"];
-    
+    item.time = [results stringForColumn:@"time"];
     return item;
 }
 @end

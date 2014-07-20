@@ -7,7 +7,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
+                <outlet property="btnMonth" destination="Rdy-xm-oM8" id="3oy-Zv-GRA"/>
+                <outlet property="btnToday" destination="k4w-av-jrO" id="Qj9-yn-dZe"/>
+                <outlet property="btnWeek" destination="kcd-Ce-3Pc" id="oVD-VJ-TaN"/>
                 <outlet property="lbNotice" destination="BMa-1f-oG5" id="BvV-Bg-6Jd"/>
+                <outlet property="lblMonth" destination="Kef-Kz-TKp" id="LCQ-tl-7d2"/>
+                <outlet property="lblToday" destination="T2S-Fy-tAy" id="hUx-D1-Mah"/>
+                <outlet property="lblWeek" destination="WMH-Vk-Ch4" id="AZZ-TV-UEw"/>
                 <outlet property="scrollViewContant" destination="LZN-Z3-Amb" id="F7r-Wx-y9L"/>
                 <outlet property="toolBarMenu" destination="aGJ-vD-Nko" id="PvM-AP-XbL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -33,26 +39,38 @@
                             <rect key="frame" x="13" y="106" width="300" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="k4w-av-jrO" userLabel="Button - Left">
+                                <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="k4w-av-jrO" userLabel="Button - Day">
                                     <rect key="frame" x="0.0" y="2" width="100" height="41"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="left_button.png">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <state key="selected" image="left_selected.png"/>
+                                    <connections>
+                                        <action selector="getActivity:" destination="-1" eventType="touchUpInside" id="JBr-xZ-P7y"/>
+                                    </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kcd-Ce-3Pc" userLabel="Button - Inside">
+                                <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kcd-Ce-3Pc" userLabel="Button - Week">
                                     <rect key="frame" x="98" y="2" width="100" height="41"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="inside.png">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <state key="selected" image="inside_selected.png"/>
+                                    <connections>
+                                        <action selector="getActivity:" destination="-1" eventType="touchUpInside" id="NAr-3X-hIA"/>
+                                    </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Rdy-xm-oM8" userLabel="Button - Right">
+                                <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Rdy-xm-oM8" userLabel="Button - Month">
                                     <rect key="frame" x="195" y="2" width="100" height="41"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="right_button.png">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <state key="selected" image="right_selected.png"/>
+                                    <connections>
+                                        <action selector="getActivity:" destination="-1" eventType="touchUpInside" id="2fy-2X-xW4"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T2S-Fy-tAy">
                                     <rect key="frame" x="20" y="12" width="56" height="21"/>
@@ -61,15 +79,15 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kef-Kz-TKp">
-                                    <rect key="frame" x="219" y="12" width="43" height="21"/>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kef-Kz-TKp" userLabel="Label - Month">
+                                    <rect key="frame" x="216" y="12" width="50" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Month" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WMH-Vk-Ch4">
-                                    <rect key="frame" x="123" y="12" width="50" height="21"/>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WMH-Vk-Ch4" userLabel="Label - Week">
+                                    <rect key="frame" x="123" y="12" width="43" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -136,7 +154,10 @@
         <image name="icon_history.png" width="32" height="32"/>
         <image name="icon_promise.png" width="40" height="40"/>
         <image name="inside.png" width="177" height="56"/>
+        <image name="inside_selected.png" width="177" height="56"/>
         <image name="left_button.png" width="185" height="56"/>
+        <image name="left_selected.png" width="185" height="56"/>
         <image name="right_button.png" width="179" height="56"/>
+        <image name="right_selected.png" width="179" height="56"/>
     </resources>
 </document>

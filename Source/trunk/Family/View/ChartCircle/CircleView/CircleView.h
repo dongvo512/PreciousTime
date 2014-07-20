@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "XYPieChart.h"
 @interface CircleView : UIView <XYPieChartDelegate, XYPieChartDataSource,UITableViewDataSource,UITableViewDelegate>
--(void) createCircleSlices;
+-(void) createCircleSlices:(int) index;
+@property (nonatomic, retain) NSString *idMemberCurr;
+
 @end

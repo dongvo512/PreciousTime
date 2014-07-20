@@ -18,6 +18,7 @@
 #import "Utilities.h"
 #import "MemberInfoView.h"
 #import "DataHandler.h"
+#import "contant.h"
 @interface MainViewController ()
 {
     IBOutlet UIScrollView *scrollViewContant;
@@ -25,15 +26,23 @@
     NSArray *arrSlicesColor;
     NSArray *arrSlicesName;
     int totalSlices;
+    
     IBOutlet UIView *viewChartCircle;
-   
     IBOutlet UIView *viewPointSummary;
     IBOutlet UIView *viewMemberInfo;
-    
     IBOutlet UILabel *lbNotice;
     IBOutlet UIToolbar *toolBarMenu;
+    IBOutlet UILabel *lblToday;
+    IBOutlet UILabel *lblMonth;
+    IBOutlet UILabel *lblWeek;
+    IBOutlet UIButton *btnMonth;
+    IBOutlet UIButton *btnToday;
+    IBOutlet UIButton *btnWeek;
     
+    NSArray *arrButton;
+    NSArray *arrLabel;
 }
+
 @end
 
 @implementation MainViewController
@@ -60,37 +69,42 @@
     [[self navigationController] setNavigationBarHidden:NO animated:NO];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     [self createButtonOnNavigationBar];
-   
-    
- 
-    
+    arrButton = [NSArray arrayWithObjects:btnToday,btnMonth,btnWeek, nil];
+    arrLabel = [NSArray arrayWithObjects:lblToday,lblMonth,lblWeek, nil];
+    [btnToday setSelected:YES];
+  
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [self getCurrentMember];
-    
-    if (self.aMemberCurr) {
-        
-        // Member Info
-        [self createViewMemberInfo];
-        // charting circle
-        [self createViewChartCircle];
-        
-        // Point Summary
-        [self createViewPointSummary];
-        scrollViewContant.hidden = NO;
-        lbNotice.hidden = YES;
-        toolBarMenu.hidden = NO;
+    [self updateOverDuePromise];
+    for(UIButton *abtnCurr in arrButton)
+    {
+        if([abtnCurr isSelected])
+        {
+            if (self.aMemberCurr) {
+                
+                // Member Info
+                [self createViewMemberInfo];
+                // charting circle
+                [abtnCurr setSelected:YES];
+                [self createViewChartCircle:abtnCurr.tag];
+                
+                // Point Summary
+                [self createViewPointSummary:btnToday.tag];
+                [abtnCurr setUserInteractionEnabled:NO];
+                scrollViewContant.hidden = NO;
+                lbNotice.hidden = YES;
+                toolBarMenu.hidden = NO;
+            }else{
+                scrollViewContant.hidden = YES;
+                lbNotice.hidden = NO;
+                toolBarMenu.hidden = YES;
+            }
 
-        [scrollViewContant setContentSize:CGSizeMake([Utilities getScreenSize].size.width, viewPointSummary.frame.origin.y + viewPointSummary.frame.size.height + NAVIGATION_BAR)];
-    }else{
-        scrollViewContant.hidden = YES;
-        lbNotice.hidden = NO;
-        toolBarMenu.hidden = YES;
-
-
+        }
     }
-   
+    
 }
 -(void) createButtonOnNavigationBar
 {
@@ -113,7 +127,12 @@
     self.navigationItem.rightBarButtonItem = memberBarButton;
     
 }
-
+-(void) updateOverDuePromise
+{
+    NSError *error = nil;
+    BOOL isUpdatePromise = [[DataHandler sharedManager] updatePromiseOverDue:&error isMember:self.aMemberCurr.idMember DateCurrent:[Utilities getStringCurrentWithDateMMddyyyy]];
+    
+}
 - (void)getCurrentMember{
     NSString *currentIdMember = [Utilities getCurrentUserNameFromUserDefault];
     NSError *error = nil;
@@ -144,11 +163,11 @@
 
     
 }
--(void)createViewChartCircle
+-(void)createViewChartCircle:(int) index
 {
     [viewChartCircle.layer setCornerRadius:10.0f];
     [viewChartCircle.layer setBorderWidth:1.0f];
-    
+
     CircleView *circleView = (CircleView*)[viewChartCircle viewWithTag:TAG_OF_VIEW_CIRCLE];
     if (circleView) {
         [circleView removeFromSuperview];
@@ -165,10 +184,11 @@
             }
         }
          CircleView *itemView = (CircleView *) aView;
-        [itemView createCircleSlices];
+        itemView.idMemberCurr = self.aMemberCurr.idMember;
+        [itemView createCircleSlices:index];
 
 }
--(void)createViewPointSummary
+-(void)createViewPointSummary:(int) tagOfButton
 {
     [viewPointSummary.layer setCornerRadius:10.0f];
     [viewPointSummary.layer setBorderWidth:1.0f];
@@ -193,11 +213,12 @@
     }
      PointSummaryTableView *aTableView = (PointSummaryTableView *) aView;
     aTableView.idMember = self.aMemberCurr.idMember;
-    [aTableView setDataForTableView];
+    [aTableView setDataForTableView:tagOfButton];
     
     CGRect framePointSummary = viewPointSummary.frame;
     framePointSummary.size.height = aTableView.frame.size.height + MARGIN_BETWEEN_VIEW;
     viewPointSummary.frame = framePointSummary;
+     [scrollViewContant setContentSize:CGSizeMake([Utilities getScreenSize].size.width, viewPointSummary.frame.origin.y + viewPointSummary.frame.size.height + NAVIGATION_BAR)];
 }
 
 
@@ -239,4 +260,30 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)getActivity:(id)sender
+{
+    UIButton *btnCurr = (UIButton *) sender;
+    
+    for(int i=0; i< [arrButton count]; i++)
+    {
+        UIButton *aBtn = [arrButton objectAtIndex:i];
+        UILabel *aLbl = [arrLabel objectAtIndex:i];
+        if([aBtn isEqual:btnCurr])
+        {
+            [aBtn setSelected:YES];
+            [aBtn setUserInteractionEnabled:NO];
+            [aLbl setTextColor:[UIColor blackColor]];
+            [self createViewChartCircle:aBtn.tag];
+            [self createViewPointSummary:aBtn.tag];
+        }
+        else
+        {
+            [aBtn setUserInteractionEnabled:YES];
+            [aBtn setSelected:NO];
+            [aLbl setTextColor:[UIColor whiteColor]];
+        }
+    }
+}
+
+
 @end

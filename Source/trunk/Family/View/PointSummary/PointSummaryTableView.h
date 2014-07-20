@@ -11,5 +11,5 @@
 @interface PointSummaryTableView : UITableView<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, retain) NSString *idMember;
 
--(void) setDataForTableView;
+-(void) setDataForTableView:(int) index;
 @end

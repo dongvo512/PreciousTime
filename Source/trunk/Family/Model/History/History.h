@@ -14,5 +14,8 @@
 @property (nonatomic, retain) NSString* activityName;
 @property (nonatomic, retain) NSString* imageUrl;
 @property (nonatomic, retain) NSString *timeTamp;
+@property (nonatomic, retain) NSString *date;
 @property (nonatomic, assign) int totalPoint;
+@property (nonatomic, retain) NSString *time;
+
 @end

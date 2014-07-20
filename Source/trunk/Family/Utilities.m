@@ -27,7 +27,12 @@
     idString = [idString stringByReplacingOccurrencesOfString:@" " withString:@""];
     return idString;
 }
-
++(NSString *) idWithDate
+{
+    int timeInterval = [NSDate timeIntervalSinceReferenceDate];
+    return [NSString stringWithFormat:@"%d",timeInterval];
+    
+}
 +(void)animationSlideY:(UIView *)viewCurrent OriginY:(float) y
 {
     [UIView beginAnimations:nil context:nil];
@@ -62,5 +67,40 @@
     NSString *idMember = [defaults objectForKey:@"idMember"];
     return idMember;
 }
-
++(NSString *) getDateBefore:(int) rangeDay
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *comps = [NSDateComponents new];
+    comps.day = rangeDay;
+    NSDate *sevenDays = [calendar dateByAddingComponents:comps toDate:[NSDate date] options:0];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
+    NSString *stringBeforeDate = [formatter stringFromDate:sevenDays];
+    return stringBeforeDate;
+    
+}
++(NSString *)convertMMddyyyyToddMMyyyy:(NSString *) stringDate
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
+    NSDate *dateCurent = [formatter dateFromString:stringDate];
+    [formatter setDateFormat:@"dd/MM/yyyy"];
+    return [formatter stringFromDate:dateCurent];
+}
++(NSString *)convertddMMyyyyToMMddyyyy:(NSString *) stringDate
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd/MM/yyyy"];
+    NSDate *dateCurent = [formatter dateFromString:stringDate];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
+    return [formatter stringFromDate:dateCurent];
+}
++(NSString *)getStringCurrentWithDateMMddyyyy
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
+    NSString *stringFromDate = [formatter stringFromDate:[NSDate date]];
+    return stringFromDate;
+}
 @end

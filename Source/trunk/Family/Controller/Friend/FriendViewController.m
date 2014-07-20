@@ -7,7 +7,7 @@
 //
 
 #import "FriendViewController.h"
-
+#import "InviteFriendViewController.h"
 @interface FriendViewController ()
 
 @end
@@ -29,8 +29,24 @@
     //Display
      [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     self.title = @"Your Friend's Activities";
+    [self createInviteFriendBarButton];
 }
+-(void) createInviteFriendBarButton
+{
+    UIButton *btnInvite = [UIButton buttonWithType:UIButtonTypeSystem];
+    btnInvite.frame = CGRectMake(0, 0, 60, 40);
+    [btnInvite setTitle:@"Invite" forState:UIControlStateNormal];
+    [btnInvite addTarget:self action:@selector(inviteFriend) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *inviteBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnInvite];
+    self.navigationItem.rightBarButtonItem = inviteBarButton;
 
+}
+-(void)inviteFriend
+{
+    InviteFriendViewController *vcInvite = [[InviteFriendViewController alloc] initWithNibName:@"InviteFriendViewController" bundle:nil];
+    [self.navigationController pushViewController:vcInvite animated:YES];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

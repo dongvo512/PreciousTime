@@ -114,6 +114,11 @@
 #pragma mark - Take Photo
 - (IBAction)handleAvatar:(id)sender
 {
+    if(isShowViewPicker)
+        [self returnScrollViewDatePicker];
+    if(isShowKeyBoard)
+        [self returnScrollViewWithKeyBoard];
+    
     vcImagePicker = [[ImagePickerViewController alloc] init];
     vcImagePicker.btnCurrent = btnAvatar;
     BlockActionSheet *blockActionSheet = [[BlockActionSheet alloc] initWithTitle:nil];
@@ -165,15 +170,34 @@
     member.genderValue = genderChosen;
     member.relationship = txtRelationship.text;
     
-   // NSString *idMember = nil;
-    //BOOL isSuccess = [[DataHandler sharedManager] insertMember:member isSync:false idMember:&idMember error:&error];
-   // member.idMember = idMember;
-    BOOL  isSuccess = [[DataHandler sharedManager] updateMemberInfo:member isSync:false  error:&error];
-    NSAssert(isSuccess, error.description);
-    if(isSuccess)
-        [_delegate reloadDataMember];
-    [self.navigationController popViewControllerAnimated:YES];
+    if([member.name isEqualToString:self.aMemberCurr.name])
+    {
+        BOOL  isSuccess = [[DataHandler sharedManager] updateMemberInfo:member isSync:false  error:&error];
+        NSAssert(isSuccess, error.description);
+        if(isSuccess)
+            [_delegate reloadDataMember];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        if(![[DataHandler sharedManager] checkExistMemberWithName:member.name error:&error])
+        {
+            if(error == nil)
+            {
+                BOOL  isSuccess = [[DataHandler sharedManager] updateMemberInfo:member isSync:false  error:&error];
+                NSAssert(isSuccess, error.description);
+                if(isSuccess)
+                    [_delegate reloadDataMember];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
+        else
+        {
+            UIAlertView *alertExistUser = [[UIAlertView alloc] initWithTitle:nil message:@"User Name existed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alertExistUser show];
+        }
 
+    }
 }
 - (void)didReceiveMemoryWarning
 {
@@ -289,25 +313,45 @@
         member.genderValue = genderChosen;
         member.relationship = txtRelationship.text;
         
-        NSString *idMember = nil;
-        BOOL isSuccess = [[DataHandler sharedManager] insertMember:member isSync:false idMember:&idMember error:&error];
-       // DLog(@"%@",idMember);
-       // NSAssert(isSuccess, error.description);
-        if(isSuccess)
-           [_delegate reloadDataMember];
-        [self.navigationController popViewControllerAnimated:YES];
-
+     
+        if(![[DataHandler sharedManager] checkExistMemberWithName:member.name error:&error])
+        {
+            if(error == nil)
+            {
+                 NSString *idMember = nil;
+                BOOL isSuccess = [[DataHandler sharedManager] insertMember:member isSync:false idMember:&idMember error:&error];
+                // DLog(@"%@",idMember);
+                // NSAssert(isSuccess, error.description);
+                if(isSuccess)
+                    [_delegate reloadDataMember];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
+        else
+        {
+            UIAlertView *alertExistUser = [[UIAlertView alloc] initWithTitle:nil message:@"User Name existed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alertExistUser show];
+        }
     }
     else
     {
-        NSError *error = nil;
-        BOOL isDeleteAMember = [[DataHandler sharedManager] updateDeletedMember:self.aMemberCurr.idMember error:&error];
-        if (isDeleteAMember)
-            [_delegate reloadDataMember];
-        [self.navigationController popViewControllerAnimated:YES];
+        
+        UIAlertView *alertDelete = [[UIAlertView alloc] initWithTitle:nil message:@"Are you sure want to delete this member ?" delegate:self cancelButtonTitle:@"Cancel"otherButtonTitles:@"OK", nil];
+        [alertDelete show];
     }
 }
-
+#pragma mark - UIAlert Delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        NSError *error = nil;
+         BOOL isDeleteAMember = [[DataHandler sharedManager] updateDeletedMember:self.aMemberCurr.idMember error:&error];
+         if (isDeleteAMember)
+         [_delegate reloadDataMember];
+         [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 -(void)createDataGender
 {
     arrGender = [NSArray arrayWithObjects:@"Male",@"Female", nil];

@@ -29,7 +29,8 @@
  * get all Member in database
  */
 - (NSMutableArray*)allocMembersWithError:(NSError**)error;
-- (BOOL)checkExistMemberWithId:(NSString*)idMember error:(NSError**)error;
+//- (BOOL)checkExistMemberWithId:(NSString*)idMember error:(NSError**)error;
+- (BOOL)checkExistMemberWithName:(NSString*)nameMember error:(NSError**)error;
 -(BOOL)insertMember:(Member*)aMember isSync:(BOOL)isSync idMember:(NSString**)idMember error:(NSError**)error;
 //Use to update member info
 -(BOOL)updateMemberInfo:(Member*)aMember isSync:(BOOL)isSync error:(NSError**)error;
@@ -43,7 +44,8 @@
  * get all Activity in databse
  */
 - (NSMutableArray*)allocAcitivitiesWithError:(NSError**)error;
-- (BOOL)checkExistActivityWithId:(NSString*)idActivity error:(NSError**)error;
+//- (BOOL)checkExistActivityWithId:(NSString*)idActivity error:(NSError**)error;
+- (BOOL)checkExistActivityWithName:(NSString*)nameActivity error:(NSError**)error;
 -(BOOL)insertActivity:(Activity*)anActivity isSync:(BOOL)isSync idActivity:(NSString**)idActivity error:(NSError**)error;
 //Use to update activity info
 -(BOOL)updateActivityInfo:(Activity*)anActivity isSync:(BOOL)isSync error:(NSError**)error;
@@ -61,11 +63,13 @@
 -(BOOL)updatePromiseInfo:(Promise*)aPromise error:(NSError**)error;
 //Use to delete promise info
 -(BOOL)updateDeletedPromise:(NSString*)idPromise idMember:(NSString*)idMember error:(NSError**)error;
+-(BOOL)updatePromiseOverDue:(NSError**)error isMember:(NSString*) idMember DateCurrent:(NSString *)date;
 /*
  * get all Histories in databse
  */
 - (NSMutableArray*)allocHistoriesWithError:(NSError**)error idMember:(NSString*)idMember;
 -(BOOL)insertHistory:(History*)aHistory idMember:(NSString*)idMember idActivity:(NSString*)idActivity error:(NSError**)error;
-
+-(NSMutableArray *) allocHistoryWithDay:(NSString*) idMember day:(NSString*)dateDay error:(NSError**)error;
+-(NSMutableArray *) allocHistoryWithWeekAndMonth:(NSString*) idMember dayCurrent:(NSString*)dateCurr BeforeWeekandMonth:(NSString*)dateBefore error:(NSError**)error;
 @end
 

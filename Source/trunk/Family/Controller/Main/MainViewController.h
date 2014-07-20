@@ -11,6 +11,6 @@
 #import "MemberInfoView.h"
 @interface MainViewController : UIViewController 
 @property (nonatomic, retain) Member *aMemberCurr;
--(void) createViewMemberInfo;
+-(void) setDataForTableView:(int) index;
 @property (nonatomic, retain) MemberInfoView *aMemberInfoCurr;
 @end

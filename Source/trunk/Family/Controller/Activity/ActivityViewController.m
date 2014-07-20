@@ -69,15 +69,14 @@
             historyItem.memberName = self.member.name;
             historyItem.activityName = item.name;
             historyItem.imageUrl = item.strAvatar;
-            historyItem.totalPoint = item.unitTypeValue * item.time;
-           /* NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            [formatter setDateFormat:@"dd/MM/yyyy"];
+            historyItem.totalPoint = item.point * item.time;
+            historyItem.time = [NSString stringWithFormat:@"%d",item.time];
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"MM/dd/yyyy"];
             NSString *dateCurr = [formatter stringFromDate:[NSDate date]];
-            historyItem.timeTamp = dateCurr;*/
+            historyItem.date = dateCurr;
             BOOL isSuccess = [[DataHandler sharedManager] insertHistory:historyItem idMember:self.member.idMember idActivity:item.idActivity error:&error];
         }
-       
-        
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

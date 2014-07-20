@@ -127,11 +127,13 @@ static DataHandler *sharedDataHandler = nil;
             [array addObject:item];
         }
     }
+    [self closeDB:db];
+
     return array;
      
 }
 
-- (BOOL)checkExistMemberWithId:(NSString*)idMember error:(NSError**)error
+/*- (BOOL)checkExistMemberWithId:(NSString*)idMember error:(NSError**)error
 {
     
     BOOL isExist = NO;
@@ -157,8 +159,33 @@ static DataHandler *sharedDataHandler = nil;
     [self closeDB:db];
     return isExist;
 }
-
-
+*/
+- (BOOL)checkExistMemberWithName:(NSString*)nameMember error:(NSError**)error
+{
+    
+    BOOL isExist = NO;
+    
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [db lastError];
+        return NO;
+    }
+    
+    
+    FMResultSet *results = [db executeQuery:@"select * from Member where name=? and deleted = ?",nameMember,[NSNumber numberWithBool:false]];
+    if ([db hadError]) {
+        DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
+        *error = [db lastError];
+        [self closeDB:db];
+        return NO;
+    }
+    
+    while ([results next]) {
+        isExist = YES;
+    }
+    [self closeDB:db];
+    return isExist;
+}
 -(BOOL)insertMember:(Member*)aMember isSync:(BOOL)isSync idMember:(NSString**)idMember error:(NSError**)error
 {
     
@@ -177,8 +204,8 @@ static DataHandler *sharedDataHandler = nil;
 
         return NO;
     }
-    
-    NSString *idString = [Utilities idWithName:aMember.name];
+    NSString *idString = [ Utilities idWithDate];
+   // NSString *idString = [Utilities idWithName:aMember.name];
     BOOL isDirty = true;
     if (isSync) {
         isDirty = false;
@@ -229,6 +256,8 @@ static DataHandler *sharedDataHandler = nil;
             
         }
         DLog(@"update Error:%@",[[db lastError] localizedDescription]);
+        [self closeDB:db];
+
         return NO;
     }
     [self closeDB:db];
@@ -264,6 +293,8 @@ static DataHandler *sharedDataHandler = nil;
             
         }
         DLog(@"update Error:%@",[[db lastError] localizedDescription]);
+        [self closeDB:db];
+
         return NO;
     }
     [self closeDB:db];
@@ -318,9 +349,12 @@ static DataHandler *sharedDataHandler = nil;
     {
         Member * item = [DataParser allocMemberWithResults:results];
         if (item) {
+            [self closeDB:db];
             return item;
         }
     }
+    [self closeDB:db];
+
     return nil;
 }
 #pragma mark Activities
@@ -349,6 +383,8 @@ static DataHandler *sharedDataHandler = nil;
             [array addObject:item];
         }
     }
+    [self closeDB:db];
+
     return array;
 }
 
@@ -358,21 +394,26 @@ static DataHandler *sharedDataHandler = nil;
     
     if (anActivity==nil) {
         *error = [NSError errorWithDomain:@"Activity object is nil" code:121 userInfo:nil];
+
         return NO;
     }
     if (anActivity.name.length == 0) {
         *error = [NSError errorWithDomain:@"Activity name is nil" code:121 userInfo:nil];
+
         return NO;
 
     }
     FMDatabase *db = [self database];
     if (![self openDB:db]) {
         *error = [NSError errorWithDomain:@"Can't open database" code:122 userInfo:nil];
+        [self closeDB:db];
+
         
         return NO;
     }
     
-    NSString *idString = [Utilities idWithName:anActivity.name];
+   // NSString *idString = [Utilities idWithName:anActivity.name];
+     NSString *idString = [ Utilities idWithDate];
     *idActivity = idString;
     BOOL isDirty = true;
     if (isSync) {
@@ -394,7 +435,7 @@ static DataHandler *sharedDataHandler = nil;
     
 }
 
-- (BOOL)checkExistActivityWithId:(NSString*)idActivity error:(NSError**)error
+/*- (BOOL)checkExistActivityWithId:(NSString*)idActivity error:(NSError**)error
 {
     
     BOOL isExist = NO;
@@ -407,6 +448,32 @@ static DataHandler *sharedDataHandler = nil;
     
     
     FMResultSet *results = [db executeQuery:@"select * from Activity where id=? and deleted = ?",idActivity,[NSNumber numberWithBool:false]];
+    if ([db hadError]) {
+        DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
+        *error = [db lastError];
+        [self closeDB:db];
+        return NO;
+    }
+    
+    while ([results next]) {
+        isExist = YES;
+    }
+    [self closeDB:db];
+    return isExist;
+}*/
+- (BOOL)checkExistActivityWithName:(NSString*)nameActivity error:(NSError**)error
+{
+    
+    BOOL isExist = NO;
+    
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [db lastError];
+        return NO;
+    }
+    
+    
+    FMResultSet *results = [db executeQuery:@"select * from Activity where name=? and deleted = ?",nameActivity,[NSNumber numberWithBool:false]];
     if ([db hadError]) {
         DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
         *error = [db lastError];
@@ -450,6 +517,8 @@ static DataHandler *sharedDataHandler = nil;
             
         }
         DLog(@"update Error:%@",[[db lastError] localizedDescription]);
+        [self closeDB:db];
+
         return NO;
     }
     [self closeDB:db];
@@ -485,6 +554,7 @@ static DataHandler *sharedDataHandler = nil;
             
         }
         DLog(@"update Error:%@",[[db lastError] localizedDescription]);
+        [self closeDB:db];
         return NO;
     }
     [self closeDB:db];
@@ -546,6 +616,7 @@ static DataHandler *sharedDataHandler = nil;
             [array addObject:item];
         }
     }
+    [self closeDB:db];
     return array;
 }
 
@@ -573,8 +644,10 @@ static DataHandler *sharedDataHandler = nil;
             [array addObject:item];
         }
     }
+    [self closeDB:db];
     return array;
 }
+
 
 - (BOOL)checkExistPromiseWithId:(NSString*)idPromise error:(NSError**)error
 {
@@ -620,8 +693,8 @@ static DataHandler *sharedDataHandler = nil;
         
         return NO;
     }
-    
-    NSString *idString = [Utilities idWithName:aPromise.name];
+     NSString *idString = [ Utilities idWithDate];
+   // NSString *idString = [Utilities idWithName:aPromise.name];
     BOOL isSuccess = [db executeUpdate:@"insert into Promise(id, idMember,name, description, duedate, status,deleted,dirty) values(?,?,?,?,?,?,?,?)",idString,aPromise.idMember, aPromise.name,aPromise.description,aPromise.dueDate,[NSNumber numberWithInt:0],[NSNumber numberWithBool:false],[NSNumber numberWithBool:true]];
     if (!isSuccess) {
         if (error!=NULL) {
@@ -638,7 +711,37 @@ static DataHandler *sharedDataHandler = nil;
     
     
 }
-
+-(BOOL)updatePromiseOverDue:(NSError**)error isMember:(NSString*) idMember DateCurrent:(NSString *)date
+{
+    
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        if (error!=NULL) {
+            *error = [db lastError];
+            
+        }
+        DLog(@"Update Error:%@",[[db lastError] localizedDescription]);
+        return NO;
+    }
+    
+    
+    [db executeUpdate:@"update Promise set status = '2' where idMember = ? and status = '0' and duedate < ? and deleted= ?",idMember,date,[NSNumber numberWithBool:false]];
+    
+     /*[db executeUpdate:@"update Promise set status = '2'"];*/
+    
+    if ([db hadError]) {
+        if (error!=NULL) {
+            *error = [db lastError];
+            
+        }
+        DLog(@"update Error:%@",[[db lastError] localizedDescription]);
+        return NO;
+    }
+    [self closeDB:db];
+    
+    return YES;
+    
+}
 -(BOOL)updatePromiseInfo:(Promise*)aPromise error:(NSError**)error
 {
     
@@ -667,8 +770,6 @@ static DataHandler *sharedDataHandler = nil;
     [self closeDB:db];
     
     return YES;
-    
-    
     
 }
 
@@ -717,7 +818,7 @@ static DataHandler *sharedDataHandler = nil;
         return nil;
     }
     
-    FMResultSet *results = [db executeQuery:@"select m.name as memberName,a.name as activityName, h.imageUrl,h.point from History h, Member m, Activity a where h.idMember=m.id and h.idActivity=a.id and m.id = ?",idMember];
+    FMResultSet *results = [db executeQuery:@"select m.name as memberName,a.name as activityName, h.imageUrl,h.point,h.time from History h, Member m, Activity a where h.idMember=m.id and h.idActivity=a.id and m.id = ?",idMember];
     if ([db hadError]) {
         DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
         *error = [db lastError];
@@ -734,7 +835,71 @@ static DataHandler *sharedDataHandler = nil;
             [array addObject:item];
         }
     }
+    [self closeDB:db];
     return array;
+}
+-(NSMutableArray *) allocHistoryWithWeekAndMonth:(NSString*) idMember dayCurrent:(NSString*)dateCurr BeforeWeekandMonth:(NSString*)dateBefore error:(NSError**)error
+{
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [db lastError];
+        return nil;
+    }
+    
+    /* FMResultSet *results = [db executeQuery:@"select m.name as memberName,a.name as activityName, h.imageUrl,h.point from History h, Member m, Activity a where h.idMember=m.id and h.idActivity=a.id and m.id = ?",idMember];*/
+    FMResultSet *results = [db executeQuery:@"select a.name as activityName,h.date, SUM (h.point) as totalPoint from History h,Activity a where idMember =? and h.idActivity=a.id AND (h.date BETWEEN ? AND ?) Group by idActivity Order by totalPoint DESC",idMember,dateBefore,dateCurr];
+    if ([db hadError]) {
+        DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
+        *error = [db lastError];
+        [self closeDB:db];
+        return nil;
+    }
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    while ([results next])
+    {
+        History * item = [DataParser allocHistoryWithResultsGroupByIdActivity:results];
+        if (item) {
+            [array addObject:item];
+        }
+    }
+    
+    [self closeDB:db];
+    return array;
+    
+}
+
+-(NSMutableArray *) allocHistoryWithDay:(NSString*) idMember day:(NSString*)dateDay error:(NSError**)error
+{
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [db lastError];
+        return nil;
+    }
+    
+   /* FMResultSet *results = [db executeQuery:@"select m.name as memberName,a.name as activityName, h.imageUrl,h.point from History h, Member m, Activity a where h.idMember=m.id and h.idActivity=a.id and m.id = ?",idMember];*/
+    FMResultSet *results = [db executeQuery:@"select a.name as activityName, SUM (h.point) as totalPoint from History h,Activity a where idMember = ? and h.idActivity=a.id and h.date=? Group by idActivity Order by totalPoint DESC",idMember,dateDay ];
+    if ([db hadError]) {
+        DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
+        *error = [db lastError];
+        [self closeDB:db];
+        return nil;
+    }
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    while ([results next])
+    {
+        History * item = [DataParser allocHistoryWithResultsGroupByIdActivity:results];
+        if (item) {
+            [array addObject:item];
+        }
+    }
+    [self closeDB:db];
+
+    return array;
+
 }
 
 -(BOOL)insertHistory:(History*)aHistory idMember:(NSString*)idMember idActivity:(NSString*)idActivity error:(NSError**)error
@@ -753,7 +918,7 @@ static DataHandler *sharedDataHandler = nil;
         return NO;
     }
     
-    BOOL isSuccess = [db executeUpdate:@"insert into History(idMember,idActivity, imageUrl, point, deleted,dirty) values(?,?,?,?,?,?)",idMember, idActivity,aHistory.imageUrl,[NSNumber numberWithInt:aHistory.totalPoint],[NSNumber numberWithBool:false],[NSNumber numberWithBool:true]];
+    BOOL isSuccess = [db executeUpdate:@"insert into History(idMember,idActivity, imageUrl, point, deleted,dirty,date,time) values(?,?,?,?,?,?,?)",idMember, idActivity,aHistory.imageUrl,[NSNumber numberWithInt:aHistory.totalPoint],[NSNumber numberWithBool:false],[NSNumber numberWithBool:true],aHistory.date,aHistory.time];
     if (!isSuccess) {
         if (error!=NULL) {
             *error = [db lastError];
@@ -766,9 +931,6 @@ static DataHandler *sharedDataHandler = nil;
     
     [self closeDB:db];
     return YES;
-
-    
-    
 }
 
 

@@ -8,7 +8,11 @@
 
 #import "CircleView.h"
 #import "Activity.h"
+#import "DataHandler.h"
+#import "contant.h"
+#import "History.h"
 #import "SlicesActivityTableViewCell.h"
+#import "Utilities.h"
 @interface CircleView()
 {
     IBOutlet XYPieChart *pieChart;
@@ -31,36 +35,81 @@
     }
     return self;
 }
--(void) createCircleSlices
+-(void) createCircleSlices:(int) index
 {
     [self createListSlicesName];
     [self createListSlicesColor];
-    [self createSlices];
+    [self createSlices:index];
     //[tblViewSliceActivity reloadData];
     tblViewSliceActivity.delegate = self;
     tblViewSliceActivity.dataSource = self;
 }
 
--(void) createSlices
+-(void) createSlices:(int) index
 {
+    arrSlices = [NSMutableArray array];
+    NSMutableArray *arrData = nil;
     
-    arrSlices = [NSMutableArray arrayWithCapacity:10];
-    
-    for(int i = 0; i < 5; i ++)
+    if (self.idMemberCurr)
     {
-        Activity *itemActivity = [[Activity alloc] init];
-        //itemActivity.point = [NSNumber numberWithInt:rand()%60+20];
-        itemActivity.point = rand()%60 +20;
-        itemActivity.name = [arrSlicesName objectAtIndex:i];
-        itemActivity.color = [arrSlicesColor objectAtIndex:i];
-        [arrSlices addObject:itemActivity];
+        NSError *error = nil;
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MM/dd/yyyy"];
+        NSString *dateCurrent = [formatter stringFromDate:[NSDate date]];
+        
+        switch (index) {
+            case TAG_OF_BUTON_DAY:
+            {
+                arrData = [[DataHandler sharedManager] allocHistoryWithDay:self.idMemberCurr day:dateCurrent error:&error];
+                break;
+            }
+            case TAG_OF_BUTTON_WEEK:
+            {
+                NSString *strBeforeDate = [Utilities getDateBefore:-7];
+                arrData = [[DataHandler sharedManager] allocHistoryWithWeekAndMonth:self.idMemberCurr dayCurrent:dateCurrent BeforeWeekandMonth:strBeforeDate error:&error];
+                break;
+            }
+            case TAG_OF_BUTTON_MONTH:
+            {
+                NSString *strBeforeDate = [Utilities getDateBefore:-30];
+                arrData = [[DataHandler sharedManager] allocHistoryWithWeekAndMonth:self.idMemberCurr dayCurrent:dateCurrent BeforeWeekandMonth:strBeforeDate error:&error];
+                break;
+            }
+   
+            default:
+                break;
+        }
     }
-    
+    int totalPointOther = 0;
+    if(arrData.count > 0)
+    {
+        for(int i =0; i< [arrData count]; i++)
+        {
+            History *aHistory = [arrData objectAtIndex:i];
+            if(i >= MAX_ITEM_CHART_CIRCLE -1)
+            {
+                totalPointOther += aHistory.totalPoint;
+                if(i == [arrData count]- 1)
+                {
+                    History *aHistoryOther = [[History alloc] init];
+                    aHistoryOther.activityName = @"Other";
+                    aHistoryOther.totalPoint = totalPointOther;
+                    [arrSlices addObject:aHistoryOther];
+                }
+            }
+            else
+            {
+                [arrSlices addObject:aHistory];
+            }
+        }
+        
+    }
+   
     [pieChart setDataSource:self];
     [pieChart setStartPieAngle:M_PI_2];
     [pieChart setAnimationSpeed:1.0];
-    [pieChart setLabelFont:[UIFont fontWithName:@"DBLCDTempBlack" size:14]];
-    [pieChart setLabelRadius:pieChart.frame.size.height/4];
+    [pieChart setLabelFont:[UIFont fontWithName:@"DBLCDTempBlack" size:12]];
+    [pieChart setLabelRadius:pieChart.frame.size.height/3];
     [pieChart setShowPercentage:YES];
     [lblPercentagel.layer setCornerRadius:lblPercentagel.frame.size.width/2];
     //[pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
@@ -69,14 +118,21 @@
     [pieChart setLabelShadowColor:[UIColor blackColor]];
     [pieChart reloadData];
 }
+
 -(void) createListSlicesColor
 {
     arrSlicesColor =[NSArray arrayWithObjects:
                      [UIColor colorWithRed:246/255.0 green:155/255.0 blue:0/255.0 alpha:1],
+                     [UIColor colorWithRed:248/255.0 green:8/255.0 blue:36/255.0 alpha:1],
+                      [UIColor colorWithRed:138/255.0 green:15/255.0 blue:242/255.0 alpha:1],
+                     [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1],
                      [UIColor colorWithRed:129/255.0 green:195/255.0 blue:29/255.0 alpha:1],
                      [UIColor colorWithRed:62/255.0 green:173/255.0 blue:219/255.0 alpha:1],
-                     [UIColor colorWithRed:229/255.0 green:66/255.0 blue:115/255.0 alpha:1],
-                     [UIColor colorWithRed:148/255.0 green:141/255.0 blue:139/255.0 alpha:1],nil];
+                     [UIColor colorWithRed:245/255.0 green:133/255.0 blue:238/255.0 alpha:1],
+                     [UIColor colorWithRed:10/255.0 green:38/255.0 blue:243/255.0 alpha:1],
+                     [UIColor colorWithRed:228/255.0 green:242/255.0 blue:67/255.0 alpha:1],
+                     [UIColor colorWithRed:120/255.0 green:120/255.0 blue:110/255.0 alpha:1],nil];
+    
 }
 -(void) createListSlicesName
 {
@@ -93,7 +149,7 @@
 - (CGFloat)pieChart:(XYPieChart *)pieChart valueForSliceAtIndex:(NSUInteger)index
 {
     //return [[self.slices objectAtIndex:index] intValue];
-    int aItemSlice = [[arrSlices objectAtIndex:index] point];
+    int aItemSlice = [[arrSlices objectAtIndex:index] totalPoint];
     totalSlices += aItemSlice;
     lblPercentagel.text = [NSString stringWithFormat:@"%d",totalSlices];
     return aItemSlice;
@@ -101,7 +157,7 @@
 
 - (UIColor *)pieChart:(XYPieChart *)pieChart colorForSliceAtIndex:(NSUInteger)index
 {
-    return [[arrSlices objectAtIndex:index] color];
+    return [arrSlicesColor objectAtIndex:index];
 }
 #pragma mark TableView DataSource - Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -135,8 +191,9 @@
     }
     // Configure the cell...
     [cell setBackgroundColor:[UIColor clearColor]];
-    Activity *aActivity = [arrSlices objectAtIndex:indexPath.row];
-    [cell setObjectForCell:aActivity];
+    History *aHistory = [arrSlices objectAtIndex:indexPath.row];
+    cell.colorCurr = [arrSlicesColor objectAtIndex:indexPath.row];
+    [cell setObjectForCell:aHistory];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

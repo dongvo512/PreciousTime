@@ -27,10 +27,10 @@
 
     // Configure the view for the selected state
 }
--(void)setObjectForCell:(Activity *) aActivity
+-(void)setObjectForCell:(History *) aHistory
 {
-    [imgColor setBackgroundColor:aActivity.color];
-    lblName.text = aActivity.name;
+    [imgColor setBackgroundColor:self.colorCurr];
+    lblName.text = aHistory.activityName;
     
 }
 @end

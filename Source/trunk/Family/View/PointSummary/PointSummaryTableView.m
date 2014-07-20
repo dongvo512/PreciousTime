@@ -11,6 +11,8 @@
 #import "Promise.h"
 #import "DataHandler.h"
 #import "History.h"
+#import "contant.h"
+#import "Utilities.h"
 @interface PointSummaryTableView()
 {
     NSMutableArray *arrHistories;
@@ -44,22 +46,25 @@
 -(void) reSizeForTableView
 {
     CGRect frameSelf = self.frame;
-    frameSelf.size.height = HEIGHT_CELL * (ITEM_ACTIVITY + ITEM_PROMISE )+ arrGenPointSummaryGen.count *HEIGHT_TITLE_FOR_HEADER;
+    frameSelf.origin.x = 0;
+    frameSelf.origin.y = 0;
+    frameSelf.size.height = HEIGHT_CELL * (arrHistories.count +arrPromise.count) + arrGenPointSummaryGen.count *HEIGHT_TITLE_FOR_HEADER;
     self.frame = frameSelf;
 }
--(void) setDataForTableView
+-(void) setDataForTableView:(int) index
 {
     arrGenPointSummaryGen = [NSArray arrayWithObjects:@"Activity point",@"Promise", nil];
     arrPointSummary = [NSMutableArray array];
-    [arrPointSummary addObject:[self allocDataActivity]];
+    [arrPointSummary addObject:[self allocDataActivity:index]];
     [arrPointSummary addObject:[self allocDataPromise]];
     self.delegate = self;
     self.dataSource = self;
+    [self reloadData];
     [self reSizeForTableView];
 }
--(NSMutableArray *)allocDataActivity
+-(NSMutableArray *)allocDataActivity:(int) index
 {
-    if (self.idMember) {
+    /*if (self.idMember) {
         NSError *error = nil;
         arrHistories = [[DataHandler sharedManager] allocHistoriesWithError:&error idMember:self.idMember];
         /*
@@ -79,9 +84,39 @@
          [arrActivities addObject:aActivity];
          }
          */
-        return arrHistories;
+    if (self.idMember)
+    {
+        NSError *error = nil;
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MM/dd/yyyy"];
+        NSString *dateCurrent = [formatter stringFromDate:[NSDate date]];
+        
+        switch (index) {
+            case TAG_OF_BUTON_DAY:
+            {
+                arrHistories = [[DataHandler sharedManager] allocHistoryWithDay:self.idMember day:dateCurrent error:&error];
+                break;
+            }
+            case TAG_OF_BUTTON_WEEK:
+            {
+                NSString *strBeforeDate = [Utilities getDateBefore:-7];
+                arrHistories = [[DataHandler sharedManager] allocHistoryWithWeekAndMonth:self.idMember dayCurrent:dateCurrent BeforeWeekandMonth:strBeforeDate error:&error];
+                break;
+            }
+            case TAG_OF_BUTTON_MONTH:
+            {
+                NSString *strBeforeDate = [Utilities getDateBefore:-30];
+                arrHistories = [[DataHandler sharedManager] allocHistoryWithWeekAndMonth:self.idMember dayCurrent:dateCurrent BeforeWeekandMonth:strBeforeDate error:&error];
+                break;
+            }
+                
+            default:
+                break;
+        }
+         return arrHistories;
     }
-    return nil;
+    else
+        return nil;
 }
 -(NSMutableArray *)allocDataPromise
 {

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Activity.h"
+#import "History.h"
 @interface SlicesActivityTableViewCell : UITableViewCell
--(void)setObjectForCell:(Activity *) aActivity;
+-(void)setObjectForCell:(History *) aHistory;
+@property (nonatomic, retain) UIColor *colorCurr;
 @end

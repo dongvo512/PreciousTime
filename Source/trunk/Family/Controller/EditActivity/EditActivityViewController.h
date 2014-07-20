@@ -11,7 +11,7 @@
 @protocol EditActivityViewControllerDelegate <NSObject>
 -(void)reloadDataActivity;
 @end
-@interface EditActivityViewController : UIViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
+@interface EditActivityViewController : UIViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate>
 {
         id <EditActivityViewControllerDelegate> _delegate;
 }

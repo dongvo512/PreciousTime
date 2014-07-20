@@ -7,13 +7,18 @@
 //
 
 #import "LoginViewController.h"
-
+#import "Utilities.h"
 @interface LoginViewController ()
+{
+    IBOutlet UITextField *txtPass;
+    IBOutlet UITextField *txtName;
+}
+
 
 @end
 
 @implementation LoginViewController
-
+#define KEY_BOARD_HEIGHT 216
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -30,7 +35,15 @@
     self.title = @"Login";
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     [[self navigationController] setNavigationBarHidden:NO animated:NO];
+   
+}
 
+
+#pragma mark - UITextField Delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning

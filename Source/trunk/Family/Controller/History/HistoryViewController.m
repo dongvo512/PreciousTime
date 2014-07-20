@@ -68,9 +68,10 @@
     NSString *strDate = aHistory.timeTamp;
     NSString *strActivity = aHistory.activityName;
     NSString *strMemberName = aHistory.memberName;
+    NSString *strTime = aHistory.time;
     
     [cell.textLabel setFont:[UIFont systemFontOfSize:13]];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@:%@ - %@ - Time",strDate,strActivity,strMemberName];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@:%@ - %@ - %@",strDate,strActivity,strMemberName,strTime];
     cell.imageView.image = [UIImage imageNamed:aHistory.imageUrl];
     return cell;
 }

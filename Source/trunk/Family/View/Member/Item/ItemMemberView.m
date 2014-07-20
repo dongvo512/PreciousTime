@@ -38,9 +38,11 @@
 {
     memberCurr = aMember;
     NSLog(@"%@",aMember.avatarUrl);
-    NSData *data = [[NSFileManager defaultManager] contentsAtPath:aMember.avatarUrl];
-    imgAvatar.image = [UIImage imageWithData:data];
-
+     NSData *data = [[NSFileManager defaultManager] contentsAtPath:aMember.avatarUrl];
+    if(data != nil)
+        imgAvatar.image = [UIImage imageWithData:data];
+    else
+        imgAvatar.image = [UIImage imageNamed:@"username.png"];
     lblName.text = aMember.name;
    
 }

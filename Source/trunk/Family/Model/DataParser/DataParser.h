@@ -18,4 +18,5 @@
 + (Activity*)allocAcitiviyWithResults:(FMResultSet*)results;
 + (Promise*)allocPromiseWithResults:(FMResultSet*)results;
 + (History*)allocHistoryWithResults:(FMResultSet*)results;
++(History*)allocHistoryWithResultsGroupByIdActivity:(FMResultSet*)results;
 @end

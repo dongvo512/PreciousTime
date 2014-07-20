@@ -8,6 +8,7 @@
 
 #import "PromiseTableViewCell.h"
 #import "DataHandler.h"
+#import "Utilities.h"
 @interface PromiseTableViewCell()
 {
     IBOutlet UILabel *lblRank;
@@ -35,8 +36,8 @@
 {
     aPromiseCurr = aPromise;
     lblRank.text = aPromise.name;
-    lblDate.text = aPromise.dueDate;
-    
+    NSString *dueDate = [Utilities convertMMddyyyyToddMMyyyy:aPromise.dueDate];
+    lblDate.text = dueDate;
     
    if(aPromise.status == 0)
        [btnPick setImage:[UIImage imageNamed:@"btn_nonepick.png"] forState:UIControlStateNormal];

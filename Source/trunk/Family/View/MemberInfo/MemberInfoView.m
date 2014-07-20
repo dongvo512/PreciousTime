@@ -30,6 +30,7 @@
  
     NSLog(@"%@",aMember.avatarUrl);
     NSData *data = [[NSFileManager defaultManager] contentsAtPath:aMember.avatarUrl];
+    if(data != nil)
     imgAvatar.image = [UIImage imageWithData:data];
     lblBirthDay.text = aMember.bithday;
 }
