@@ -21,4 +21,5 @@
 +(NSString *)getStringCurrentWithDateMMddyyyy;
 +(NSString *)convertMMddyyyyToddMMyyyy:(NSString *) stringDate;
 +(NSString *)convertddMMyyyyToMMddyyyy:(NSString *) stringDate;
++(NSString *)getYear:(NSDate *) date;
 @end

@@ -32,8 +32,14 @@
     NSData *data = [[NSFileManager defaultManager] contentsAtPath:aMember.avatarUrl];
     if(data != nil)
     imgAvatar.image = [UIImage imageWithData:data];
+    NSString *yearCurr = [Utilities getYear:[NSDate date]];
+     NSArray *arrDate = [aMember.bithday componentsSeparatedByString:@"/"];
+    NSString *birthYear = [arrDate objectAtIndex:2];
+    int yearold =  yearCurr.intValue - birthYear.intValue;
+    lblAge.text = [NSString stringWithFormat:@"%d years old",yearold];
     lblBirthDay.text = aMember.bithday;
 }
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

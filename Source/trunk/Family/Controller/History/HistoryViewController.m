@@ -73,7 +73,16 @@
     
     [cell.textLabel setFont:[UIFont systemFontOfSize:13]];
     cell.textLabel.text = [NSString stringWithFormat:@"%@:%@ - %@ - %@ %@",strDate,strActivity,strMemberName,strTime,strUnitType];
-    cell.imageView.image = [UIImage imageNamed:aHistory.imageUrl];
+    UIImage *imgAvatarCurr = [UIImage imageNamed:aHistory.imageUrl];
+    NSData *data = [[NSFileManager defaultManager] contentsAtPath:aHistory.imageUrl];
+    
+    if(data != nil)
+        cell.imageView.image = [UIImage imageWithData:data];
+    else if (imgAvatarCurr != nil)
+        cell.imageView.image = imgAvatarCurr;
+    else
+        cell.imageView.image = [UIImage imageNamed:@"icon_FamLink2.png"];
+    
     return cell;
 }
 -(NSString *) getUnitType:(int) unitType

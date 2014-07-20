@@ -96,6 +96,15 @@
     [formatter setDateFormat:@"MM/dd/yyyy"];
     return [formatter stringFromDate:dateCurent];
 }
++(NSString *)getYear:(NSDate *) date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
+    NSString *stringFromDate = [formatter stringFromDate:date];
+    NSArray *arrDate = [stringFromDate componentsSeparatedByString:@"/"];
+    
+    return [arrDate objectAtIndex:2];
+}
 +(NSString *)getStringCurrentWithDateMMddyyyy
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];

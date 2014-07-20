@@ -83,23 +83,8 @@
     [request setDelegate:self];
     [request startAsynchronous];*/
 }
-- (void)requestFinished:(ASIHTTPRequest *)request
-{
-    NSData *data = [request responseData];
-    NSDictionary *dicData = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-    NSMutableArray *arrData = [dicData objectForKey:@"data"];
-    for(NSDictionary *dicItem in arrData)
-    {
-        Friend *item = [[Friend alloc] init];
-        item.fbID = [dicItem objectForKey:@"id"];
-        item.nameFB = [dicItem objectForKey:@"name"];
-    }
 
-}
-- (void)requestFailed:(ASIHTTPRequest *)request
-{
-    NSLog(@"%@",request.error);
-}
+
 -(void)sendInvite
 {
 }

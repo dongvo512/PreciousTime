@@ -136,15 +136,6 @@
 		84A4FE041976366B00063089 /* InviteFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A4FE021976366B00063089 /* InviteFriendViewController.xib */; };
 		84A4FE081976391300063089 /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4FE071976391300063089 /* Friend.m */; };
 		84A4FE0B19766BC200063089 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A4FE0A19766BC200063089 /* FacebookSDK.framework */; };
-		84A4FE231976849600063089 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4FE0E1976849600063089 /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		84A4FE241976849600063089 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4FE111976849600063089 /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		84A4FE251976849600063089 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4FE131976849600063089 /* ASIDataDecompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		84A4FE261976849600063089 /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4FE151976849600063089 /* ASIDownloadCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		84A4FE271976849600063089 /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4FE171976849600063089 /* ASIFormDataRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		84A4FE281976849600063089 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4FE191976849600063089 /* ASIHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		84A4FE291976849600063089 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4FE1D1976849600063089 /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		84A4FE2A1976849600063089 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4FE1F1976849600063089 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		84A4FE2B1976849600063089 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4FE221976849600063089 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84A4FE2D197685AB00063089 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A4FE2C197685AB00063089 /* CFNetwork.framework */; };
 		84A4FE2F197685BD00063089 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A4FE2E197685BD00063089 /* SystemConfiguration.framework */; };
 		84A4FE31197685C800063089 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A4FE30197685C800063089 /* MobileCoreServices.framework */; };
@@ -369,28 +360,6 @@
 		84A4FE061976391300063089 /* Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friend.h; sourceTree = "<group>"; };
 		84A4FE071976391300063089 /* Friend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friend.m; sourceTree = "<group>"; };
 		84A4FE0A19766BC200063089 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = Library/FacebookeSDK/FacebookSDK.framework; sourceTree = "<group>"; };
-		84A4FE0D1976849600063089 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
-		84A4FE0E1976849600063089 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
-		84A4FE0F1976849600063089 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
-		84A4FE101976849600063089 /* ASIDataCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataCompressor.h; sourceTree = "<group>"; };
-		84A4FE111976849600063089 /* ASIDataCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataCompressor.m; sourceTree = "<group>"; };
-		84A4FE121976849600063089 /* ASIDataDecompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataDecompressor.h; sourceTree = "<group>"; };
-		84A4FE131976849600063089 /* ASIDataDecompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataDecompressor.m; sourceTree = "<group>"; };
-		84A4FE141976849600063089 /* ASIDownloadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDownloadCache.h; sourceTree = "<group>"; };
-		84A4FE151976849600063089 /* ASIDownloadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDownloadCache.m; sourceTree = "<group>"; };
-		84A4FE161976849600063089 /* ASIFormDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIFormDataRequest.h; sourceTree = "<group>"; };
-		84A4FE171976849600063089 /* ASIFormDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIFormDataRequest.m; sourceTree = "<group>"; };
-		84A4FE181976849600063089 /* ASIHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequest.h; sourceTree = "<group>"; };
-		84A4FE191976849600063089 /* ASIHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIHTTPRequest.m; sourceTree = "<group>"; };
-		84A4FE1A1976849600063089 /* ASIHTTPRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestConfig.h; sourceTree = "<group>"; };
-		84A4FE1B1976849600063089 /* ASIHTTPRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestDelegate.h; sourceTree = "<group>"; };
-		84A4FE1C1976849600063089 /* ASIInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIInputStream.h; sourceTree = "<group>"; };
-		84A4FE1D1976849600063089 /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIInputStream.m; sourceTree = "<group>"; };
-		84A4FE1E1976849600063089 /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
-		84A4FE1F1976849600063089 /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASINetworkQueue.m; sourceTree = "<group>"; };
-		84A4FE201976849600063089 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
-		84A4FE211976849600063089 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		84A4FE221976849600063089 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		84A4FE2C197685AB00063089 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		84A4FE2E197685BD00063089 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		84A4FE30197685C800063089 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -824,7 +793,6 @@
 		84534A61196253000031D6DA /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				84A4FE0C1976849600063089 /* ASIHTTPRequest */,
 				84A4FE0919766BC200063089 /* FacebookeSDK */,
 				411D26EF196FD9BF00B3BF9B /* FMDB */,
 				841A2AE2196CED4B00442CAE /* Alert-Background */,
@@ -1142,35 +1110,6 @@
 			path = FacebookeSDK;
 			sourceTree = "<group>";
 		};
-		84A4FE0C1976849600063089 /* ASIHTTPRequest */ = {
-			isa = PBXGroup;
-			children = (
-				84A4FE0D1976849600063089 /* ASIAuthenticationDialog.h */,
-				84A4FE0E1976849600063089 /* ASIAuthenticationDialog.m */,
-				84A4FE0F1976849600063089 /* ASICacheDelegate.h */,
-				84A4FE101976849600063089 /* ASIDataCompressor.h */,
-				84A4FE111976849600063089 /* ASIDataCompressor.m */,
-				84A4FE121976849600063089 /* ASIDataDecompressor.h */,
-				84A4FE131976849600063089 /* ASIDataDecompressor.m */,
-				84A4FE141976849600063089 /* ASIDownloadCache.h */,
-				84A4FE151976849600063089 /* ASIDownloadCache.m */,
-				84A4FE161976849600063089 /* ASIFormDataRequest.h */,
-				84A4FE171976849600063089 /* ASIFormDataRequest.m */,
-				84A4FE181976849600063089 /* ASIHTTPRequest.h */,
-				84A4FE191976849600063089 /* ASIHTTPRequest.m */,
-				84A4FE1A1976849600063089 /* ASIHTTPRequestConfig.h */,
-				84A4FE1B1976849600063089 /* ASIHTTPRequestDelegate.h */,
-				84A4FE1C1976849600063089 /* ASIInputStream.h */,
-				84A4FE1D1976849600063089 /* ASIInputStream.m */,
-				84A4FE1E1976849600063089 /* ASINetworkQueue.h */,
-				84A4FE1F1976849600063089 /* ASINetworkQueue.m */,
-				84A4FE201976849600063089 /* ASIProgressDelegate.h */,
-				84A4FE211976849600063089 /* Reachability.h */,
-				84A4FE221976849600063089 /* Reachability.m */,
-			);
-			path = ASIHTTPRequest;
-			sourceTree = "<group>";
-		};
 		84A51B28196F859300351A71 /* ImagePicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -1416,40 +1355,31 @@
 				84534AA3196271E30031D6DA /* MemberTableViewCell.m in Sources */,
 				8429DB041963E8D600A8A381 /* ItemActivityView.m in Sources */,
 				411D26FD196FD9BF00B3BF9B /* FMDatabaseQueue.m in Sources */,
-				84A4FE261976849600063089 /* ASIDownloadCache.m in Sources */,
 				84534A3D196252D80031D6DA /* main.m in Sources */,
 				8429DAF81963E69E00A8A381 /* FriendViewController.m in Sources */,
 				84A7DB94196A46A3004516F0 /* DataParser.m in Sources */,
 				84A7DB91196A466B004516F0 /* DataHandler.m in Sources */,
-				84A4FE271976849600063089 /* ASIFormDataRequest.m in Sources */,
 				84A4C265196E4BF50058B7B3 /* PointSummaryTableView.m in Sources */,
 				841A2AE1196CEBC500442CAE /* BlockActionSheet.m in Sources */,
 				84404A4A197531D60013412F /* LoginViewController.m in Sources */,
-				84A4FE231976849600063089 /* ASIAuthenticationDialog.m in Sources */,
 				84534A75196257840031D6DA /* MainViewController.m in Sources */,
 				8425BD2E196B929A0018187E /* SplashScreentViewController.m in Sources */,
-				84A4FE2B1976849600063089 /* Reachability.m in Sources */,
 				84534AB21962C5260031D6DA /* Member.m in Sources */,
 				8484F168196919E900EBA065 /* SlicesActivityTableViewCell.m in Sources */,
 				84A4583C19651E7F00DF96FA /* PromiseTableViewCell.m in Sources */,
 				84A4584119651FA600DF96FA /* Promise.m in Sources */,
 				411D26FB196FD9BF00B3BF9B /* FMDatabaseAdditions.m in Sources */,
 				8429DB0F1963ED2500A8A381 /* Activity.m in Sources */,
-				84A4FE2A1976849600063089 /* ASINetworkQueue.m in Sources */,
-				84A4FE241976849600063089 /* ASIDataCompressor.m in Sources */,
 				84534A9A19626F3B0031D6DA /* AddMemberViewController.m in Sources */,
 				84534A7C19625BE70031D6DA /* MemberViewController.m in Sources */,
 				8429DAF31963E68800A8A381 /* ActivityViewController.m in Sources */,
-				84A4FE291976849600063089 /* ASIInputStream.m in Sources */,
 				84404A44197530FB0013412F /* InitialLandingViewController.m in Sources */,
 				84A51B2B196F865B00351A71 /* ImagePickerViewController.m in Sources */,
 				84534A93196268240031D6DA /* Utilities.m in Sources */,
-				84A4FE281976849600063089 /* ASIHTTPRequest.m in Sources */,
 				84534A8119625BF90031D6DA /* SettingViewController.m in Sources */,
 				8484F1561969174000EBA065 /* CircleView.m in Sources */,
 				841A2AE6196CED4B00442CAE /* BlockBackground.m in Sources */,
 				8484F1401969013300EBA065 /* XYPieChart.m in Sources */,
-				84A4FE251976849600063089 /* ASIDataDecompressor.m in Sources */,
 				84A4FE081976391300063089 /* Friend.m in Sources */,
 				8429DB091963EA6D00A8A381 /* ActivityTableViewCell.m in Sources */,
 				8429DAEB1963E51000A8A381 /* HistoryViewController.m in Sources */,

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
-#import "ASIHTTPRequest.h"
-@interface InviteFriendViewController : UIViewController<ASIHTTPRequestDelegate>
+
+@interface InviteFriendViewController : UIViewController
 
 @end

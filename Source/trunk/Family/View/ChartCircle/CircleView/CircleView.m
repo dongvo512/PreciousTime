@@ -102,9 +102,17 @@
                 [arrSlices addObject:aHistory];
             }
         }
-        
+        [self setupForPieChart];
+    }
+    else
+    {
+        [lblPercentagel setHidden:YES];
+        [tblViewSliceActivity setHidden:YES];
     }
    
+}
+-(void)setupForPieChart
+{
     [pieChart setDataSource:self];
     [pieChart setStartPieAngle:M_PI_2];
     [pieChart setAnimationSpeed:1.0];
@@ -117,8 +125,8 @@
     [pieChart setUserInteractionEnabled:YES];
     [pieChart setLabelShadowColor:[UIColor blackColor]];
     [pieChart reloadData];
-}
 
+}
 -(void) createListSlicesColor
 {
     arrSlicesColor =[NSArray arrayWithObjects:
