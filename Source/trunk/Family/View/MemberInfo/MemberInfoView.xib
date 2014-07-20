@@ -44,6 +44,6 @@
         </view>
     </objects>
     <resources>
-        <image name="username.png" width="55" height="54"/>
+        <image name="username.png" width="128" height="128"/>
     </resources>
 </document>

@@ -818,7 +818,7 @@ static DataHandler *sharedDataHandler = nil;
         return nil;
     }
     
-    FMResultSet *results = [db executeQuery:@"select m.name as memberName, a.unitType as unitType,a.name as activityName, h.imageUrl,h.point,h.time,h.date from History h, Member m, Activity a where h.idMember=m.id and h.idActivity=a.id and m.id = ?",idMember];
+    FMResultSet *results = [db executeQuery:@"select m.name as memberName,a.name as activityName, h.imageUrl,h.point,h.time,h.date,h.unitType from History h, Member m, Activity a where h.idMember=m.id and h.idActivity=a.id and m.id = ?",idMember];
     if ([db hadError]) {
         DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
         *error = [db lastError];
@@ -918,7 +918,7 @@ static DataHandler *sharedDataHandler = nil;
         return NO;
     }
     
-    BOOL isSuccess = [db executeUpdate:@"insert into History(idMember,idActivity, imageUrl, point, deleted,dirty,date,time) values(?,?,?,?,?,?,?,?)",idMember, idActivity,aHistory.imageUrl,[NSNumber numberWithInt:aHistory.totalPoint],[NSNumber numberWithBool:false],[NSNumber numberWithBool:true],aHistory.date,aHistory.time];
+    BOOL isSuccess = [db executeUpdate:@"insert into History(idMember,idActivity, imageUrl, point, deleted,dirty,date,time,unitType) values(?,?,?,?,?,?,?,?,?)",idMember, idActivity,aHistory.imageUrl,[NSNumber numberWithInt:aHistory.totalPoint],[NSNumber numberWithBool:false],[NSNumber numberWithBool:true],aHistory.date,aHistory.time,[NSNumber numberWithInt:aHistory.unitType]];
     if (!isSuccess) {
         if (error!=NULL) {
             *error = [db lastError];
