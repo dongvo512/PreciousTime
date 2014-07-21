@@ -22,4 +22,5 @@
 +(NSString *)convertMMddyyyyToddMMyyyy:(NSString *) stringDate;
 +(NSString *)convertddMMyyyyToMMddyyyy:(NSString *) stringDate;
 +(NSString *)getYear:(NSDate *) date;
++(NSString *) getUnitType:(int) unitType;
 @end

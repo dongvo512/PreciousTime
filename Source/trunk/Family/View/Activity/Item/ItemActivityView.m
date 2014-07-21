@@ -115,12 +115,13 @@
     NSLog(@"%d",aActivityCurrent.time);
     aActivityCurrent.time = aActivityCurrent.time + TIME_UP;
     [_delegate singleTagItemActivityView:aActivityCurrent];
+    
 }
 -(void)handleLongPress:(id)sender
 {
     aActivityCurrent.isSelected = NO;
     aActivityCurrent.time = TIME_DEFAULT;
-    [_delegate longTagItemActivityView];
+    [_delegate longTagItemActivityView:aActivityCurrent];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

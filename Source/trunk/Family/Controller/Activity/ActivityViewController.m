@@ -14,11 +14,15 @@
 #import "ImagePickerViewController.h"
 #import "DataHandler.h"
 #import "History.h"
+#import "Utilities.h"
 #import "Member.h"
 @interface ActivityViewController ()
 {
     NSMutableArray *arrActivities;
     IBOutlet UITableView *tblContent;
+    ImagePickerViewController *vcImagePicker;
+    IBOutlet UIButton *btnTakePhoto;
+    NSMutableArray *arrChosenActivity;
 }
 - (IBAction)takePhoto:(id)sender;
 
@@ -46,6 +50,7 @@
     [self createBarButtonDone];
     // Data
     //[self createData];
+    arrChosenActivity = [NSMutableArray array];
     [self getAllDataForActivity];
 }
 -(void) createBarButtonDone
@@ -68,7 +73,13 @@
             History *historyItem = [[History alloc] init];
             historyItem.memberName = self.member.name;
             historyItem.activityName = item.name;
-            historyItem.imageUrl = item.strAvatar;
+            
+            if (vcImagePicker.nameImageChosenCurr != nil)
+            {
+                NSString *documentsDirectory = [Utilities getPathOfDocument];
+                NSString *avatarPath = [documentsDirectory stringByAppendingPathComponent:vcImagePicker.nameImageChosenCurr];
+                historyItem.imageUrl = avatarPath;
+            }
             historyItem.totalPoint = item.point * item.time;
             historyItem.time = [NSString stringWithFormat:@"%d",item.time];
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -154,21 +165,29 @@
 }
 -(void)singleTagItemActivity:(Activity *)aActivity
 {
+    [arrChosenActivity addObject:aActivity];
+    [btnTakePhoto setUserInteractionEnabled:YES];
     [tblContent reloadData];
 }
--(void)longTagItemActivity
+-(void)longTagItemActivity:(Activity *)aActivity
 {
-       [tblContent reloadData];
+   if(arrChosenActivity.count >0)
+   {
+    [arrChosenActivity removeObject:aActivity];
+    if([arrChosenActivity count] == 0)
+        [btnTakePhoto setUserInteractionEnabled:NO];
+    [tblContent reloadData];
+   }
 }
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+#pragma mark - take photo
 - (IBAction)takePhoto:(id)sender
 {
-    ImagePickerViewController *vcImagePicker = [[ImagePickerViewController alloc] init];
+    vcImagePicker = [[ImagePickerViewController alloc] init];
     BlockActionSheet *blockActionSheet = [[BlockActionSheet alloc] initWithTitle:nil];
     [blockActionSheet setCancelButtonWithTitle:@"Cancel" block:^{
         NSLog(@"Cancel");

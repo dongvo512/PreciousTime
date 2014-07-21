@@ -11,7 +11,7 @@
 @protocol ItemActivityViewDelegate <NSObject>
 -(void)editItemActivityrSelectedView:(Activity*)aActivity;
 -(void)singleTagItemActivityView:(Activity *)aActivity;
--(void)longTagItemActivityView;
+-(void)longTagItemActivityView:(Activity *)aActivity;
 @end
 @interface ItemActivityView : UIView
 {

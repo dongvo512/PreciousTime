@@ -146,6 +146,8 @@
 		84ABA0701977DA58004597C3 /* inside_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ABA06D1977DA58004597C3 /* inside_selected.png */; };
 		84ABA0711977DA58004597C3 /* left_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ABA06E1977DA58004597C3 /* left_selected.png */; };
 		84ABA0721977DA58004597C3 /* right_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ABA06F1977DA58004597C3 /* right_selected.png */; };
+		84B1FC90197D06D3002B50C3 /* HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1FC8E197D06D3002B50C3 /* HistoryTableViewCell.m */; };
+		84B1FC91197D06D3002B50C3 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B1FC8F197D06D3002B50C3 /* HistoryTableViewCell.xib */; };
 		84BBD4161972B98100B47134 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BBD4131972B98100B47134 /* icon-120.png */; };
 		84BBD4171972B98100B47134 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BBD4141972B98100B47134 /* icon.png */; };
 		84BBD4181972B98100B47134 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BBD4151972B98100B47134 /* icon@2x.png */; };
@@ -374,6 +376,9 @@
 		84ABA06D1977DA58004597C3 /* inside_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inside_selected.png; sourceTree = "<group>"; };
 		84ABA06E1977DA58004597C3 /* left_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_selected.png; sourceTree = "<group>"; };
 		84ABA06F1977DA58004597C3 /* right_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_selected.png; sourceTree = "<group>"; };
+		84B1FC8D197D06D3002B50C3 /* HistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewCell.h; sourceTree = "<group>"; };
+		84B1FC8E197D06D3002B50C3 /* HistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewCell.m; sourceTree = "<group>"; };
+		84B1FC8F197D06D3002B50C3 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
 		84BBD4131972B98100B47134 /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-120.png"; path = "logo_app/icon-120.png"; sourceTree = "<group>"; };
 		84BBD4141972B98100B47134 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = logo_app/icon.png; sourceTree = "<group>"; };
 		84BBD4151972B98100B47134 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "logo_app/icon@2x.png"; sourceTree = "<group>"; };
@@ -820,6 +825,7 @@
 		84534A63196253000031D6DA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				84B1FC8C197D06B7002B50C3 /* History */,
 				84A4C25B196E07380058B7B3 /* PointSummary */,
 				8484F16A19691DF900EBA065 /* MemberInfo */,
 				8484F1511969174000EBA065 /* ChartCircle */,
@@ -1137,6 +1143,16 @@
 			path = DataParser;
 			sourceTree = "<group>";
 		};
+		84B1FC8C197D06B7002B50C3 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				84B1FC8D197D06D3002B50C3 /* HistoryTableViewCell.h */,
+				84B1FC8E197D06D3002B50C3 /* HistoryTableViewCell.m */,
+				84B1FC8F197D06D3002B50C3 /* HistoryTableViewCell.xib */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1322,6 +1338,7 @@
 				84E0107019718C8B00776E4B /* icon_Playground.png in Resources */,
 				8429DADC19637BFE00A8A381 /* btn_delete.png in Resources */,
 				8429DAE41963E0AC00A8A381 /* icon_friend.png in Resources */,
+				84B1FC91197D06D3002B50C3 /* HistoryTableViewCell.xib in Resources */,
 				84534A9519626E100031D6DA /* add_user.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1355,6 +1372,7 @@
 				84534AA3196271E30031D6DA /* MemberTableViewCell.m in Sources */,
 				8429DB041963E8D600A8A381 /* ItemActivityView.m in Sources */,
 				411D26FD196FD9BF00B3BF9B /* FMDatabaseQueue.m in Sources */,
+				84B1FC90197D06D3002B50C3 /* HistoryTableViewCell.m in Sources */,
 				84534A3D196252D80031D6DA /* main.m in Sources */,
 				8429DAF81963E69E00A8A381 /* FriendViewController.m in Sources */,
 				84A7DB94196A46A3004516F0 /* DataParser.m in Sources */,

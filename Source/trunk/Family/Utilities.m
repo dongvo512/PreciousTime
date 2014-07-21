@@ -105,6 +105,24 @@
     
     return [arrDate objectAtIndex:2];
 }
++(NSString *) getUnitType:(int) unitType
+{
+    NSString *strUnittype = nil;
+    switch (unitType) {
+        case 0:
+            strUnittype = @"Second";
+            break;
+        case 1:
+            strUnittype = @"Minute";
+            break;
+        case 2:
+            strUnittype = @"Hour";
+            break;
+        default:
+            break;
+    }
+    return strUnittype;
+}
 +(NSString *)getStringCurrentWithDateMMddyyyy
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];

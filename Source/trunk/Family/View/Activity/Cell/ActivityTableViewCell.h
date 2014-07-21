@@ -12,7 +12,7 @@
 @protocol ActivityTableViewDelegate <NSObject>
 -(void)editActivitySelectedCell:(Activity*)aActivity;
 -(void)singleTagItemActivity:(Activity*)aActivity;
--(void)longTagItemActivity;
+-(void)longTagItemActivity:(Activity*) aActivity;
 @end
 @interface ActivityTableViewCell : UITableViewCell<ItemActivityViewDelegate>
 {

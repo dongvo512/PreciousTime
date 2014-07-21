@@ -108,11 +108,34 @@
     NSString *strDueDate = [Utilities convertddMMyyyyToMMddyyyy:btnDueDate.titleLabel.text];
     promise.dueDate = strDueDate;
     promise.idPromise = self.aPromise.idPromise;
+    
+    // check Important
+    if([self checkImportant:promise])
+        return;
+    
    BOOL isSuccess = [[DataHandler sharedManager] updatePromiseInfo:promise error:&error];
     NSAssert(isSuccess, error.description);
     if(isSuccess)
         [_delegate reloadDataPromise];
     [self.navigationController popViewControllerAnimated:YES];
+}
+-(BOOL) checkImportant:(Promise *)promise
+{
+    if([promise.name isEqualToString:@""])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Promise Name must not be empty " delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        return YES;
+    }
+    else if (promise.dueDate == nil)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Due date must not be empty " delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        return YES;
+    }
+    else
+        return NO;
+    
 }
 -(void)addGestureSingleTagForScrollView
 {
@@ -291,6 +314,9 @@
          NSString *strDueDate = [Utilities convertddMMyyyyToMMddyyyy:btnDueDate.titleLabel.text];
         promise.dueDate = strDueDate;
         promise.status = 0;
+        
+        if([self checkImportant:promise])
+            return;
         
         NSString *idPromise = nil;
         BOOL isSuccess = [[DataHandler sharedManager] insertPromise:promise idPromise:&idPromise error:&error];

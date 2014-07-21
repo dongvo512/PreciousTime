@@ -85,9 +85,9 @@
 {
     [_delegate singleTagItemActivity:aActivity];
 }
--(void)longTagItemActivityView
+-(void)longTagItemActivityView:(Activity *)aActivity
 {
-    [_delegate longTagItemActivity];
+    [_delegate longTagItemActivity:aActivity];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {

@@ -170,6 +170,9 @@
     member.genderValue = genderChosen;
     member.relationship = txtRelationship.text;
     
+    if([self checkUserNameNotNull:member.name])
+        return;
+    
     if([member.name isEqualToString:self.aMemberCurr.name])
     {
         BOOL  isSuccess = [[DataHandler sharedManager] updateMemberInfo:member isSync:false  error:&error];
@@ -198,6 +201,17 @@
         }
 
     }
+}
+-(BOOL) checkUserNameNotNull:(NSString *)username
+{
+    if([username isEqualToString:@""])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Username must not be empty " delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        return YES;
+    }
+    else
+        return NO;
 }
 - (void)didReceiveMemoryWarning
 {
@@ -313,7 +327,9 @@
         member.genderValue = genderChosen;
         member.relationship = txtRelationship.text;
         
-     
+        if([self checkUserNameNotNull:member.name])
+        return;
+        
         if(![[DataHandler sharedManager] checkExistMemberWithName:member.name error:&error])
         {
             if(error == nil)

@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ActivityViewController">
             <connections>
+                <outlet property="btnTakePhoto" destination="dTj-st-EPB" id="w2D-cx-hdq"/>
                 <outlet property="tblContent" destination="mag-y5-WIc" id="Qjm-GP-8ri"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -25,7 +26,7 @@
                         <outlet property="delegate" destination="-1" id="AX4-eU-gNB"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dTj-st-EPB">
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dTj-st-EPB">
                     <rect key="frame" x="113" y="433" width="95" height="41"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <state key="normal" title="Take photo" backgroundImage="btn_border.png">

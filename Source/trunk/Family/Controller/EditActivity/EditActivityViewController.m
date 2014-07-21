@@ -173,6 +173,8 @@
     NSString *documentsDirectory = [Utilities getPathOfDocument];
     NSString *avatarPath = nil;
     
+   
+    
     if(vcImagePicker.nameImageChosenCurr != nil)
     {
         avatarPath = [documentsDirectory stringByAppendingPathComponent:vcImagePicker.nameImageChosenCurr];
@@ -184,6 +186,10 @@
     activity.point = txtPoint.text.intValue;
     activity.idActivity = self.aActivityCurr.idActivity;
    
+    // check important
+    if([self checkImportant:activity])
+        return;
+    
     if([activity.name isEqualToString:self.aActivityCurr.name])
     {
         
@@ -265,6 +271,9 @@
         activity.strAvatar = avatarPath;
         activity.point = txtPoint.text.intValue;
         
+        //check important
+        if([self checkImportant:activity])
+            return;
         
          if(! [[DataHandler sharedManager] checkExistActivityWithName:activity.name error:&error])
          {
@@ -288,6 +297,24 @@
     
     
 
+}
+-(BOOL) checkImportant:(Activity *)activity
+{
+    if([activity.name isEqualToString:@""])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Activity Name must not be empty " delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        return YES;
+    }
+    else if (activity.point == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Point must be other zero " delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        return YES;
+    }
+    else
+        return NO;
+    
 }
 #pragma mark - UIAlert Delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

@@ -9,6 +9,8 @@
 #import "HistoryViewController.h"
 #import "DataHandler.h"
 #import "History.h"
+#import "HistoryTableViewCell.h"
+#import "Utilities.h"
 @interface HistoryViewController ()
 {
     NSMutableArray *arrHistories;
@@ -55,57 +57,29 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"HistoryCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    HistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    if(cell == nil)
+    NSArray *arrObj = [[NSBundle mainBundle] loadNibNamed:@"HistoryTableViewCell" owner:nil options:nil];
+    
+    for(id curObject in arrObj)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        if([curObject isKindOfClass:[UITableViewCell class]])
+        {
+            cell = (HistoryTableViewCell *)curObject;
+            break;
+        }
     }
     [cell setBackgroundColor:[UIColor clearColor]];
     
-    // don't know to get point history about.
     History *aHistory = [arrHistories objectAtIndex:indexPath.row];
-    NSString *strDate = aHistory.date;
-    NSString *strActivity = aHistory.activityName;
-    NSString *strMemberName = aHistory.memberName;
-    NSString *strTime = aHistory.time;
-    NSString *strUnitType = [self getUnitType:aHistory.unitType];
-    
-    [cell.textLabel setFont:[UIFont systemFontOfSize:13]];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@:%@ - %@ - %@ %@",strDate,strActivity,strMemberName,strTime,strUnitType];
-    UIImage *imgAvatarCurr = [UIImage imageNamed:aHistory.imageUrl];
-    NSData *data = [[NSFileManager defaultManager] contentsAtPath:aHistory.imageUrl];
-    
-    if(data != nil)
-        cell.imageView.image = [UIImage imageWithData:data];
-    else if (imgAvatarCurr != nil)
-        cell.imageView.image = imgAvatarCurr;
-    else
-        cell.imageView.image = [UIImage imageNamed:@"icon_FamLink2.png"];
+    [cell setObjectForCell:aHistory];
     
     return cell;
 }
--(NSString *) getUnitType:(int) unitType
-{
-    NSString *strUnittype = nil;
-    switch (unitType) {
-        case 0:
-            strUnittype = @"Second";
-            break;
-        case 1:
-            strUnittype = @"Minute";
-            break;
-        case 2:
-            strUnittype = @"Hour";
-            break;
-        default:
-            break;
-    }
-    return strUnittype;
-}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 40;
+    return 50;
 }
 - (void)didReceiveMemoryWarning
 {
