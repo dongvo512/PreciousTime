@@ -11,6 +11,7 @@
 #import "PromiseTableViewCell.h"
 #import "EditPromiseViewController.h"
 #import "Datahandler.h"
+#import "Utilities.h"
 @interface PromiseViewController ()
 {
     NSMutableArray *arrPromise;
@@ -63,6 +64,7 @@
 {
     for (Promise *item in arrPromise) {
         if (item.status == 1) {
+            item.completeDate = [Utilities getStringCurrentWithDateMMddyyyy];
             NSError *error = nil;
             BOOL isSuccess = [[DataHandler sharedManager] updatePromiseInfo:item error:&error];
         }

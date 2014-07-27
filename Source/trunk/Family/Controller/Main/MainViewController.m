@@ -69,8 +69,8 @@
     [[self navigationController] setNavigationBarHidden:NO animated:NO];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     [self createButtonOnNavigationBar];
-    arrButton = [NSArray arrayWithObjects:btnToday,btnMonth,btnWeek, nil];
-    arrLabel = [NSArray arrayWithObjects:lblToday,lblMonth,lblWeek, nil];
+    arrButton = [NSArray arrayWithObjects:btnToday,btnWeek,btnMonth, nil];
+    arrLabel = [NSArray arrayWithObjects:lblToday,lblWeek,lblMonth, nil];
     [btnToday setSelected:YES];
   
 }
@@ -83,16 +83,15 @@
         if([abtnCurr isSelected])
         {
             if (self.aMemberCurr) {
-                
                 // Member Info
                 [self createViewMemberInfo];
                 // charting circle
-                [abtnCurr setSelected:YES];
                 [self createViewChartCircle:abtnCurr.tag];
-                
                 // Point Summary
                 [self createViewPointSummary:btnToday.tag];
+                
                 [abtnCurr setUserInteractionEnabled:NO];
+                
                 scrollViewContant.hidden = NO;
                 lbNotice.hidden = YES;
                 toolBarMenu.hidden = NO;
@@ -214,14 +213,34 @@
      PointSummaryTableView *aTableView = (PointSummaryTableView *) aView;
     aTableView.idMember = self.aMemberCurr.idMember;
     [aTableView setDataForTableView:tagOfButton];
+    [self reSizePointSummaryTableView:aTableView];
+    [self setContentSizeForScrollViewContent:aTableView];
     
-    CGRect framePointSummary = viewPointSummary.frame;
-    framePointSummary.size.height = aTableView.frame.size.height + MARGIN_BETWEEN_VIEW;
-    viewPointSummary.frame = framePointSummary;
-     [scrollViewContant setContentSize:CGSizeMake([Utilities getScreenSize].size.width, viewPointSummary.frame.origin.y + viewPointSummary.frame.size.height + NAVIGATION_BAR)];
 }
+-(void) reSizePointSummaryTableView:(PointSummaryTableView *) tblPointSummary
+{
+    CGRect frameSelf = tblPointSummary.frame;
+    int totalItemTableView = 0;
+    for(int i =0; i< [tblPointSummary numberOfSections]; i++)
+    {
+        totalItemTableView += [tblPointSummary numberOfRowsInSection:i];
+    }
+    
+   
+       frameSelf.size.height = (HEIGHT_CELL *(totalItemTableView) + (TITLE *HEIGHT_TITLE_FOR_HEADER));
+    //frameSelf.size.height = 40;
+    NSLog(@"%f", frameSelf.size.height);
+    tblPointSummary.frame = frameSelf;
+}
+-(void) setContentSizeForScrollViewContent:(UITableView *)tblCurr
+{
+    CGRect framePointSummary = viewPointSummary.frame;
+    
+    framePointSummary.size.height = tblCurr.frame.size.height + MARGIN_BETWEEN_VIEW;
+    viewPointSummary.frame = framePointSummary;
+    [scrollViewContant setContentSize:CGSizeMake([Utilities getScreenSize].size.width, viewPointSummary.frame.origin.y + viewPointSummary.frame.size.height + NAVIGATION_BAR)];
 
-
+}
 -(void)changeSettingViewController
 {
     SettingViewController *vcSetting = [[SettingViewController alloc] initWithNibName:@"SettingViewController" bundle:nil];

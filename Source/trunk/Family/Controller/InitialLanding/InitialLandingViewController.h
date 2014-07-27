@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
-@interface InitialLandingViewController : UIViewController
+#import <GooglePlus/GooglePlus.h>
+@class GPPSignIn;
+@interface InitialLandingViewController : UIViewController<GPPSignInDelegate>
 
 @end

@@ -15,17 +15,13 @@
 #import "Utilities.h"
 @interface PointSummaryTableView()
 {
-    NSMutableArray *arrHistories;
-    NSMutableArray *arrPromise;
     NSMutableArray *arrPointSummary;
     NSArray *arrGenPointSummaryGen;
 }
 @end
 @implementation PointSummaryTableView
-#define ITEM_ACTIVITY 5
-#define ITEM_PROMISE 2
-#define HEIGHT_CELL 30
-#define HEIGHT_TITLE_FOR_HEADER 30
+
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -35,98 +31,98 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
--(void) reSizeForTableView
-{
-    CGRect frameSelf = self.frame;
-    frameSelf.origin.x = 0;
-    frameSelf.origin.y = 0;
-    frameSelf.size.height = HEIGHT_CELL * (arrHistories.count +arrPromise.count) + arrGenPointSummaryGen.count *HEIGHT_TITLE_FOR_HEADER;
-    self.frame = frameSelf;
-}
 -(void) setDataForTableView:(int) index
 {
     arrGenPointSummaryGen = [NSArray arrayWithObjects:@"Activity point",@"Promise", nil];
+    //arrPointSummary = [NSMutableArray array];
     arrPointSummary = [NSMutableArray array];
+    
     [arrPointSummary addObject:[self allocDataActivity:index]];
-    [arrPointSummary addObject:[self allocDataPromise]];
+    [arrPointSummary addObject:[self allocDataPromise:index]];
+    
     self.delegate = self;
     self.dataSource = self;
     [self reloadData];
-    [self reSizeForTableView];
+   // [self reSizeForTableViewContent];
 }
 -(NSMutableArray *)allocDataActivity:(int) index
 {
-    /*if (self.idMember) {
-        NSError *error = nil;
-        arrHistories = [[DataHandler sharedManager] allocHistoriesWithError:&error idMember:self.idMember];
-        /*
-         // Member data
-         for(int i =0; i<ITEM_ACTIVITY; i++)
-         {
-         Activity *aActivity = [[Activity alloc] init];
-         
-         NSString *strImg = [NSString stringWithFormat:@"activity%d.jpg",i+1];
-         
-         aActivity.strAvatar = strImg;
-         aActivity.dirty = 1;
-         NSString *strName = [NSString stringWithFormat:@"Activity%d",i+1];
-         aActivity.name = strName;
-         aActivity.time = 5;
-         aActivity.point = 20 + i;
-         [arrActivities addObject:aActivity];
-         }
-         */
+    NSMutableArray *arrHistoryCurr = nil;
     if (self.idMember)
     {
         NSError *error = nil;
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"MM/dd/yyyy"];
-        NSString *dateCurrent = [formatter stringFromDate:[NSDate date]];
         
         switch (index) {
             case TAG_OF_BUTON_DAY:
             {
-                arrHistories = [[DataHandler sharedManager] allocHistoryWithDay:self.idMember day:dateCurrent error:&error];
+                arrHistoryCurr = [[DataHandler sharedManager] allocHistoryWithDay:self.idMember dayCurrent:[Utilities getStringCurrentWithDateMMddyyyy] error:&error];
                 break;
             }
             case TAG_OF_BUTTON_WEEK:
             {
-                NSString *strBeforeDate = [Utilities getDateBefore:-7];
-                arrHistories = [[DataHandler sharedManager] allocHistoryWithWeekAndMonth:self.idMember dayCurrent:dateCurrent BeforeWeekandMonth:strBeforeDate error:&error];
+                 NSString *strBeforeDate = [Utilities getDateBefore:-7];
+                arrHistoryCurr = [[DataHandler sharedManager] allocHistoryWithWeekAndMonth:self.idMember dayCurrent:[Utilities getStringCurrentWithDateMMddyyyy] BeforeWeekandMonth:strBeforeDate error:&error];
                 break;
             }
             case TAG_OF_BUTTON_MONTH:
             {
                 NSString *strBeforeDate = [Utilities getDateBefore:-30];
-                arrHistories = [[DataHandler sharedManager] allocHistoryWithWeekAndMonth:self.idMember dayCurrent:dateCurrent BeforeWeekandMonth:strBeforeDate error:&error];
+                arrHistoryCurr = [[DataHandler sharedManager] allocHistoryWithWeekAndMonth:self.idMember dayCurrent:[Utilities getStringCurrentWithDateMMddyyyy] BeforeWeekandMonth:strBeforeDate error:&error];
                 break;
             }
                 
             default:
                 break;
         }
-         return arrHistories;
+         return arrHistoryCurr;
     }
     else
         return nil;
 }
--(NSMutableArray *)allocDataPromise
+-(NSMutableArray *)allocDataPromise:(int) index
 {
-    if (self.idMember) {
+    NSMutableArray *arrPromiseCurr = nil;
+    if (self.idMember)
+    {
         NSError *error = nil;
-        arrPromise = [[DataHandler sharedManager] allocDoneOverDuePromisesWithError:&error idMember:self.idMember];
-        
-        return arrPromise;
+        switch (index) {
+            case TAG_OF_BUTON_DAY:
+            {
+                NSMutableArray *arrData = [NSMutableArray array];
+                NSMutableArray *arrayPromiseWithDone = nil;
+                NSMutableArray *arrayPromiseWithOverDue = nil;
+                
+                arrayPromiseWithDone = [[DataHandler sharedManager] allocDonePromiseDayWithError:&error idMember:self.idMember dateCurrent:[Utilities getStringCurrentWithDateMMddyyyy]];
+                if(arrayPromiseWithDone != nil)
+                   [arrData addObjectsFromArray:arrayPromiseWithDone];
+                
+                arrayPromiseWithOverDue = [[DataHandler sharedManager] allocOverDuePromiseDayWithError:&error idMember:self.idMember dateCurrent:[Utilities getStringCurrentWithDateMMddyyyy]];
+                if(arrayPromiseWithOverDue != nil)
+                    [arrData addObjectsFromArray:arrayPromiseWithOverDue];
+                arrPromiseCurr = arrData;
+                break;
+            }
+            case TAG_OF_BUTTON_WEEK:
+            {
+                NSString *strBeforeDate = [Utilities getDateBefore:-7];
+                arrPromiseCurr = [[DataHandler sharedManager] allocDoneOverDuePromiseWeekMonthWithError:&error idMember:self.idMember DayCurrent:[Utilities getStringCurrentWithDateMMddyyyy] BeforeDate:strBeforeDate];
+                break;
+            }
+            case TAG_OF_BUTTON_MONTH:
+            {
+                NSString *strBeforeDate = [Utilities getDateBefore:-30];
+                arrPromiseCurr = [[DataHandler sharedManager] allocDoneOverDuePromiseWeekMonthWithError:&error idMember:self.idMember DayCurrent:[Utilities getStringCurrentWithDateMMddyyyy] BeforeDate:strBeforeDate];
+                break;
+            }
+                
+            default:
+                break;
+        }
+        return arrPromiseCurr;
     }
-    return nil;
+    else
+        return nil;
+
 }
 #pragma mark - Table view data source - delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -150,13 +146,13 @@
     
    if(indexPath.section == 0)
    {
-       History *history = [arrHistories objectAtIndex:indexPath.row];
+       History *history = [[arrPointSummary objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
        NSString *strPointActivity = [NSString stringWithFormat:@"%d point for %@",history.totalPoint,history.activityName];
        cell.textLabel.text = strPointActivity;
    }
     else
     {
-        Promise *aPromise = [arrPromise objectAtIndex:indexPath.row];
+        Promise *aPromise = [[arrPointSummary objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         NSString *strPromise = @"";
         if (aPromise.status == 1) {
             strPromise = [NSString stringWithFormat:@"%@ Done",aPromise.name];

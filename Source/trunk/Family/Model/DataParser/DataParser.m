@@ -40,6 +40,7 @@
 
 + (Promise*)allocPromiseWithResults:(FMResultSet*)results{
     Promise *item = [[Promise alloc] init];
+    item.completeDate = [results stringForColumn:@"completeDate"];
     item.idPromise = [results stringForColumn:@"id"];
     item.idMember =[results stringForColumn:@"idMember"];
     item.name = [results stringForColumn:@"name"];
@@ -50,7 +51,7 @@
     return item;
 }
 
-+(History*)allocHistoryWithResultsGroupByIdActivity:(FMResultSet*)results
++(History*)allocHistoryWithResultsGroupByActivityName:(FMResultSet*)results
 {
     History *item = [[History alloc] init];
     item.activityName =[results stringForColumn:@"activityName"];

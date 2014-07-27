@@ -647,7 +647,126 @@ static DataHandler *sharedDataHandler = nil;
     [self closeDB:db];
     return array;
 }
+/*-(NSMutableArray *) allocDoneOverDuePromiseDayWithError:(NSError **) error idMember:(NSString *) idMember dateCurrent:(NSString *)date
+{
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [NSError errorWithDomain:@"Can't open database" code:123 userInfo:nil];
+        return nil;
+    }
+    
+    FMResultSet *results = [db executeQuery:@"select * from Promise where idMember = ? and (duedate = ? or completeDate = ?) and  status <>0 and deleted=? Order by status ASC",idMember,date,date,[NSNumber numberWithBool:false]];
+    if ([db hadError]) {
+        DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
+        *error = [db lastError];
+        [self closeDB:db];
+        return nil;
+    }
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    while ([results next])
+    {
+        Promise * item = [DataParser allocPromiseWithResults:results];
+        if (item) {
+            [array addObject:item];
+        }
+    }
+    [self closeDB:db];
+    return array;
 
+
+}*/
+-(NSMutableArray *) allocDonePromiseDayWithError:(NSError **) error idMember:(NSString *) idMember dateCurrent:(NSString *)date
+{
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [NSError errorWithDomain:@"Can't open database" code:123 userInfo:nil];
+        return nil;
+    }
+    
+    FMResultSet *results = [db executeQuery:@"select * from Promise where idMember =? and duedate =? and status ='2' and deleted=? Order by id ASC",idMember,date,[NSNumber numberWithBool:false]];
+    if ([db hadError]) {
+        DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
+        *error = [db lastError];
+        [self closeDB:db];
+        return nil;
+    }
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    while ([results next])
+    {
+        Promise * item = [DataParser allocPromiseWithResults:results];
+        if (item) {
+            [array addObject:item];
+        }
+    }
+    [self closeDB:db];
+    return array;
+    
+    
+}
+-(NSMutableArray *) allocOverDuePromiseDayWithError:(NSError **) error idMember:(NSString *) idMember dateCurrent:(NSString *)date
+{
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [NSError errorWithDomain:@"Can't open database" code:123 userInfo:nil];
+        return nil;
+    }
+    
+    FMResultSet *results = [db executeQuery:@"select * from Promise where idMember = ? and completeDate = ?  and status = '1' and deleted= ? Order by id ASC",idMember,date,[NSNumber numberWithBool:false]];
+    if ([db hadError]) {
+        DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
+        *error = [db lastError];
+        [self closeDB:db];
+        return nil;
+    }
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    while ([results next])
+    {
+        Promise * item = [DataParser allocPromiseWithResults:results];
+        if (item) {
+            [array addObject:item];
+        }
+    }
+    [self closeDB:db];
+    return array;
+    
+    
+}
+-(NSMutableArray *) allocDoneOverDuePromiseWeekMonthWithError:(NSError **) error idMember:(NSString *) idMember DayCurrent:(NSString *)today BeforeDate:(NSString *)beforDate
+{
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [NSError errorWithDomain:@"Can't open database" code:123 userInfo:nil];
+        return nil;
+    }
+    
+    FMResultSet *results = [db executeQuery:@"select * from Promise where idMember = ? and status = 1 or status = 2 and duedate BETWEEN ? AND ? or completeDate BETWEEN ? AND ? and deleted=? Order by status ASC",idMember,beforDate,today,beforDate,today,[NSNumber numberWithBool:false]];
+    if ([db hadError]) {
+        DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
+        *error = [db lastError];
+        [self closeDB:db];
+        return nil;
+    }
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    while ([results next])
+    {
+        Promise * item = [DataParser allocPromiseWithResults:results];
+        if (item) {
+            [array addObject:item];
+        }
+    }
+    [self closeDB:db];
+    return array;
+    
+    
+}
 
 - (BOOL)checkExistPromiseWithId:(NSString*)idPromise error:(NSError**)error
 {
@@ -756,8 +875,8 @@ static DataHandler *sharedDataHandler = nil;
     }
     
     [db executeUpdate:@"update Promise"
-     " set name = ?,description=?,duedate=?,status=?,deleted=?,dirty=?"
-     " where id = ? and idMember = ?",aPromise.name,aPromise.description,aPromise.dueDate,[NSNumber numberWithInt:aPromise.status],[NSNumber numberWithBool:false], [NSNumber numberWithBool:true],aPromise.idPromise, aPromise.idMember];
+     " set name = ?,description=?,duedate=?,status=?,deleted=?,dirty=?,completeDate=?"
+     " where id = ? and idMember = ?",aPromise.name,aPromise.description,aPromise.dueDate,[NSNumber numberWithInt:aPromise.status],[NSNumber numberWithBool:false], [NSNumber numberWithBool:true],aPromise.completeDate,aPromise.idPromise, aPromise.idMember];
 
     if ([db hadError]) {
         if (error!=NULL) {
@@ -847,7 +966,7 @@ static DataHandler *sharedDataHandler = nil;
     }
     
     /* FMResultSet *results = [db executeQuery:@"select m.name as memberName,a.name as activityName, h.imageUrl,h.point from History h, Member m, Activity a where h.idMember=m.id and h.idActivity=a.id and m.id = ?",idMember];*/
-    FMResultSet *results = [db executeQuery:@"select a.name as activityName,h.date, SUM (h.point) as totalPoint from History h,Activity a where idMember =? and h.idActivity=a.id AND (h.date BETWEEN ? AND ?) Group by idActivity Order by totalPoint DESC",idMember,dateBefore,dateCurr];
+    FMResultSet *results = [db executeQuery:@"select a.name as activityName,h.date, SUM (h.point) as totalPoint from History h,Activity a where idMember =? and h.idActivity=a.id AND (h.date BETWEEN ? AND ?) Group by activityName Order by totalPoint DESC",idMember,dateBefore,dateCurr];
     if ([db hadError]) {
         DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
         *error = [db lastError];
@@ -859,7 +978,7 @@ static DataHandler *sharedDataHandler = nil;
     
     while ([results next])
     {
-        History * item = [DataParser allocHistoryWithResultsGroupByIdActivity:results];
+        History * item = [DataParser allocHistoryWithResultsGroupByActivityName:results];
         if (item) {
             [array addObject:item];
         }
@@ -870,16 +989,18 @@ static DataHandler *sharedDataHandler = nil;
     
 }
 
--(NSMutableArray *) allocHistoryWithDay:(NSString*) idMember day:(NSString*)dateDay error:(NSError**)error
+-(NSMutableArray *) allocHistoryWithDay:(NSString*) idMember dayCurrent:(NSString*)date error:(NSError**)error
 {
+    
     FMDatabase *db = [self database];
     if (![self openDB:db]) {
         *error = [db lastError];
         return nil;
     }
+
+//    FMResultSet *results = [db executeQuery:@"select a.name as activityName, SUM (h.point) as totalPoint from History h,Activity a where idMember = ? and h.idActivity=a.id and h.date=? Group by activityName Order by totalPoint DESC",idMember,date ];
+     FMResultSet *results = [db executeQuery:@"select a.name as activityName, SUM (h.point) as totalPoint from History h,Activity a where idMember = ? and h.idActivity=a.id and h.date=? Group by activityName Order by totalPoint DESC",idMember,date ];
     
-   /* FMResultSet *results = [db executeQuery:@"select m.name as memberName,a.name as activityName, h.imageUrl,h.point from History h, Member m, Activity a where h.idMember=m.id and h.idActivity=a.id and m.id = ?",idMember];*/
-    FMResultSet *results = [db executeQuery:@"select a.name as activityName, SUM (h.point) as totalPoint from History h,Activity a where idMember = ? and h.idActivity=a.id and h.date=? Group by idActivity Order by totalPoint DESC",idMember,dateDay ];
     if ([db hadError]) {
         DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
         *error = [db lastError];
@@ -888,18 +1009,18 @@ static DataHandler *sharedDataHandler = nil;
     }
     
     NSMutableArray *array = [[NSMutableArray alloc] init];
+   
     
     while ([results next])
     {
-        History * item = [DataParser allocHistoryWithResultsGroupByIdActivity:results];
+        History * item = [DataParser allocHistoryWithResultsGroupByActivityName:results];
         if (item) {
             [array addObject:item];
         }
     }
+    
     [self closeDB:db];
-
     return array;
-
 }
 
 -(BOOL)insertHistory:(History*)aHistory idMember:(NSString*)idMember idActivity:(NSString*)idActivity error:(NSError**)error

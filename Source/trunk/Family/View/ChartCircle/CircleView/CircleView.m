@@ -53,26 +53,22 @@
     if (self.idMemberCurr)
     {
         NSError *error = nil;
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"MM/dd/yyyy"];
-        NSString *dateCurrent = [formatter stringFromDate:[NSDate date]];
-        
         switch (index) {
             case TAG_OF_BUTON_DAY:
             {
-                arrData = [[DataHandler sharedManager] allocHistoryWithDay:self.idMemberCurr day:dateCurrent error:&error];
+                arrData = [[DataHandler sharedManager] allocHistoryWithDay:self.idMemberCurr dayCurrent:[Utilities getStringCurrentWithDateMMddyyyy] error:&error];
                 break;
             }
             case TAG_OF_BUTTON_WEEK:
             {
                 NSString *strBeforeDate = [Utilities getDateBefore:-7];
-                arrData = [[DataHandler sharedManager] allocHistoryWithWeekAndMonth:self.idMemberCurr dayCurrent:dateCurrent BeforeWeekandMonth:strBeforeDate error:&error];
+                arrData = [[DataHandler sharedManager] allocHistoryWithWeekAndMonth:self.idMemberCurr dayCurrent:[Utilities getStringCurrentWithDateMMddyyyy] BeforeWeekandMonth:strBeforeDate error:&error];
                 break;
             }
             case TAG_OF_BUTTON_MONTH:
             {
                 NSString *strBeforeDate = [Utilities getDateBefore:-30];
-                arrData = [[DataHandler sharedManager] allocHistoryWithWeekAndMonth:self.idMemberCurr dayCurrent:dateCurrent BeforeWeekandMonth:strBeforeDate error:&error];
+                arrData = [[DataHandler sharedManager] allocHistoryWithWeekAndMonth:self.idMemberCurr dayCurrent:[Utilities getStringCurrentWithDateMMddyyyy] BeforeWeekandMonth:strBeforeDate error:&error];
                 break;
             }
    

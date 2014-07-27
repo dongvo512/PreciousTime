@@ -64,12 +64,16 @@
 //Use to delete promise info
 -(BOOL)updateDeletedPromise:(NSString*)idPromise idMember:(NSString*)idMember error:(NSError**)error;
 -(BOOL)updatePromiseOverDue:(NSError**)error isMember:(NSString*) idMember DateCurrent:(NSString *)date;
+-(NSMutableArray *) allocDoneOverDuePromiseWeekMonthWithError:(NSError **) error idMember:(NSString *) idMember DayCurrent:(NSString *)today BeforeDate:(NSString *)beforDate;
+-(NSMutableArray *) allocDonePromiseDayWithError:(NSError **) error idMember:(NSString *) idMember dateCurrent:(NSString *)date;
+-(NSMutableArray *) allocOverDuePromiseDayWithError:(NSError **) error idMember:(NSString *) idMember dateCurrent:(NSString *)date;
 /*
  * get all Histories in databse
  */
 - (NSMutableArray*)allocHistoriesWithError:(NSError**)error idMember:(NSString*)idMember;
 -(BOOL)insertHistory:(History*)aHistory idMember:(NSString*)idMember idActivity:(NSString*)idActivity error:(NSError**)error;
--(NSMutableArray *) allocHistoryWithDay:(NSString*) idMember day:(NSString*)dateDay error:(NSError**)error;
+//-(NSMutableArray *) allocHistoryWithDay:(NSString*) idMember day:(NSString*)dateDay error:(NSError**)error;
+-(NSMutableArray *) allocHistoryWithDay:(NSString*) idMember dayCurrent:(NSString*)date error:(NSError**)error;
 -(NSMutableArray *) allocHistoryWithWeekAndMonth:(NSString*) idMember dayCurrent:(NSString*)dateCurr BeforeWeekandMonth:(NSString*)dateBefore error:(NSError**)error;
 @end
 

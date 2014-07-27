@@ -11,8 +11,10 @@
 #import "SplashScreentViewController.h"
 #import "DataHandler.h"
 #import "Activity.h"
+#import <GooglePlus/GooglePlus.h>
 @implementation AppDelegate
-
+static NSString * const kClientID =
+@"516933277800-8kk3rgm85uqccdonh5ataka68o7sihfe.apps.googleusercontent.com";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -22,6 +24,8 @@
   /*  LoginViewController *vcLogin = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
       self.window.rootViewController = vcLogin;*/
     // create Data for Activity
+    [GPPSignIn sharedInstance].clientID = kClientID;
+    
     NSError *error = nil;
     [[DataHandler sharedManager] copyDatabaseToDocumentWithError:&error];
     if (error) {
@@ -34,6 +38,26 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+- (BOOL)application: (UIApplication *)application
+            openURL: (NSURL *)url
+  sourceApplication: (NSString *)sourceApplication
+         annotation: (id)annotation {
+    return [GPPURLHandler handleURL:url
+                  sourceApplication:sourceApplication
+                         annotation:annotation];
+}
+#pragma mark - GPPDeepLinkDelegate
+
+- (void)didReceiveDeepLink:(GPPDeepLink *)deepLink {
+    // An example to handle the deep link data.
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Deep-link Data"
+                          message:[deepLink deepLinkID]
+                          delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil];
+    [alert show];
 }
 -(void)createDataActivity
 {

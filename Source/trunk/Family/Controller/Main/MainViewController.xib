@@ -98,6 +98,7 @@
                         <view contentMode="scaleToFill" id="a1x-dP-7UX" userLabel="View - Point summary">
                             <rect key="frame" x="13" y="320" width="300" height="160"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="NwR-rm-6xZ" userLabel="View - ChartingSlices">
                             <rect key="frame" x="13" y="155" width="300" height="150"/>

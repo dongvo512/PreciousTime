@@ -11,17 +11,23 @@
 #import "SignUpViewController.h"
 #import "LoginViewController.h"
 #import "AppDelegate.h"
+#import "GoogleOpenSource/GoogleOpenSource.h"
+
 @interface InitialLandingViewController ()
 {
     AppDelegate *appDelegate;
+    GPPSignIn *signIn;
 }
 - (IBAction)signUpUser:(id)sender;
 - (IBAction)loginUser:(id)sender;
 - (IBAction)SigninWithFacebook:(id)sender;
+- (IBAction)signInWithGoogle:(id)sender;
+
 
 @end
 
 @implementation InitialLandingViewController
+
 - (IBAction)skipMainViewController:(id)sender
 {
      MainViewController *vcMain = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
@@ -45,6 +51,25 @@
     
      [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
     // Do any additional setup after loading the view from its nib.
+    // google login
+    [self setupSignInGoogle];
+  
+}
+-(void)setupSignInGoogle
+{
+    signIn = [GPPSignIn sharedInstance];
+    signIn.shouldFetchGooglePlusUser = YES;
+    signIn.shouldFetchGoogleUserEmail = YES;  // Uncomment to get the user's email
+    
+    // You previously set kClientId in the "Initialize the Google+ client" step
+    //signIn.clientID = @"516933277800-8kk3rgm85uqccdonh5ataka68o7sihfe.apps.googleusercontent.com";
+    // Uncomment one of these two statements for the scope you chose in the previous step
+    signIn.scopes = @[ kGTLAuthScopePlusLogin ];  // "https://www.googleapis.com/auth/plus.login" scope
+    signIn.scopes = @[ @"profile" ];            // "profile" scope
+    
+    // Optional: declare signIn.actions, see "app activities"
+    signIn.delegate = self;
+
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -90,6 +115,44 @@
     else
         [self getUserInfo];
 
+}
+
+- (IBAction)signInWithGoogle:(id)sender
+{
+    [signIn authenticate];
+}
+#pragma mark - GPPSignIn Delegate
+- (void)finishedWithAuth: (GTMOAuth2Authentication *)auth
+                   error: (NSError *) error {
+    if (error) {
+        // Do some error handling here.
+    } else {
+        [self refreshInterfaceBasedOnSignIn];
+        NSLog(@"%@",auth.userID);
+        NSLog(@"%@",auth.userEmail);
+        NSLog(@"%@",auth.userEmailIsVerified);
+        NSLog(@"%@",auth.userAgent);
+          NSLog(@"%@",signIn.userID);
+         NSLog(@"%@",signIn.userEmail);
+     
+        
+    }
+    
+}
+
+- (void)presentSignInViewController:(UIViewController *)viewController {
+    // This is an example of how you can implement it if your app is navigation-based.
+    [[self navigationController] pushViewController:viewController animated:YES];
+}
+-(void)refreshInterfaceBasedOnSignIn {
+    if ([[GPPSignIn sharedInstance] authentication]) {
+        // The user is signed in.
+        //self.signInButton.hidden = YES;
+        // Perform other actions here, such as showing a sign-out button
+    } else {
+        //self.signInButton.hidden = NO;
+        // Perform other actions here
+    }
 }
 -(void) getUserInfo
 {
