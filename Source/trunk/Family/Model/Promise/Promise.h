@@ -18,4 +18,5 @@
 @property (nonatomic, assign) int status;
 @property (nonatomic, retain) NSString * timestamp;
 @property (nonatomic, retain) NSString * description;
+@property (nonatomic, assign) int deleted;
 @end

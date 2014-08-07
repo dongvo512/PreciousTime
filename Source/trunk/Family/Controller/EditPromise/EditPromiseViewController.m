@@ -45,7 +45,8 @@
     [super viewDidLoad];
     // Display
     [self radiusForView];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+   // [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    [Utilities setBackGroundForViewWithVersion:self.view];
     
     if(self.isEditPromiseViewController)
         [self displayWithEditPromiseViewController];
@@ -276,7 +277,7 @@
     
     if([dateCurrent compare:dateOfDatePicker] == NSOrderedDescending)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Date must be larger than to day " delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Date must be larger than today " delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
     else

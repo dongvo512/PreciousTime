@@ -17,6 +17,7 @@
 
 + (Member*)allocMemberWithResults:(FMResultSet*)results{
     Member *item = [[Member alloc] init];
+    item.deleted = [results intForColumn:@"deleted"];
     item.idMember = [results stringForColumn:@"id"];
     item.name = [results stringForColumn:@"name"];
     item.avatarUrl = [results stringForColumn:@"avatarUrl"];
@@ -30,6 +31,7 @@
 
 + (Activity*)allocAcitiviyWithResults:(FMResultSet*)results{
     Activity *item = [[Activity alloc] init];
+    item.deleted = [results intForColumn:@"deleted"];
     item.idActivity = [results stringForColumn:@"id"];
     item.name = [results stringForColumn:@"name"];
     item.strAvatar = [results stringForColumn:@"logoUrl"];
@@ -44,6 +46,7 @@
     item.idPromise = [results stringForColumn:@"id"];
     item.idMember =[results stringForColumn:@"idMember"];
     item.name = [results stringForColumn:@"name"];
+    item.deleted = [results intForColumn:@"deleted"];
     item.description = [results stringForColumn:@"description"];
     item.dueDate = [results stringForColumn:@"duedate"];
     item.status = [results intForColumn:@"status"];
@@ -61,6 +64,8 @@
 }
 + (History*)allocHistoryWithResults:(FMResultSet*)results{
     History *item = [[History alloc] init];
+    item.idMember = [results stringForColumn:@"idMember"];
+    item.idActivity = [results stringForColumn:@"idActivity"];
     item.memberName = [results stringForColumn:@"memberName"];
     item.unitType = [results intForColumn:@"unitType"];
     item.date = [results stringForColumn:@"date"];

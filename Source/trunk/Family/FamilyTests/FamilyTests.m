@@ -12,6 +12,7 @@
 #import "Activity.h"
 #import "Promise.h"
 #import "History.h"
+#import "Utilities.h"
 @interface FamilyTests : XCTestCase
 
 @end
@@ -21,15 +22,17 @@
 - (void)setUp
 {
     [super setUp];
+    NSError *error = nil;
+    [[DataHandler sharedManager] copyDatabaseToDocumentWithError:&error];
+    
+    NSAssert((error==nil), error.description);
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
 - (void)tearDown
 {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
-    NSError *error = nil;
-    [[DataHandler sharedManager] copyDatabaseToDocumentWithError:&error];
-    NSAssert((error==nil), error.description);
+   
 
     [super tearDown];
 }
@@ -82,6 +85,13 @@
     isSuccess = [[DataHandler sharedManager] updateMemberInfo:member isSync:false  error:&error];
     NSAssert(isSuccess, error.description);
 }
+-(void) testGetAllMemberTransform
+{
+    NSError *error = nil;
+    
+    NSMutableArray *array = [[DataHandler sharedManager] allocMemberDirtyTransformWithError:&error];
+    NSAssert((array !=nil), error.description);
+}
 /*
  * Activity
  */
@@ -123,7 +133,13 @@
     isSuccess = [[DataHandler sharedManager] updateActivityInfo:activity isSync:false error:&error];
     NSAssert(isSuccess, error.description);
 }
-
+-(void) testGetAllActivityTransform
+{
+    NSError *error = nil;
+    
+    NSMutableArray *array = [[DataHandler sharedManager] allocActivityDirtyTransformWithError:&error];
+    NSAssert((array !=nil), error.description);
+}
 /*
  * Promise
  */
@@ -166,7 +182,16 @@
     isSuccess = [[DataHandler sharedManager] updatePromiseInfo:promise error:&error];
     NSAssert(isSuccess, error.description);
 }
-
+-(void) testGetPromiseTransform
+{
+    NSError *error = nil;
+    
+    NSMutableArray *array = [[DataHandler sharedManager] allocPromiseDirtyTransformWithError:&error];
+    NSAssert((array !=nil), error.description);
+}
+/*
+ * History
+ */
 /*- (void)testGetAllHistory{
     NSError *error = nil;
     
@@ -175,7 +200,7 @@
 
 }*/
 
-- (void)testInsertHistory{
+/*- (void)testInsertHistory{
     NSError *error = nil;
     History *history = [[History alloc] init];
    
@@ -183,5 +208,63 @@
     
     NSAssert(isSuccess, error.description);
     
+}*/
+-(void) testGetHistoryTransform
+{
+    NSError *error = nil;
+    
+    NSMutableArray *array = [[DataHandler sharedManager] allocHistoryDirtyTransformWithError:&error];
+    NSAssert((array !=nil), error.description);
 }
+/*
+ * Synce Data
+ */
+-(void) testGetTimestampLatest
+{
+    NSError *error = nil;
+   
+    int timestampLatest = [[DataHandler sharedManager] getTimestampLatest:&error];
+    
+     NSAssert(timestampLatest != -1, error.description);
+}
+-(void) testGetStringJsonObjectWithPromise
+{
+    NSError *error = nil;
+    NSMutableArray *arrPromiseTranform = [[DataHandler sharedManager] allocPromiseDirtyTransformWithError:&error];
+    
+    NSMutableArray *arrPromiseTranformWithDic =[[DataHandler sharedManager] tranformJsonObjectWithPromise:arrPromiseTranform];
+    NSString *stringJsonObject = [Utilities convertNSmutableToJsonObjectWithKey:arrPromiseTranformWithDic keyName:@"ListPromise"];
+    NSAssert(stringJsonObject != nil, error.description);
+}
+-(void) testGetStringJsonObjectWithMember
+{
+    NSError *error = nil;
+    NSMutableArray *arrMemberTranform = [[DataHandler sharedManager] allocMemberDirtyTransformWithError:&error];
+    
+    NSMutableArray *arrMemberTranformWithDic =[[DataHandler sharedManager] tranformJsonObjectWithMember:arrMemberTranform];
+    NSString *stringJsonObject = [Utilities convertNSmutableToJsonObjectWithKey:arrMemberTranformWithDic keyName:@"ListMember"];
+    NSAssert(stringJsonObject != nil, error.description);
+
+}
+-(void) testGetStringJsonObjectWithActivity
+{
+    NSError *error = nil;
+    NSMutableArray *arrActivityTranform = [[DataHandler sharedManager] allocActivityDirtyTransformWithError:&error];
+    
+    NSMutableArray *arrMemberTranformWithDic =[[DataHandler sharedManager] tranformJsonObjectWithActivity:arrActivityTranform];
+    NSString *stringJsonObject = [Utilities convertNSmutableToJsonObjectWithKey:arrMemberTranformWithDic keyName:@"ListActivity"];
+    NSAssert(stringJsonObject != nil, error.description);
+    
+}
+-(void) testGetStringJsonObjectWithHistory
+{
+    NSError *error = nil;
+    NSMutableArray *arrHistoryTranform = [[DataHandler sharedManager] allocHistoryDirtyTransformWithError:&error];
+    
+    NSMutableArray *arrHistoryTranformWithDic =[[DataHandler sharedManager] tranformJsonObjectWithHistory:arrHistoryTranform];
+    NSString *stringJsonObject = [Utilities convertNSmutableToJsonObjectWithKey:arrHistoryTranformWithDic keyName:@"ListHistory"];
+    NSAssert(stringJsonObject != nil, error.description);
+    
+}
+
 @end

@@ -51,7 +51,8 @@
     // Display
     self.title = @"SignUp";
     [[self navigationController] setNavigationBarHidden:NO animated:NO];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    //[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    [Utilities setBackGroundForViewWithVersion:self.view];
      [scrollViewContent setContentSize:CGSizeMake(self.view.frame.size.width, scrollViewContent.frame.size.height)];
     [self radiusForButtonAvatar];
     [self addGestureSingleTagForScrollView];

@@ -67,7 +67,8 @@
     self.title = @"Home";
     // Display
     [[self navigationController] setNavigationBarHidden:NO animated:NO];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    //[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    [Utilities setBackGroundForViewWithVersion:self.view];
     [self createButtonOnNavigationBar];
     arrButton = [NSArray arrayWithObjects:btnToday,btnWeek,btnMonth, nil];
     arrLabel = [NSArray arrayWithObjects:lblToday,lblWeek,lblMonth, nil];
@@ -88,7 +89,7 @@
                 // charting circle
                 [self createViewChartCircle:abtnCurr.tag];
                 // Point Summary
-                [self createViewPointSummary:btnToday.tag];
+                [self createViewPointSummary:abtnCurr.tag];
                 
                 [abtnCurr setUserInteractionEnabled:NO];
                 

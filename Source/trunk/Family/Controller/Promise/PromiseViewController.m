@@ -38,7 +38,8 @@
     [super viewDidLoad];
     //Display
     self.title = @"Promise";
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    //[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    [Utilities setBackGroundForViewWithVersion:self.view];
     [self createBarButtonDone];
     //Data
    // [self createData];

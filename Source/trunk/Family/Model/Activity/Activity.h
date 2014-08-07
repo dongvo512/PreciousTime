@@ -15,6 +15,7 @@
 @property (nonatomic, retain) NSString *idActivity;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic) int time;
+@property (nonatomic, assign) int deleted;
 @property (nonatomic, retain) NSString *strAvatar;
 @property (nonatomic) int point;
 @property (nonatomic, assign) int unitTypeValue;

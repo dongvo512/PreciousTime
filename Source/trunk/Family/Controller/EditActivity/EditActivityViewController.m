@@ -56,7 +56,8 @@
 {
     [super viewDidLoad];
     // Display
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+   // [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    [Utilities setBackGroundForViewWithVersion:self.view];
       [scrollViewContent setContentSize:CGSizeMake(self.view.frame.size.width, scrollViewContent.frame.size.height)];
     
     if(self.isEditActivityViewController)

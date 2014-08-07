@@ -357,6 +357,55 @@ static DataHandler *sharedDataHandler = nil;
 
     return nil;
 }
+-(NSMutableArray *)allocMemberDirtyTransformWithError:(NSError **) error
+{
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [NSError errorWithDomain:@"Can't open database" code:123 userInfo:nil];
+        return nil;
+    }
+    
+    FMResultSet *results = [db executeQuery:@"select * from Member where dirty=?",[NSNumber numberWithBool:true]];
+    if ([db hadError]) {
+        DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
+        *error = [db lastError];
+        [self closeDB:db];
+        return nil;
+    }
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    while ([results next])
+    {
+        Member * item = [DataParser allocMemberWithResults:results];
+        if (item) {
+            [array addObject:item];
+        }
+    }
+    [self closeDB:db];
+    
+    return array;
+
+}
+-(NSMutableArray *) tranformJsonObjectWithMember:(NSMutableArray *) arrMember
+{
+    NSMutableArray *arrData = [NSMutableArray array];
+    for(Member *aMember in arrMember)
+    {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setValue:aMember.idMember forKey:@"id_Member"];
+        [dic setValue:aMember.avatarUrl forKey:@"avatar_url"];
+        [dic setValue:aMember.name forKey:@"name"];
+        [dic setValue:aMember.bithday forKey:@"birthday"];
+        [dic setValue:[NSNumber numberWithInt:aMember.genderValue ]forKey:@"gender"];
+        [dic setValue:aMember.timestamp forKey:@"timestamp"];
+        [dic setValue:[NSNumber numberWithInt:aMember.deleted] forKey:@"deleted"];
+        [dic setValue:aMember.description forKey:@"relationship"];
+        
+        [arrData addObject:dic];
+    }
+    return arrData;
+}
 #pragma mark Activities
 
 - (NSMutableArray*)allocAcitivitiesWithError:(NSError**)error{
@@ -413,8 +462,13 @@ static DataHandler *sharedDataHandler = nil;
     }
     
    // NSString *idString = [Utilities idWithName:anActivity.name];
-     NSString *idString = [ Utilities idWithDate];
-    *idActivity = idString;
+    NSString *idString = nil;
+   
+    if(anActivity.idActivity == nil)
+        idString = [Utilities idWithDate];
+    else
+        idString = anActivity.idActivity;
+        
     BOOL isDirty = true;
     if (isSync) {
         isDirty = false;
@@ -564,16 +618,15 @@ static DataHandler *sharedDataHandler = nil;
     
     
 }
-#pragma mark Promises
-
-/*- (NSMutableArray*)allocPromisesWithError:(NSError**)error{
+-(NSMutableArray *)allocActivityDirtyTransformWithError:(NSError **) error
+{
     FMDatabase *db = [self database];
     if (![self openDB:db]) {
         *error = [NSError errorWithDomain:@"Can't open database" code:123 userInfo:nil];
         return nil;
     }
     
-    FMResultSet *results = [db executeQuery:@"select * from Promise where deleted=? ",[NSNumber numberWithBool:false]];
+    FMResultSet *results = [db executeQuery:@"select * from Activity where dirty=?",[NSNumber numberWithBool:true]];
     if ([db hadError]) {
         DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
         *error = [db lastError];
@@ -585,13 +638,38 @@ static DataHandler *sharedDataHandler = nil;
     
     while ([results next])
     {
-        Promise * item = [DataParser allocPromiseWithResults:results];
+        Activity * item = [DataParser allocAcitiviyWithResults:results];
         if (item) {
             [array addObject:item];
         }
     }
+    [self closeDB:db];
+    
     return array;
-}*/
+    
+}
+-(NSMutableArray *) tranformJsonObjectWithActivity:(NSMutableArray *) arrActivity
+{
+    NSMutableArray *arrData = [NSMutableArray array];
+    for(Activity *aActivity in arrActivity)
+    {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setValue:aActivity.idActivity forKey:@"id_activity"];
+        [dic setValue:aActivity.strAvatar forKey:@"avatar_url"];
+        [dic setValue:aActivity.name forKey:@"name"];
+        [dic setValue:[NSNumber numberWithInt:aActivity.unitTypeValue] forKey:@"unit_type"];
+        [dic setValue:[NSNumber numberWithInt:aActivity.point ]forKey:@"point_per_unit"];
+        [dic setValue:aActivity.timestamp forKey:@"timestamp"];
+        [dic setValue:[NSNumber numberWithInt:aActivity.deleted] forKey:@"deleted"];
+        
+        [arrData addObject:dic];
+    }
+    return arrData;
+}
+
+#pragma mark Promises
+
+
 - (NSMutableArray*)allocNotDonePromisesWithError:(NSError**)error idMember:(NSString*) idMember{
     FMDatabase *db = [self database];
     if (![self openDB:db]) {
@@ -677,7 +755,7 @@ static DataHandler *sharedDataHandler = nil;
 
 
 }*/
--(NSMutableArray *) allocDonePromiseDayWithError:(NSError **) error idMember:(NSString *) idMember dateCurrent:(NSString *)date
+-(NSMutableArray *) allocOverDuePromiseDayWithError:(NSError **) error idMember:(NSString *) idMember dateBeforeCurrentOneDay:(NSString *)date
 {
     FMDatabase *db = [self database];
     if (![self openDB:db]) {
@@ -707,7 +785,7 @@ static DataHandler *sharedDataHandler = nil;
     
     
 }
--(NSMutableArray *) allocOverDuePromiseDayWithError:(NSError **) error idMember:(NSString *) idMember dateCurrent:(NSString *)date
+-(NSMutableArray *) allocDonePromiseDayWithError:(NSError **) error idMember:(NSString *) idMember dateCurrent:(NSString *)date
 {
     FMDatabase *db = [self database];
     if (![self openDB:db]) {
@@ -737,7 +815,7 @@ static DataHandler *sharedDataHandler = nil;
     
     
 }
--(NSMutableArray *) allocDoneOverDuePromiseWeekMonthWithError:(NSError **) error idMember:(NSString *) idMember DayCurrent:(NSString *)today BeforeDate:(NSString *)beforDate
+-(NSMutableArray *) allocDonePromiseWeekMonthWithError:(NSError **) error idMember:(NSString *) idMember DayCurrent:(NSString *)today BeforeDate:(NSString *)beforDate
 {
     FMDatabase *db = [self database];
     if (![self openDB:db]) {
@@ -745,7 +823,7 @@ static DataHandler *sharedDataHandler = nil;
         return nil;
     }
     
-    FMResultSet *results = [db executeQuery:@"select * from Promise where idMember = ? and status = 1 or status = 2 and duedate BETWEEN ? AND ? or completeDate BETWEEN ? AND ? and deleted=? Order by status ASC",idMember,beforDate,today,beforDate,today,[NSNumber numberWithBool:false]];
+    FMResultSet *results = [db executeQuery:@"select * from Promise where idMember = ? and (status = 1 or status = 2) and ((duedate BETWEEN ? AND ?) or (completeDate BETWEEN ? AND ?)) and deleted=? Order by status ASC",idMember,beforDate,today,beforDate,today,[NSNumber numberWithBool:false]];
     if ([db hadError]) {
         DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
         *error = [db lastError];
@@ -827,6 +905,7 @@ static DataHandler *sharedDataHandler = nil;
     
     [self closeDB:db];
     return YES;
+    
     
     
 }
@@ -926,6 +1005,56 @@ static DataHandler *sharedDataHandler = nil;
     
     
 }
+-(NSMutableArray *)allocPromiseDirtyTransformWithError:(NSError **) error
+{
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [NSError errorWithDomain:@"Can't open database" code:123 userInfo:nil];
+        return nil;
+    }
+    
+    FMResultSet *results = [db executeQuery:@"select * from Promise where dirty=?",[NSNumber numberWithBool:true]];
+    if ([db hadError]) {
+        DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
+        *error = [db lastError];
+        [self closeDB:db];
+        return nil;
+    }
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    while ([results next])
+    {
+        Promise * item = [DataParser allocPromiseWithResults:results];
+        if (item) {
+            [array addObject:item];
+        }
+    }
+    [self closeDB:db];
+    
+    return array;
+    
+}
+-(NSMutableArray *) tranformJsonObjectWithPromise:(NSMutableArray *) arrPromise
+{
+    NSMutableArray *arrData = [NSMutableArray array];
+    for(Promise *aPromise in arrPromise)
+    {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setValue:aPromise.idMember forKey:@"idMember"];
+        [dic setValue:aPromise.idPromise forKey:@"id"];
+        [dic setValue:aPromise.name forKey:@"name"];
+        [dic setValue:aPromise.description forKey:@"description"];
+        [dic setValue:aPromise.dueDate forKey:@"duedate"];
+        [dic setValue:aPromise.completeDate forKey:@"completeDate"];
+        [dic setValue:[NSNumber numberWithInt:aPromise.status] forKey:@"status"];
+        [dic setValue:[NSNumber numberWithInt:aPromise.deleted] forKey:@"deleted"];
+        [dic setValue:aPromise.description forKey:@"description"];
+        
+        [arrData addObject:dic];
+    }
+    return arrData;
+}
 
 
 #pragma mark History
@@ -937,7 +1066,7 @@ static DataHandler *sharedDataHandler = nil;
         return nil;
     }
     
-    FMResultSet *results = [db executeQuery:@"select m.name as memberName,a.name as activityName, h.imageUrl,h.point,h.time,h.date,h.unitType from History h, Member m, Activity a where h.idMember=m.id and h.idActivity=a.id and m.id = ?",idMember];
+    FMResultSet *results = [db executeQuery:@"select m.name as memberName,a.name as activityName,h.idMember,h,idActivity, h.imageUrl,h.point,h.time,h.date,h.unitType from History h, Member m, Activity a where h.idMember=m.id and h.idActivity=a.id and m.id = ?",idMember];
     if ([db hadError]) {
         DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
         *error = [db lastError];
@@ -1053,6 +1182,81 @@ static DataHandler *sharedDataHandler = nil;
     [self closeDB:db];
     return YES;
 }
+-(NSMutableArray *)allocHistoryDirtyTransformWithError:(NSError **) error
+{
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [NSError errorWithDomain:@"Can't open database" code:123 userInfo:nil];
+        return nil;
+    }
+    
+    FMResultSet *results = [db executeQuery:@"select * from History where dirty=?",[NSNumber numberWithBool:true]];
+    if ([db hadError]) {
+        DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
+        *error = [db lastError];
+        [self closeDB:db];
+        return nil;
+    }
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    while ([results next])
+    {
+        History * item = [DataParser allocHistoryWithResults:results];
+        if (item) {
+            [array addObject:item];
+        }
+    }
+    [self closeDB:db];
+    
+    return array;
+    
+}
+-(NSMutableArray *) tranformJsonObjectWithHistory:(NSMutableArray *) arrHistory
+{
+    NSMutableArray *arrData = [NSMutableArray array];
+    for(History *aHistory in arrHistory)
+    {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setValue:aHistory.idMember forKey:@"id_member"];
+        [dic setValue:aHistory.idActivity forKey:@"id_activity"];
+        [dic setValue:aHistory.imageUrl forKey:@"imageUrl"];
+        [dic setValue:aHistory.date forKey:@"date"];
+        [dic setValue:aHistory.time forKey:@"time"];
+        [dic setValue:[NSNumber numberWithInt:aHistory.totalPoint ]forKey:@"point"];
+        [dic setValue:aHistory.timeTamp forKey:@"timestamp"];
+        
+        [arrData addObject:dic];
+    }
+    return arrData;
+}
+#pragma mark - Synce Data
+-(int)getTimestampLatest:(NSError**) error
+{
+    FMDatabase *db = [self database];
+    if (![self openDB:db]) {
+        *error = [db lastError];
+        return -1;
+    }
 
+    FMResultSet *results = [db executeQuery:@"select max(max(m.timestamp), max(p.timestamp),max(h.timestamp),max(a.timestamp)) as timestampLatest from member m, promise p,history h,activity a"];
+    
+    if ([db hadError]) {
+        DLog(@"Select Error:%@",[[db lastError] localizedDescription]);
+        *error = [db lastError];
+        [self closeDB:db];
+        return -1;
+    }
+    int timestampLatest = 0;
+    while ([results next])
+    {
+        if(results)
+       timestampLatest = [results intForColumn:@"timestampLatest"];
+    }
+    
+    [self closeDB:db];
+    return timestampLatest;
+
+}
 
 @end

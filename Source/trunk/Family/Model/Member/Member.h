@@ -10,6 +10,7 @@
 
 @interface Member : NSObject
 @property (nonatomic, retain) NSString *idMember;
+@property (nonatomic, assign) int deleted;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *bithday;
 @property (nonatomic, retain) NSString *relationship;

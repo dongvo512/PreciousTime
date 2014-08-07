@@ -8,6 +8,7 @@
 
 #import "FriendViewController.h"
 #import "InviteFriendViewController.h"
+#import "Utilities.h"
 @interface FriendViewController ()
 
 @end
@@ -27,7 +28,8 @@
 {
     [super viewDidLoad];
     //Display
-     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    // [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    [Utilities setBackGroundForViewWithVersion:self.view];
     self.title = @"Your Friend's Activities";
     [self createInviteFriendBarButton];
 }

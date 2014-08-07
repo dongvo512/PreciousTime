@@ -40,6 +40,8 @@
 - (Member*)allocMemberWithId:(NSString*)memberId error:(NSError**)error;
 
 - (BOOL)removeDeletedMembersWithError:(NSError**)error;
+-(NSMutableArray *)allocMemberDirtyTransformWithError:(NSError **) error;
+-(NSMutableArray *) tranformJsonObjectWithMember:(NSMutableArray *) arrMember;
 /*
  * get all Activity in databse
  */
@@ -51,6 +53,8 @@
 -(BOOL)updateActivityInfo:(Activity*)anActivity isSync:(BOOL)isSync error:(NSError**)error;
 //Use to delete activity
 -(BOOL)updateDeletedActivity:(NSString*)idActivity error:(NSError**)error;
+-(NSMutableArray *)allocActivityDirtyTransformWithError:(NSError **) error;
+-(NSMutableArray *) tranformJsonObjectWithActivity:(NSMutableArray *) arrActivity;
 /*
  * get all Promises in databse
  */
@@ -64,9 +68,11 @@
 //Use to delete promise info
 -(BOOL)updateDeletedPromise:(NSString*)idPromise idMember:(NSString*)idMember error:(NSError**)error;
 -(BOOL)updatePromiseOverDue:(NSError**)error isMember:(NSString*) idMember DateCurrent:(NSString *)date;
--(NSMutableArray *) allocDoneOverDuePromiseWeekMonthWithError:(NSError **) error idMember:(NSString *) idMember DayCurrent:(NSString *)today BeforeDate:(NSString *)beforDate;
+-(NSMutableArray *) allocDonePromiseWeekMonthWithError:(NSError **) error idMember:(NSString *) idMember DayCurrent:(NSString *)today BeforeDate:(NSString *)beforDate;
+-(NSMutableArray *) allocOverDuePromiseDayWithError:(NSError **) error idMember:(NSString *) idMember dateBeforeCurrentOneDay:(NSString *)date;
 -(NSMutableArray *) allocDonePromiseDayWithError:(NSError **) error idMember:(NSString *) idMember dateCurrent:(NSString *)date;
--(NSMutableArray *) allocOverDuePromiseDayWithError:(NSError **) error idMember:(NSString *) idMember dateCurrent:(NSString *)date;
+-(NSMutableArray *)allocPromiseDirtyTransformWithError:(NSError **) error;
+-(NSMutableArray *) tranformJsonObjectWithPromise:(NSMutableArray *) arrPromise;
 /*
  * get all Histories in databse
  */
@@ -75,5 +81,12 @@
 //-(NSMutableArray *) allocHistoryWithDay:(NSString*) idMember day:(NSString*)dateDay error:(NSError**)error;
 -(NSMutableArray *) allocHistoryWithDay:(NSString*) idMember dayCurrent:(NSString*)date error:(NSError**)error;
 -(NSMutableArray *) allocHistoryWithWeekAndMonth:(NSString*) idMember dayCurrent:(NSString*)dateCurr BeforeWeekandMonth:(NSString*)dateBefore error:(NSError**)error;
+-(NSMutableArray *)allocHistoryDirtyTransformWithError:(NSError **) error;
+-(NSMutableArray *) tranformJsonObjectWithHistory:(NSMutableArray *) arrHistory;
+/*
+ * synce data
+ */
+-(int)getTimestampLatest:(NSError**) error;
+-(NSMutableArray *) tranformJosonObjectWithPromise:(NSMutableArray *) arrPromise;
 @end
 

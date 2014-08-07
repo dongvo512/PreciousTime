@@ -10,6 +10,8 @@
 @class Member;
 @class Activity;
 @interface History : NSObject
+@property (nonatomic, retain) NSString *idMember;
+@property (nonatomic, retain) NSString *idActivity;
 @property (nonatomic, retain) NSString* memberName;
 @property (nonatomic, retain) NSString* activityName;
 @property (nonatomic, retain) NSString* imageUrl;

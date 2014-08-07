@@ -23,4 +23,7 @@
 +(NSString *)convertddMMyyyyToMMddyyyy:(NSString *) stringDate;
 +(NSString *)getYear:(NSDate *) date;
 +(NSString *) getUnitType:(int) unitType;
++(void) setBackGroundForViewWithVersion:(UIView *) viewCurr;
++(NSString *)getStringBeforeDateOneDay;
++(NSString *)convertNSmutableToJsonObjectWithKey:(NSMutableArray *)arrCurr keyName:(NSString *)key;
 @end

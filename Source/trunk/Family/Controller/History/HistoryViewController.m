@@ -33,7 +33,8 @@
 {
     [super viewDidLoad];
     // Display
-     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+     //[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    [Utilities setBackGroundForViewWithVersion:self.view];
     self.title = @"History";
     // Data
     [self getDataHistory];

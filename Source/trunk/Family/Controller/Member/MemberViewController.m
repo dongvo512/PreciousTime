@@ -37,7 +37,8 @@
     [super viewDidLoad];
     // Display
     self.title = @"Member";
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    //[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    [Utilities setBackGroundForViewWithVersion:self.view];
     [self createAddNewMember];
     // Data
     [self getAllMembers];

@@ -29,10 +29,12 @@
 }
 +(NSString *) idWithDate
 {
-    int timeInterval = [NSDate timeIntervalSinceReferenceDate];
+    NSDate *currDate = [NSDate date];
+    int timeInterval = [currDate timeIntervalSinceReferenceDate];
     return [NSString stringWithFormat:@"%d",timeInterval];
     
 }
+
 +(void)animationSlideY:(UIView *)viewCurrent OriginY:(float) y
 {
     [UIView beginAnimations:nil context:nil];
@@ -129,5 +131,43 @@
     [formatter setDateFormat:@"MM/dd/yyyy"];
     NSString *stringFromDate = [formatter stringFromDate:[NSDate date]];
     return stringFromDate;
+}
++(NSString *)getStringBeforeDateOneDay
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
+    NSString *stringFromDate = [formatter stringFromDate:[NSDate date]];
+    NSArray *arrDate = [stringFromDate componentsSeparatedByString:@"/"];
+    int numbeforDate = [[arrDate objectAtIndex:1] intValue] -1;
+ 
+    NSString *stringBeforeOneDay = [NSString stringWithFormat:@"%@/%d/%@",[arrDate objectAtIndex:0],numbeforDate,[arrDate objectAtIndex:2]];
+    return stringBeforeOneDay;
+}
++(void) setBackGroundForViewWithVersion:(UIView *) viewCurr
+{
+    NSArray *ver = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
+    if ([[ver objectAtIndex:0] intValue] >= 7)
+        [viewCurr setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_320x560@2x.png"]]];
+    else
+        [viewCurr setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_320x480@2x.png"]]];
+
+}
++(NSString *)convertNSmutableToJsonObjectWithKey:(NSMutableArray *)arrCurr keyName:(NSString *)key
+{
+    //NSArray *keys = [NSArray arrayWithObjects:key,nil];
+    NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObject:arrCurr forKey:key];
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDictionary
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    NSString *jsonString = nil;
+    if (!jsonData) {
+        NSLog(@"eror ");
+        return nil;
+    } else {
+        
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        }
+    return jsonString;
 }
 @end

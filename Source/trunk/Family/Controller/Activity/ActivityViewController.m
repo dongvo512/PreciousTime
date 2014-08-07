@@ -45,7 +45,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     // Display
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+   // [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    [Utilities setBackGroundForViewWithVersion:self.view];
     self.title = @"Activities";
     [self createBarButtonDone];
     // Data

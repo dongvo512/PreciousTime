@@ -11,6 +11,7 @@
 #import "SignUpViewController.h"
 #import "LoginViewController.h"
 #import "AppDelegate.h"
+#import "Utilities.h"
 #import "GoogleOpenSource/GoogleOpenSource.h"
 
 @interface InitialLandingViewController ()
@@ -49,7 +50,8 @@
     [super viewDidLoad];
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    // [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    [Utilities setBackGroundForViewWithVersion:self.view];
     // Do any additional setup after loading the view from its nib.
     // google login
     [self setupSignInGoogle];

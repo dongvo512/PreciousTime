@@ -96,7 +96,7 @@
                 if(arrayPromiseWithDone != nil)
                    [arrData addObjectsFromArray:arrayPromiseWithDone];
                 
-                arrayPromiseWithOverDue = [[DataHandler sharedManager] allocOverDuePromiseDayWithError:&error idMember:self.idMember dateCurrent:[Utilities getStringCurrentWithDateMMddyyyy]];
+                arrayPromiseWithOverDue = [[DataHandler sharedManager] allocOverDuePromiseDayWithError:&error idMember:self.idMember dateBeforeCurrentOneDay:[Utilities getStringBeforeDateOneDay]];
                 if(arrayPromiseWithOverDue != nil)
                     [arrData addObjectsFromArray:arrayPromiseWithOverDue];
                 arrPromiseCurr = arrData;
@@ -105,13 +105,13 @@
             case TAG_OF_BUTTON_WEEK:
             {
                 NSString *strBeforeDate = [Utilities getDateBefore:-7];
-                arrPromiseCurr = [[DataHandler sharedManager] allocDoneOverDuePromiseWeekMonthWithError:&error idMember:self.idMember DayCurrent:[Utilities getStringCurrentWithDateMMddyyyy] BeforeDate:strBeforeDate];
+                arrPromiseCurr = [[DataHandler sharedManager] allocDonePromiseWeekMonthWithError:&error idMember:self.idMember DayCurrent:[Utilities getStringCurrentWithDateMMddyyyy] BeforeDate:strBeforeDate];
                 break;
             }
             case TAG_OF_BUTTON_MONTH:
             {
                 NSString *strBeforeDate = [Utilities getDateBefore:-30];
-                arrPromiseCurr = [[DataHandler sharedManager] allocDoneOverDuePromiseWeekMonthWithError:&error idMember:self.idMember DayCurrent:[Utilities getStringCurrentWithDateMMddyyyy] BeforeDate:strBeforeDate];
+                arrPromiseCurr = [[DataHandler sharedManager] allocDonePromiseWeekMonthWithError:&error idMember:self.idMember DayCurrent:[Utilities getStringCurrentWithDateMMddyyyy] BeforeDate:strBeforeDate];
                 break;
             }
                 

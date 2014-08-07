@@ -33,7 +33,8 @@
     [super viewDidLoad];
     //Display
     self.title = @"Login";
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    //[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    [Utilities setBackGroundForViewWithVersion:self.view];
     [[self navigationController] setNavigationBarHidden:NO animated:NO];
    
 }

@@ -7,7 +7,7 @@
 //
 
 #import "SettingViewController.h"
-
+#import "Utilities.h"
 @interface SettingViewController ()
 
 @end
@@ -26,7 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    // [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background.png"]]];
+    [Utilities setBackGroundForViewWithVersion:self.view];
     // Do any additional setup after loading the view from its nib.
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
